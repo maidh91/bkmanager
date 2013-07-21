@@ -30,6 +30,10 @@
             android:name="com.cvteam.bkmanager.ThoiKhoaBieuActivity"
             android:label="@string/title_activity_thoi_khoa_bieu" >
         </activity>
+        <activity
+            android:name="com.cvteam.bkmanager.LichThiActivity"
+            android:label="@string/title_activity_lich_thi" >
+        </activity>
     </application>
 
 </manifest>

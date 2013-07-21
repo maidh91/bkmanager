@@ -136,10 +136,16 @@ public class MainActivity extends SherlockFragmentActivity implements
 
 	public void onClickFeature(View view) {
 		logService.functionTag("onClickFeature", "id: " + view.getId());
+		Intent myIntent;
 		switch (view.getId()) {
 		case R.id.txtviewThoiKhoaBieu:
-			Intent myIntent = new Intent(MainActivity.this,
+			myIntent = new Intent(MainActivity.this,
 					ThoiKhoaBieuActivity.class);
+			MainActivity.this.startActivity(myIntent);
+			break;
+		case R.id.txtviewLichThi:
+			myIntent = new Intent(MainActivity.this,
+					LichThiActivity.class);
 			MainActivity.this.startActivity(myIntent);
 			break;
 		}

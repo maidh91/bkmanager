@@ -7,5 +7,6 @@
     <string name="new_account_description">Ứng dụng sẽ hoạt động dựa trên mã số sinh viên của bạn</string>
     <string name="title_activity_thoi_khoa_bieu">ThoiKhoaBieuActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_lich_thi">LichThiActivity</string>
 
 </resources>
