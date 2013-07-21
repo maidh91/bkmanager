@@ -21,7 +21,9 @@
     <View
         android:id="@+id/view1"
         android:layout_width="fill_parent"
-        android:layout_height="6dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="6dp"
+        android:layout_height="3dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView1"
         android:background="@android:color/darker_gray" />
@@ -35,7 +37,7 @@
         android:text="@string/new_account_description" />
 
     <EditText
-        android:id="@+id/editTextMSSV"
+        android:id="@+id/editTextName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView2"
@@ -43,10 +45,22 @@
         android:layout_below="@+id/textView2"
         android:layout_marginTop="27dp"
         android:ems="10"
-        android:hint="Mã số sinh viên" >
+        android:hint="Tên người dùng" >
 
         <requestFocus android:layout_width="match_parent" />
 
+    </EditText>
+        
+    <EditText
+        android:id="@+id/editTextMSSV"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextName"
+        android:layout_alignRight="@+id/editTextName"
+        android:layout_below="@+id/editTextName"
+        android:layout_marginTop="27dp"
+        android:ems="10"
+        android:hint="Mã số sinh viên" >
     </EditText>
 
     <LinearLayout

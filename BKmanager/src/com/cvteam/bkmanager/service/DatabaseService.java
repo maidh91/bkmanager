@@ -23,7 +23,7 @@ public class DatabaseService extends SQLiteOpenHelper {
 			+ "_id integer primary key autoincrement, "
 			+ "mssv text not null, " + "namhoc integer not null, "
 			+ "hocky integer not null, " + "mamh text not null, "
-			+ "tenmonhoc text not null, " + "nhomto text not null, "
+			+ "tenmh text not null, " + "nhomto text not null, "
 			+ "ngaygk text, " + "tietgk integer, " + "phonggk text, "
 			+ "ngayck text, " + "tietck integer, " + "phongck text);";
 
@@ -33,7 +33,7 @@ public class DatabaseService extends SQLiteOpenHelper {
 			+ "namhoc integer not null, "
 			+ "hocky integer not null, "
 			+ "mamh text not null, "
-			+ "tenmonhoc text not null, "
+			+ "tenmh text not null, "
 			+ "nhomto text not null, "
 			+ "thu1 text, "
 			+ "tiet1 integer, "
@@ -44,8 +44,8 @@ public class DatabaseService extends SQLiteOpenHelper {
 			+ "_id integer primary key autoincrement, "
 			+ "mssv text not null, " + "namhoc integer not null, "
 			+ "hocky integer not null, " + "mamh text not null, "
-			+ "tenmonhoc text not null, " + "nhomto text not null, "
-			+ "sotc integer, " + "diemkiemtra real, " + "diemthi real, "
+			+ "tenmh text not null, " + "nhomto text not null, "
+			+ "sotc integer, " + "diemkt real, " + "diemthi real, "
 			+ "diemtk real);";
 
 	private static final String CREATE_TABLE_HOCKY = "create table hocky ("
