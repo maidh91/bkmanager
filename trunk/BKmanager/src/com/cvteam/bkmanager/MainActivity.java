@@ -5,44 +5,54 @@ import org.holoeverywhere.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.SearchView;
+import com.cvteam.bkmanager.service.LogService;
 import com.cvteam.bkmanager.service.SharedPreferencesService;
 
-public class MainActivity extends SherlockActivity implements
+public class MainActivity extends SherlockFragmentActivity implements
 		SearchView.OnQueryTextListener {
 
+	private LogService logService = new LogService("MainActivity");
 	public static final String APP_PREFS = "CVTeam.BKmanager";
 	private SharedPreferences sharedPrefs;
-	private String currentSearch;
-	
+	public static String currentSearch;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		logService.functionTag("onCreate", "");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		sharedPrefs = getSharedPreferences(APP_PREFS, Activity.MODE_PRIVATE);
 		SharedPreferencesService.LoadCauHinh(sharedPrefs);
-        currentSearch = SharedPreferencesService.LoadCurrentSearch(sharedPrefs);
-        if (Setting._mssv == "") {
-            startActivityForResult(new Intent(this, AccountSetupActivity.class),
-                    57);
-        }
+		currentSearch = SharedPreferencesService.LoadCurrentSearch(sharedPrefs);
+		if (Setting._mssv == "") {
+			startActivityForResult(
+					new Intent(this, AccountSetupActivity.class), 57);
+		} else {
+			getSupportActionBar().setDisplayShowTitleEnabled(true);
+			getSupportActionBar().setTitle(Setting._name);
+			getSupportActionBar().setSubtitle(Setting._mssv);
+			getSupportActionBar().setHomeButtonEnabled(true);
+		}
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		logService.functionTag("onCreateOptionsMenu", "");
 		// Used to put dark icons on light action bar
 		boolean isLight = !Setting._blackTheme;
 
 		// Create the search view
 		SearchView searchView = new SearchView(getSupportActionBar()
 				.getThemedContext());
-		searchView.setQueryHint("Tìm theo MSSV");
+		searchView.setQueryHint("TÃ¬m theo MSSV");
 		searchView.setOnQueryTextListener(this);
 
 		menu.add("Search")
@@ -64,16 +74,17 @@ public class MainActivity extends SherlockActivity implements
 	}
 
 	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
+		logService.functionTag("onOptionsItemSelected", item.getTitle() + " selected");
 		if (item.getTitle().toString().equals("Refresh")) {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onQueryTextSubmit(String query) {
-		Toast.makeText(this, "You searched for: " + query, Toast.LENGTH_LONG)
-				.show();
+		logService.functionTag("onQueryTextSubmit", "submit text: " + query);
+		currentSearch = query;
 		return true;
 	}
 
@@ -82,28 +93,57 @@ public class MainActivity extends SherlockActivity implements
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		logService.functionTag("onActivityResult", "");
+		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 57) {
+			// logService.functionTag("onActivityResult", "requestCode == 57");
+			if (resultCode == RESULT_OK) {
+				SharedPreferencesService.SaveCauHinh(sharedPrefs);
+				getSupportActionBar().setTitle(Setting._name);
+				getSupportActionBar().setSubtitle(Setting._mssv);
+			}
+			if (resultCode == RESULT_CANCELED) {
+				// Write your code if there's no result
+				this.finish();
+			}
+		}
+	}
+
+	@Override
+	protected void onResume() {
+		logService.functionTag("onResume", "");
+		super.onResume();
+	}
+
+	@Override
+	protected void onPause() {
+		logService.functionTag("onPause", "");
+		super.onPause();
+	}
+
+	@Override
+	protected void onStop() {
+		logService.functionTag("onStop", "");
+		// TODO Auto-generated method stub
+		SharedPreferencesService.SaveCauHinh(sharedPrefs);
+		SharedPreferencesService.SaveCurrentSearch(currentSearch, sharedPrefs);
+		super.onStop();
+	}
+
+	public void onClickFeature(View view) {
+		logService.functionTag("onClickFeature", "id: " + view.getId());
+		switch (view.getId()) {
+		case R.id.txtviewThoiKhoaBieu:
+			Intent myIntent = new Intent(MainActivity.this,
+					ThoiKhoaBieuActivity.class);
+			MainActivity.this.startActivity(myIntent);
+			break;
+		}
 	}
 	
-	@Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-    
-	@Override
-    protected void onStop() {
-        // TODO Auto-generated method stub
-        SharedPreferencesService.SaveCauHinh(sharedPrefs);
-        SharedPreferencesService.SaveCurrentSearch(currentSearch, sharedPrefs);
-        super.onStop();
-    }
+	
 }

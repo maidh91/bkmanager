@@ -16,6 +16,8 @@ public class DI__ThoiKhoaBieu {
     public int thu2;
     public String tiet2;
     public String phong2;
+    
+    public String notice;
 
     public DI__ThoiKhoaBieu() {
         mssv = "";
@@ -33,5 +35,7 @@ public class DI__ThoiKhoaBieu {
         thu2 = 0;
         tiet2 = "";
         phong2 = "";
+        
+        notice = "";
     }
 }

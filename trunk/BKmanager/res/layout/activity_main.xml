@@ -8,9 +8,106 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+    <TableLayout
+        android:id="@+id/table_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TableRow
+            android:id="@+id/rowDiemLichThi"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/txtviewDiem"
+                android:layout_height="fill_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:background="#8D55F5"
+                android:clickable="true"
+                android:onClick="onClickFeature"
+                android:text="Điểm" />
+
+            <TextView
+                android:id="@+id/txtviewLichThi"
+                android:layout_height="fill_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:background="#47E1D2"
+                android:clickable="true"
+                android:onClick="onClickFeature"
+                android:text="Lịch thi" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/rowThoiKhoaBieu"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/txtviewThoiKhoaBieu"
+                android:layout_height="fill_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:background="#1E743A"
+                android:clickable="true"
+                android:onClick="onClickFeature"
+                android:text="Thời khóa biểu" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/rowTienIchHocPhiCauHinh"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/txtviewTienIch"
+                android:layout_height="fill_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:background="#96EC4B"
+                android:text="Tiện ích" />
+
+            <TableLayout
+                android:id="@+id/table_layout2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" >
+
+                <TableRow
+                    android:id="@+id/rowHocPhi"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
+
+                    <TextView
+                        android:id="@+id/txtviewHocPhi"
+                        android:layout_height="fill_parent"
+                        android:layout_margin="2dp"
+                        android:layout_weight="1"
+                        android:background="#AD2C62"
+                        android:text="Học phí" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/rowCauHinh"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
+
+                    <TextView
+                        android:id="@+id/txtviewCauHinh"
+                        android:layout_height="fill_parent"
+                        android:layout_margin="2dp"
+                        android:layout_weight="1"
+                        android:background="#D7EC4B"
+                        android:text="Cấu hình" />
+                </TableRow>
+            </TableLayout>
+        </TableRow>
+    </TableLayout>
 
 </RelativeLayout>

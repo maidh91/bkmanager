@@ -3,8 +3,6 @@ package com.cvteam.bkmanager;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.holoeverywhere.app.ProgressDialog;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -24,8 +22,6 @@ import com.cvteam.bkmanager.service.AAOService;
 
 public class AccountSetupActivity extends Activity {
 
-	public static ProgressDialog pd;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,8 +34,15 @@ public class AccountSetupActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				String name = ((EditText) findViewById(R.id.editTextName))
+						.getText().toString();
 				String mssv = ((EditText) findViewById(R.id.editTextMSSV))
 						.getText().toString();
+				if (name.equals("")) {
+					((EditText) findViewById(R.id.editTextName))
+							.setError("Bạn phải nhập tên người dùng.");
+					return;
+				}
 				if (mssv.equals("")) {
 					((EditText) findViewById(R.id.editTextMSSV))
 							.setError("Bạn phải nhập mã số sinh viên.");
@@ -50,7 +53,6 @@ public class AccountSetupActivity extends Activity {
 							.setError("Bạn nhập mã số sinh viên không hợp lệ.");
 					return;
 				}
-				// openProgressDialog("Đang kiểm tra...");
 				okButton.setText("Đang kiểm tra thông tin sinh viên...");
 				okButton.setEnabled(false);
 				List<String> checkvalid = new ArrayList<String>();
@@ -63,10 +65,8 @@ public class AccountSetupActivity extends Activity {
 							.setError("Bạn nhập mã số sinh viên không tồn tại.");
 					okButton.setText("Nhập");
 					okButton.setEnabled(true);
-					// closeProgressDialog();
 					return;
 				}
-				// closeProgressDialog();
 				okButton.setText("Nhập");
 				okButton.setEnabled(true);
 				if (checkvalid.get(0).contains(
@@ -76,6 +76,8 @@ public class AccountSetupActivity extends Activity {
 					return;
 				}
 
+				Setting._mssv = mssv;
+				Setting._name = name;
 				Intent returnIntent = new Intent();
 				setResult(RESULT_OK, returnIntent);
 				finish();
@@ -91,15 +93,6 @@ public class AccountSetupActivity extends Activity {
 						if (event != null
 								&& (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
 							InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-
-							// NOTE: In the author's example, he uses an
-							// identifier
-							// called searchBar. If setting this code on your
-							// EditText
-							// then use v.getWindowToken() as a reference to
-							// your
-							// EditText is passed into this callback as a
-							// TextView
 
 							in.hideSoftInputFromWindow(
 									((EditText) findViewById(R.id.editTextMSSV))
@@ -126,26 +119,6 @@ public class AccountSetupActivity extends Activity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-	}
-
-	public void openProgressDialog(String message) {
-		if (pd != null) {
-			if (pd.isShowing())
-				return;
-		}
-		pd = new ProgressDialog(this);
-		pd.setTitle("BKmanager: Thông báo");
-		pd.setMessage(message);
-		pd.setCancelable(false);
-		pd.setCanceledOnTouchOutside(false);
-		pd.show();
-
-	}
-
-	public void closeProgressDialog() {
-		if (pd != null)
-			if (pd.isShowing())
-				pd.dismiss();
 	}
 
 }

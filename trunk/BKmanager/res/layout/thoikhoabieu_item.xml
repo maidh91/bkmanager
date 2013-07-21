@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="3dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="3dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="6"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/txt_tenmon"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textColor="#006400"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txt_mamonhoc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textColor="#32cd32"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txt_notice"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textColor="#990033"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txt_sotc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textColor="#32cd32"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <TableLayout
+            android:id="@+id/table_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5" >
+
+            <TableRow
+                android:id="@+id/rowTKBHeader"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="#343131" >
+
+                <TextView
+                    android:layout_column="0"
+                    android:layout_weight="1"
+                    android:text="Thứ" />
+
+                <TextView
+                    android:layout_column="1"
+                    android:layout_weight="1"
+                    android:text="Tiết" />
+
+                <TextView
+                    android:layout_column="2"
+                    android:layout_weight="1"
+                    android:text="Phòng" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/rowTKB1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="7"
+                android:background="#EEE8E8" >
+
+                <TextView
+                    android:id="@+id/txt_thu1"
+                    android:layout_column="0"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/txt_tiet1"
+                    android:layout_column="1"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/txt_phong1"
+                    android:layout_column="2"
+                    android:layout_weight="1" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/rowTKB2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="7"
+                android:background="#EEE8E8" >
+
+                <TextView
+                    android:id="@+id/txt_thu2"
+                    android:layout_column="0"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/txt_tiet2"
+                    android:layout_column="1"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/txt_phong2"
+                    android:layout_column="2"
+                    android:layout_weight="1" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+</LinearLayout>

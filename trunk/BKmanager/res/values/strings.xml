@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">bkmanager</string>
+    <string name="app_name">BKmanager</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_account_setup">AccountSetup</string>
-	<string name ="new_account_description">Ứng dụng sẽ hoạt động dựa trên mã số sinh viên của bạn</string>
+    <string name="new_account_description">Ứng dụng sẽ hoạt động dựa trên mã số sinh viên của bạn</string>
+    <string name="title_activity_thoi_khoa_bieu">ThoiKhoaBieuActivity</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>

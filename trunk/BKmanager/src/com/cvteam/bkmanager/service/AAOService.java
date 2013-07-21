@@ -14,6 +14,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
@@ -255,6 +257,7 @@ public class AAOService {
 			List<String> objs) {
 		List<DI__ThoiKhoaBieu> result = new ArrayList<DI__ThoiKhoaBieu>();
 
+		LogService.freeTag("AAOService", "getTKB");
 		try {
 			// post request
 			Map<String, String> m = new HashMap<String, String>();
@@ -267,9 +270,9 @@ public class AAOService {
 				}
 				DI__NienHoc nien = lstNienHoc.get(2);
 				hk = Integer.toString(nien.namhoc * 10 + nien.hk);
-				// System.out.println("getTKB hk " + hk);
 			}
 
+			LogService.freeTag("AAOService", "getTKB hk " + hk);
 			m.put("HOC_KY", hk);
 			m.put("mssv", mssv);
 			m.put("image", "Xem-->");
@@ -349,6 +352,14 @@ public class AAOService {
 					if ((tmpInt == -1) || (tmpInt > start)) {
 						end = tmp.indexOf(keywordE,
 								start + keywordBreak.length());
+						String notice = tmp.substring(
+								start + keywordBreak.length(), end);
+
+						Pattern pattern = Pattern.compile("(Môn.*)");
+						Matcher matcher = pattern.matcher(notice);
+						if (matcher.find()) {
+							notice = matcher.group(0);
+						}
 
 						start = tmp.indexOf(keywordS, end);
 						thisSemesterRead = (start == -1);
@@ -359,6 +370,7 @@ public class AAOService {
 						tkb.hocky = Integer.parseInt(hk) % 10;
 						tkb.mamh = maMH;
 						tkb.tenmh = tenMH;
+						tkb.notice = notice;
 
 						result.add(tkb);
 
