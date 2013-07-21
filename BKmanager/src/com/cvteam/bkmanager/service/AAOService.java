@@ -20,6 +20,7 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
+import com.cvteam.bkmanager.model.DI__LichThi;
 import com.cvteam.bkmanager.model.DI__NienHoc;
 import com.cvteam.bkmanager.model.DI__ThoiKhoaBieu;
 
@@ -472,4 +473,168 @@ public class AAOService {
 		}
 		return result;
 	}
+
+	/**
+    *
+    * @param mssv
+    * @param hk
+    *            : i.e: 20122
+    * @param objs
+    *            : objs[0] is updateDate or error message if result is empty
+    * @return map of DI__LichThi with id
+    */
+   public static List<DI__LichThi> getLichThi(String mssv, String hk,
+           List<String> objs) {
+
+       List<DI__LichThi> result = new ArrayList<DI__LichThi>();
+
+       try {
+           // get latest semester
+           if (hk.equals("")) {
+               List<DI__NienHoc> lstNienHoc = refreshListNienHoc();
+
+               if (lstNienHoc.size() == 0) {
+                   objs.clear();
+                   objs.add("Không tìm thấy thông tin.\nVui lòng kiểm tra kết nối Internet và thử lại.");
+                   return result;
+               }
+               DI__NienHoc nien = lstNienHoc.get(2);
+               hk = Integer.toString(nien.namhoc * 10 + nien.hk);
+           }
+
+           // get DI__LichThi objects based on mssv and the latest semester
+           Map<String, String> m = new HashMap<String, String>();
+           m.put("HOC_KY", hk);
+           m.put("mssv", mssv);
+           m.put("image", "Xem-->");
+
+           String tmp = doSubmitPost(
+                   "http://www.aao.hcmut.edu.vn/php/aao_lt.php?goto=", m);
+
+           if (tmp.equals("")) {
+               result.clear();
+               objs.clear();
+               objs.add("Không tìm thấy thông tin.\nVui lòng kiểm tra kết nối Internet và thử lại.");
+               return result;
+           }
+
+           if (tmp.indexOf("Không tìm thấy mã số sinh viên này trong dữ liệu") != -1) {
+               result.clear();
+               objs.clear();
+               objs.add("Mã số sinh viên không tồn tại.");
+               return result;
+           }
+
+           if (tmp.indexOf("Không tìm thấy") != -1) {
+               result.clear();
+               objs.clear();
+               objs.add("Không có thông tin cho học kỳ này.");
+               return result;
+           }
+
+           String keywordS = "color=#0080FF>";
+           String keywordE = "</font>";
+
+           // get updateDate
+           String keywordUpdateDate = "t: ";
+           String ngayCapNhat = "";
+           int start = tmp.indexOf(keywordUpdateDate);
+           ngayCapNhat = tmp.substring(start + keywordUpdateDate.length(),
+                   start + keywordUpdateDate.length() + 10);
+           objs.add(ngayCapNhat);
+
+           start = tmp.indexOf(keywordS);
+           int end = 0;
+
+           // System.out.println(start);
+
+           boolean exit = (start == -1);
+           while (exit == false) {
+               // get maMH
+               end = tmp.indexOf(keywordE, start + keywordS.length());
+               String maMH = tmp.substring(start + keywordS.length(), end);
+               // System.out.println(maMH + "\t");
+               // get tenMH
+               start = tmp.indexOf(keywordS, end);
+               end = tmp.indexOf(keywordE, start + keywordS.length());
+               String tenMH = tmp.substring(start + keywordS.length(), end);
+               // System.out.println(tenMH + "\t");
+               // get nhom_to
+               start = tmp.indexOf(keywordS, end);
+               end = tmp.indexOf(keywordE, start + keywordS.length());
+               String nhom_to = tmp.substring(start + keywordS.length(), end);
+               // System.out.println(nhom_to + "\t");
+
+               // get ngayGK
+               start = tmp.indexOf(keywordS, end);
+               end = tmp.indexOf(keywordE, start + keywordS.length());
+               String nG = tmp.substring(start + keywordS.length(), end);
+               // System.out.println(nG + "\t");
+               // get tietGK
+               start = tmp.indexOf(keywordS, end);
+               end = tmp.indexOf(keywordE, start + keywordS.length());
+               int tG = Integer.parseInt("0"
+                       + tmp.substring(start + keywordS.length(), end));
+               // System.out.println(tG + "\t");
+               // get phongGK
+               start = tmp.indexOf(keywordS, end);
+               end = tmp.indexOf(keywordE, start + keywordS.length());
+               String pG = tmp.substring(start + keywordS.length(), end);
+               // System.out.println(pG);
+
+               // get ngayCK
+               start = tmp.indexOf(keywordS, end);
+               end = tmp.indexOf(keywordE, start + keywordS.length());
+               String nC = tmp.substring(start + keywordS.length(), end);
+               // System.out.println(nC + "\t");
+               // get tietGK
+               start = tmp.indexOf(keywordS, end);
+               end = tmp.indexOf(keywordE, start + keywordS.length());
+               int tC = Integer.parseInt("0"
+                       + tmp.substring(start + keywordS.length(), end));
+               // System.out.println(tC + "\t");
+               // get phongGK
+               start = tmp.indexOf(keywordS, end);
+               end = tmp.indexOf(keywordE, start + keywordS.length());
+               String pC = tmp.substring(start + keywordS.length(), end);
+               // System.out.println(pC + "\t");
+
+               DI__LichThi lt = new DI__LichThi();
+               lt.mssv = mssv;
+               lt.namhoc = Integer.parseInt(hk) / 10;
+               lt.hocky = Integer.parseInt(hk) % 10;
+               lt.mamh = maMH;
+               lt.tenmh = tenMH;
+               lt.nhomto = nhom_to;
+               lt.ngaygk = nG;
+               lt.tietgk = tG;
+               lt.phonggk = pG;
+               lt.ngayck = nC;
+               lt.tietck = tC;
+               lt.phongck = pC;
+
+               result.add(lt);
+
+               start = tmp.indexOf(keywordS, end);
+               // System.out.println(start);
+
+               exit = (start == -1);
+           }
+       } catch (UnknownHostException uhe) {
+           result.clear();
+           objs.clear();
+           objs.add("Không tìm thấy thông tin.\nVui lòng kiểm tra kết nối Internet và thử lại.");
+       } catch (Exception ex) {
+           ex.printStackTrace();
+           result.clear();
+           objs.clear();
+           objs.add("Không tìm thấy thông tin.\nVui lòng kiểm tra kết nối Internet và thử lại.");
+       }
+
+       if (result.size() == 0 && objs.size() == 0) {
+           objs.add("Chưa có thông tin mới!");
+       }
+
+       return result;
+   }
 }
