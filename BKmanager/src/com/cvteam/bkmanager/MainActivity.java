@@ -1,17 +1,20 @@
 package com.cvteam.bkmanager;
 
+import java.util.List;
+
 import org.holoeverywhere.app.Activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.SearchView;
+import com.cvteam.bkmanager.model.DI__NienHoc;
+import com.cvteam.bkmanager.model.NienHocModel;
 import com.cvteam.bkmanager.service.LogService;
 import com.cvteam.bkmanager.service.SharedPreferencesService;
 
@@ -22,7 +25,8 @@ public class MainActivity extends SherlockFragmentActivity implements
 	public static final String APP_PREFS = "CVTeam.BKmanager";
 	private SharedPreferences sharedPrefs;
 	public static String currentSearch;
-
+	public static NienHocModel nienHocModel;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		logService.functionTag("onCreate", "");
@@ -41,6 +45,48 @@ public class MainActivity extends SherlockFragmentActivity implements
 			getSupportActionBar().setSubtitle(Setting._mssv);
 			getSupportActionBar().setHomeButtonEnabled(true);
 		}
+		
+		nienHocModel = new NienHocModel();
+        List<DI__NienHoc> lstNienHoc = SharedPreferencesService
+                .LoadListNienHoc(sharedPrefs);
+        if (lstNienHoc.size() == 0)
+            try {
+                //lstNienHoc = AAOService.refreshListNienHoc();
+                lstNienHoc.add(new DI__NienHoc(2012, 2));
+                lstNienHoc.add(new DI__NienHoc(2012, 1));
+
+                lstNienHoc.add(new DI__NienHoc(2011, 3));
+                lstNienHoc.add(new DI__NienHoc(2011, 2));
+                lstNienHoc.add(new DI__NienHoc(2011, 1));
+
+                lstNienHoc.add(new DI__NienHoc(2010, 3));
+                lstNienHoc.add(new DI__NienHoc(2010, 2));
+                lstNienHoc.add(new DI__NienHoc(2010, 1));
+
+                lstNienHoc.add(new DI__NienHoc(2009, 3));
+                lstNienHoc.add(new DI__NienHoc(2009, 2));
+                lstNienHoc.add(new DI__NienHoc(2009, 1));
+
+                lstNienHoc.add(new DI__NienHoc(2008, 3));
+                lstNienHoc.add(new DI__NienHoc(2008, 2));
+                lstNienHoc.add(new DI__NienHoc(2008, 1));
+
+                lstNienHoc.add(new DI__NienHoc(2007, 3));
+                lstNienHoc.add(new DI__NienHoc(2007, 2));
+                lstNienHoc.add(new DI__NienHoc(2007, 1));
+
+                lstNienHoc.add(new DI__NienHoc(2006, 3));
+                lstNienHoc.add(new DI__NienHoc(2006, 2));
+                lstNienHoc.add(new DI__NienHoc(2006, 1));
+
+                lstNienHoc.add(new DI__NienHoc(2005, 3));
+                lstNienHoc.add(new DI__NienHoc(2005, 2));
+                lstNienHoc.add(new DI__NienHoc(2005, 1));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        nienHocModel.setHKs(lstNienHoc);
 	}
 
 	@Override
@@ -146,6 +192,11 @@ public class MainActivity extends SherlockFragmentActivity implements
 		case R.id.txtviewLichThi:
 			myIntent = new Intent(MainActivity.this,
 					LichThiActivity.class);
+			MainActivity.this.startActivity(myIntent);
+			break;
+		case R.id.txtviewDiem:
+			myIntent = new Intent(MainActivity.this,
+					DiemActivity.class);
 			MainActivity.this.startActivity(myIntent);
 			break;
 		}

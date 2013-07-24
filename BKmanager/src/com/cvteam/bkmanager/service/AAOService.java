@@ -20,6 +20,8 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
+import com.cvteam.bkmanager.MainActivity;
+import com.cvteam.bkmanager.model.DI__Diem;
 import com.cvteam.bkmanager.model.DI__LichThi;
 import com.cvteam.bkmanager.model.DI__NienHoc;
 import com.cvteam.bkmanager.model.DI__ThoiKhoaBieu;
@@ -241,7 +243,7 @@ public class AAOService {
 			tagPos = getResult.indexOf(optionTag, tagPos + optionTag.length()
 					+ 5);
 		}
-
+		MainActivity.nienHocModel.setHKs(lstHK);
 		return lstHK;
 	}
 
@@ -637,4 +639,254 @@ public class AAOService {
 
        return result;
    }
+
+   /**
+   *
+   * @param mssv
+   * @param nienhoc
+   *            : i.e: 20122
+   * @param objs
+   *            : objs[0] is updateDate or error message if result is empty,
+   *            objs[1..5] are tcdkhk, tctlhk, tongsotc, diemtbhk, diemtbtl
+   * @return: list of DI__Diem object
+   */
+  public static List<DI__Diem> getDiem(String mssv, String nienhoc,
+          List<Object> objs) {
+
+      List<DI__Diem> result = new ArrayList<DI__Diem>();
+
+      try {
+          // post request
+          Map<String, String> m = new HashMap<String, String>();
+          if (nienhoc.equals("0") || nienhoc.equals(""))
+              m.put("HOC_KY", "d.hk_nh is not NULL");
+          else
+              m.put("HOC_KY", "d.hk_nh=" + nienhoc);
+          m.put("mssv", mssv);
+          m.put("image", "Xem-->");
+          String tmp = doSubmitPost(
+                  "http://www.aao.hcmut.edu.vn/php/aao_bd.php?goto=", m);
+
+          if (tmp.length() >= 3)
+              if (tmp.substring(0, 3).equals("404")) {
+                  result.clear();
+                  objs.clear();
+                  objs.add("Không tìm thấy thông tin.\nVui lòng kiểm tra kết nối Internet và thử lại.");
+                  return result;
+              }
+
+          if (tmp.equals("")) {
+              result.clear();
+              objs.clear();
+              objs.add("Không tìm thấy thông tin.\nVui lòng kiểm tra kết nối Internet và thử lại.");
+              return result;
+          }
+
+          if (tmp.indexOf("Không tìm thấy mã số sinh viên này trong dữ liệu") != -1) {
+              result.clear();
+              objs.clear();
+              objs.add("Mã số sinh viên không tồn tại.");
+              return result;
+          }
+
+          if (tmp.indexOf("Không tìm thấy") != -1) {
+              result.clear();
+              objs.clear();
+              objs.add("Không có thông tin cho học kỳ này.");
+              return result;
+          }
+
+          // searching keywords
+          String keywordS = "color=#0080FF>";
+          String keywordE = "</font>";
+          String keywordSemester = "M HK";
+          String keywordUpdateDate = "t: ";
+
+          int start, end, nextSemester;
+
+          nextSemester = tmp.indexOf(keywordSemester);
+          start = nextSemester;
+          end = 0;
+
+          // start = tmp.indexOf(keywordS);
+          // end = 0;
+
+          boolean allSemesterRead = (nextSemester == -1);
+
+          int hk;
+          int startYear;
+          String ngayCapNhat = "";
+
+          while (allSemesterRead == false) {
+              // get semester
+              String strHk = tmp.substring(
+                      nextSemester + keywordSemester.length(), nextSemester
+                              + keywordSemester.length() + 1);
+
+              hk = Integer.parseInt(strHk);
+              String strYear = tmp.substring(
+                      nextSemester + keywordSemester.length() + 3,
+                      nextSemester + keywordSemester.length() + 7);
+              startYear = Integer.parseInt(strYear);
+              // hk = (startYear % 100) * 10 + hk;
+              strHk = strYear + strHk;
+
+              // get updated date
+              start = tmp.indexOf(keywordUpdateDate, end);
+              end = tmp.indexOf(keywordE, start + keywordS.length());
+              if (ngayCapNhat.equals("")) {
+                  ngayCapNhat = tmp.substring(
+                          start + keywordUpdateDate.length(), end);
+                  objs.add(ngayCapNhat);
+              }
+
+              start = tmp.indexOf(keywordS, end);
+              nextSemester = tmp.indexOf(keywordSemester, end);
+
+              boolean thisSemesterRead = ((start > nextSemester) && (nextSemester != -1))
+                      || (start == -1);
+
+              while (thisSemesterRead == false) {
+
+                  // get maMH
+                  end = tmp.indexOf(keywordE, start + keywordS.length());
+                  String maMH = tmp.substring(start + keywordS.length(), end);
+
+                  // get tenMH
+                  start = tmp.indexOf(keywordS, end);
+                  end = tmp.indexOf(keywordE, start + keywordS.length());
+                  String tenMH = tmp
+                          .substring(start + keywordS.length(), end);
+                  // System.out.println("Mon :" + tenMH);
+
+                  // get nhom_to
+                  start = tmp.indexOf(keywordS, end);
+                  end = tmp.indexOf(keywordE, start + keywordS.length());
+                  String nhom_to = tmp.substring(start + keywordS.length(),
+                          end);
+
+                  // get so tin chi
+                  start = tmp.indexOf(keywordS, end);
+                  end = tmp.indexOf(keywordE, start + keywordS.length());
+                  int soTinChi = Integer.parseInt(tmp.substring(start
+                          + keywordS.length(), end));
+
+                  // get diem kiem tra
+                  start = tmp.indexOf(keywordS, end);
+                  end = tmp.indexOf(keywordE, start + keywordS.length());
+                  float dKT;
+                  try {
+                      dKT = Float.parseFloat(tmp.substring(
+                              start + keywordS.length(), end));
+                  } catch (NumberFormatException nFE) {
+                      dKT = -1;
+                      nFE.printStackTrace(System.out);
+                  }
+
+                  // get diem thi
+                  start = tmp.indexOf(keywordS, end);
+                  end = tmp.indexOf(keywordE, start + keywordS.length());
+                  float dThi;
+                  try {
+                      dThi = Float.parseFloat(tmp.substring(
+                              start + keywordS.length(), end));
+                  } catch (NumberFormatException nFE) {
+                      dThi = -1;
+                      nFE.printStackTrace(System.out);
+                  }
+
+                  // get diem TK
+                  start = tmp.indexOf(keywordS, end);
+                  end = tmp.indexOf(keywordE, start + keywordS.length());
+                  float dTK;
+                  try {
+                      dTK = Float.parseFloat(tmp.substring(
+                              start + keywordS.length(), end));
+                  } catch (NumberFormatException nFE) {
+                      dTK = -1;
+                      nFE.printStackTrace(System.out);
+                  }
+
+                  start = tmp.indexOf(keywordS, end);
+
+                  thisSemesterRead = ((start > nextSemester) && (nextSemester != -1))
+                          || (start == -1);
+
+                  // create object
+                  DI__Diem nDiem = new DI__Diem();
+                  nDiem.mssv = mssv;
+                  nDiem.namhoc = startYear;
+                  nDiem.hocky = hk;
+                  nDiem.mamh = maMH;
+                  nDiem.tenmh = tenMH;
+                  nDiem.nhomto = nhom_to;
+                  nDiem.sotc = soTinChi;
+                  nDiem.diemkt = dKT;
+                  nDiem.diemthi = dThi;
+                  nDiem.diemtk = dTK;
+
+                  // insert object into list
+                  result.add(nDiem);
+              }
+              allSemesterRead = (nextSemester == -1);
+          }
+
+          // tcdkhk
+          String searchPiece = "Tổng số tín chỉ đăng ký học kỳ :";
+          start = tmp.indexOf(searchPiece);
+          if (start != -1) {
+              end = tmp.indexOf("</td>", start + searchPiece.length());
+              objs.add(tmp.substring(start + searchPiece.length(), end));
+
+              // tctlhk
+              searchPiece = "Tổng số tín chỉ tích lũy học kỳ:";
+              start = tmp.indexOf(searchPiece);
+              if (start != -1) {
+                  end = tmp.indexOf("</td>", start + searchPiece.length());
+                  objs.add(tmp.substring(start + searchPiece.length(), end));
+
+                  // tongsotc
+                  searchPiece = "Tổng số tín chỉ :";
+                  start = tmp.indexOf(searchPiece);
+                  if (start != -1) {
+                      end = tmp
+                              .indexOf("</td>", start + searchPiece.length());
+                      objs.add(tmp.substring(start + searchPiece.length(),
+                              end));
+
+                      // diemtbhk
+                      searchPiece = "Điểm trung bình học kỳ:";
+                      start = tmp.indexOf(searchPiece);
+                      if (start != -1) {
+                          end = tmp.indexOf("</td>",
+                                  start + searchPiece.length());
+                          objs.add(tmp.substring(
+                                  start + searchPiece.length(), end));
+
+                          // diemtbtl
+                          searchPiece = "Điểm trung bình tích lũy:";
+                          start = tmp.indexOf(searchPiece);
+                          if (start != -1) {
+                              end = tmp.indexOf("</td>",
+                                      start + searchPiece.length());
+                              objs.add(tmp.substring(
+                                      start + searchPiece.length(), end));
+                          }
+                      }
+                  }
+              }
+          }
+      } catch (Exception ex) {
+          ex.printStackTrace();
+          result.clear();
+          objs.clear();
+          objs.add("Không tìm thấy thông tin.\nVui lòng kiểm tra kết nối Internet và thử lại.");
+      }
+
+      if (result.size() == 0 && objs.size() == 0) {
+          objs.add("Chưa có thông tin mới!");
+      }
+
+      return result;
+  }
 }

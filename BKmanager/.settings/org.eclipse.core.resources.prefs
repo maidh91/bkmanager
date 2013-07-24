@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/com/cvteam/bkmanager/AccountSetupActivity.java=UTF-8
+encoding//src/com/cvteam/bkmanager/DiemActivity.java=UTF-8
 encoding//src/com/cvteam/bkmanager/MainActivity.java=UTF-8
+encoding//src/com/cvteam/bkmanager/adapter/DiemAdapter.java=UTF-8
 encoding//src/com/cvteam/bkmanager/adapter/LichThiAdapter.java=UTF-8
 encoding//src/com/cvteam/bkmanager/controller/LichThiController.java=UTF-8
 encoding//src/com/cvteam/bkmanager/service/AAOService.java=UTF-8
