@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:isScrollContainer="true"
+    android:orientation="vertical"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    android:scrollbars="vertical" >
+
+    <org.holoeverywhere.widget.Spinner
+        android:id="@+id/spin_hocky"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:layout_marginLeft="8dip"
+        android:layout_marginRight="8dip" />
+
+    <org.holoeverywhere.widget.ListView
+        android:id="@+id/list_diem"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:paddingTop="7dp"
+          android:layout_weight="1" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/btn_more_info"
+        android:background="#3BB9FF" />
+
+    <org.holoeverywhere.widget.Button
+        android:id="@+id/btn_more_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="#FFFFFF"
+        android:text="Xem thông tin học kỳ"/>
+
+</LinearLayout>

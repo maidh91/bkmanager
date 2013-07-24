@@ -8,5 +8,6 @@
     <string name="title_activity_thoi_khoa_bieu">ThoiKhoaBieuActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_lich_thi">LichThiActivity</string>
+    <string name="title_activity_diem">DiemActivity</string>
 
 </resources>

@@ -34,6 +34,10 @@
             android:name="com.cvteam.bkmanager.LichThiActivity"
             android:label="@string/title_activity_lich_thi" >
         </activity>
+        <activity
+            android:name="com.cvteam.bkmanager.DiemActivity"
+            android:label="@string/title_activity_diem" >
+        </activity>
     </application>
 
 </manifest>
