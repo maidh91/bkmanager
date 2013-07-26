@@ -98,7 +98,6 @@ namespace BKmanager.Commands
         void ICommand.Execute(object parameter)
         {
             this.DoExecute(parameter);
-
         }
     }
 }

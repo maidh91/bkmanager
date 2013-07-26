@@ -21,6 +21,7 @@ namespace BKmanager.ViewModels
         public ObservableCollection<int> HocKyItems { get; set; }
         public ObservableCollection<LichThiObject> LichThiItems { get; set; }
         public ObservableCollection<DiemObject> DiemItems { get; set; }
+        public ObservableCollection<ThoiKhoaBieuObject> ThoiKhoaBieuItems { get; set; }
 
         private int _currentNamHocIndex;
         public int CurrentNamHocIndex
@@ -110,6 +111,9 @@ namespace BKmanager.ViewModels
                 AccountItems = new ObservableCollection<AccountObject>();
                 NamHocItems = new ObservableCollection<string>();
                 HocKyItems = new ObservableCollection<int>();
+                LichThiItems = new ObservableCollection<LichThiObject>();
+                DiemItems = new ObservableCollection<DiemObject>();
+                ThoiKhoaBieuItems = new ObservableCollection<ThoiKhoaBieuObject>();
 
                 // load account from db
                 AccountObject acc = new AccountObject() { MSSV = "50901524", Ten = "Đinh Hoàng Mai" };
@@ -119,9 +123,11 @@ namespace BKmanager.ViewModels
                 CurrentTen = _currentAccount.Ten;
 
                 // load namhoc from db
-                NamHocItems.Add("Tất cả");
-                NamHocItems.Add("2010");
+                NamHocItems.Add("");
                 NamHocItems.Add("2011");
+                NamHocItems.Add("2012");
+                NamHocItems.Add("2013");
+                NamHocItems.Add("Tất cả");
 
                 // load hocky
                 HocKyItems.Add(1);
@@ -263,45 +269,51 @@ namespace BKmanager.ViewModels
             LogService.StatusLog("LoadLichThi()");
             try
             {
-                LichThiItems = new ObservableCollection<LichThiObject>();
+                LichThiItems.Clear();
 
-                var lichthi = new LichThiObject();
-                lichthi.TenMon = "Chủ nghĩa Mác-Lênin";
-                lichthi.MaMon = "001001";
-                lichthi.Nhom = "A01";
-                lichthi.SoTC = 2;
-                lichthi.NgayGK = "1/1";
-                lichthi.TietGK = 2;
-                lichthi.PhongGK = "102C2";
-                lichthi.NgayCK = "1/2";
-                lichthi.TietCK = 3;
-                lichthi.PhongCK = "309C1";
+                var lichthi = new LichThiObject()
+                {
+                    TenMon = "Chủ nghĩa Mác-Lênin",
+                    MaMon = "001001",
+                    Nhom = "A01",
+                    SoTC = 5,
+                    NgayGK = "17/12/2012",
+                    TietGK = 2,
+                    PhongGK = "102C2",
+                    NgayCK = "31/03/2013",
+                    TietCK = 3,
+                    PhongCK = "309C1",
+                };
                 LichThiItems.Add(lichthi);
 
-                lichthi = new LichThiObject();
-                lichthi.TenMon = "Xác suất thống kê";
-                lichthi.MaMon = "001001";
-                lichthi.Nhom = "A01";
-                lichthi.SoTC = 2;
-                lichthi.NgayGK = "1/1";
-                lichthi.TietGK = 2;
-                lichthi.PhongGK = "102C2";
-                lichthi.NgayCK = "1/2";
-                lichthi.TietCK = 3;
-                lichthi.PhongCK = "309C1";
+                lichthi = new LichThiObject()
+                {
+                    TenMon = "Xác suất thống kê",
+                    MaMon = "001002",
+                    Nhom = "A03",
+                    SoTC = 2,
+                    NgayGK = "10/02/2013",
+                    TietGK = 2,
+                    PhongGK = "102C2",
+                    NgayCK = "31/03/2013",
+                    TietCK = 3,
+                    PhongCK = "309C1",
+                };
                 LichThiItems.Add(lichthi);
 
-                lichthi = new LichThiObject();
-                lichthi.TenMon = "Luận văn tốt nghiệp";
-                lichthi.MaMon = "001001";
-                lichthi.Nhom = "A01";
-                lichthi.SoTC = 2;
-                lichthi.NgayGK = "1/1";
-                lichthi.TietGK = 2;
-                lichthi.PhongGK = "102C2";
-                lichthi.NgayCK = "1/2";
-                lichthi.TietCK = 3;
-                lichthi.PhongCK = "309C1";
+                lichthi = new LichThiObject()
+                {
+                    TenMon = "Luận văn tốt nghiệp",
+                    MaMon = "001003",
+                    Nhom = "A02-A",
+                    SoTC = 10,
+                    NgayGK = "31/03/2013",
+                    TietGK = 2,
+                    PhongGK = "102C2",
+                    NgayCK = "10/02/2013",
+                    TietCK = 3,
+                    PhongCK = "309C1",
+                };
                 LichThiItems.Add(lichthi);
             }
             catch (Exception ex) { LogService.ErrorLog(ex.Message); }
@@ -312,36 +324,30 @@ namespace BKmanager.ViewModels
             LogService.StatusLog("LoadDiem()");
             try
             {
-                DiemItems = new ObservableCollection<DiemObject>();
+                DiemItems.Clear();
 
-                var diem = new DiemObject();
-                diem.TenMon = "av2";
-                diem.MaMon = "001001";
-                diem.Nhom = "A01";
-                diem.SoTC = 2;
-                diem.DiemGK = 11;
-                diem.DiemCK = 12;
-                diem.DiemTK = 8.8;
+                var diem = new DiemObject()
+                {
+                    TenMon = "Tư tưởng HCM",
+                    MaMon = "001001",
+                    Nhom = "A01",
+                    SoTC = 3,
+                    DiemGK = 10,
+                    DiemCK = 5,
+                    DiemTK = 7,
+                };
                 DiemItems.Add(diem);
 
-                diem = new DiemObject();
-                diem.TenMon = "av2";
-                diem.MaMon = "001001";
-                diem.Nhom = "A01";
-                diem.SoTC = 2;
-                diem.DiemGK = 11;
-                diem.DiemCK = 12;
-                diem.DiemTK = 8.8;
-                DiemItems.Add(diem);
-
-                diem = new DiemObject();
-                diem.TenMon = "av2";
-                diem.MaMon = "001001";
-                diem.Nhom = "A01";
-                diem.SoTC = 2;
-                diem.DiemGK = 11;
-                diem.DiemCK = 12;
-                diem.DiemTK = 8.8;
+                diem = new DiemObject()
+                {
+                    TenMon = "Giải tích 1",
+                    MaMon = "001002",
+                    Nhom = "A04",
+                    SoTC = 3,
+                    DiemGK = 5,
+                    DiemCK = 7,
+                    DiemTK = 6,
+                };
                 DiemItems.Add(diem);
             }
             catch (Exception ex) { LogService.ErrorLog(ex.Message); }
@@ -352,6 +358,20 @@ namespace BKmanager.ViewModels
             LogService.StatusLog("LoadThoiKhoaBieu()");
             try
             {
+                ThoiKhoaBieuItems.Clear();
+
+                var tkb = new ThoiKhoaBieuObject()
+                {
+                    TenMon = "Chủ nghĩa Mác-Lênin",
+                    MaMon = "001001",
+                    Nhom = "A01",
+                    SoTC = 5,
+
+                    Thu1 = 2,
+                    Tiet1 = 2,
+                    Phong1 = "101B1",
+                };
+                ThoiKhoaBieuItems.Add(tkb);
             }
             catch (Exception ex) { LogService.ErrorLog(ex.Message); }
         }
