@@ -1,0 +1,6 @@
+>>> SDK <<<
+http://download.microsoft.com/download/9/3/8/938A5074-461F-4E3D-89F4-5CE2F42C1E36/fulltril30/iso/wpsdkv80_enu1.iso
+
+>>> Tutorials <<<
+- Training Kit WP8
+http://www.microsoft.com/en-us/download/details.aspx?id=38782
