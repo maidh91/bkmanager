@@ -47,7 +47,7 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Text="{Binding TietGK, StringFormat=Tiet \{0\}}" FontFamily="Tahoma" FontSize="22"/>
+                                    <TextBlock Grid.Column="0" Text="{Binding TietGK, StringFormat=Tiết \{0\}}" FontFamily="Tahoma" FontSize="22"/>
                                     <TextBlock Grid.Column="1" Text="{Binding PhongGK}" FontFamily="Tahoma" FontSize="22"/>
                                 </Grid>
                             </StackPanel>
@@ -61,7 +61,7 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{Binding TietCK, StringFormat=Tiet \{0\}}" FontFamily="Tahoma" FontSize="22"/>
+                                <TextBlock Grid.Column="0" Text="{Binding TietCK, StringFormat=Tiết \{0\}}" FontFamily="Tahoma" FontSize="22"/>
                                 <TextBlock Grid.Column="1" Text="{Binding PhongCK}" FontFamily="Tahoma" FontSize="22"/>
                             </Grid>
                         </StackPanel>
@@ -95,6 +95,58 @@
                         <TextBlock Text="{Binding DiemGK, StringFormat=GK : \{0\}}" FontFamily="Tahoma" FontSize="22"/>
                         <TextBlock Text="{Binding DiemCK, StringFormat=CK : \{0\}}" FontFamily="Tahoma" FontSize="22"/>
                         <TextBlock Text="{Binding DiemTK, StringFormat=TK : \{0\}}" FontFamily="Tahoma" FontSize="22"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ThoiKhoaBieuTemplate">
+            <Border BorderBrush="Gray" BorderThickness="0,0,0,1">
+                <Grid Margin="0,10,0,10" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.60*"/>
+                        <ColumnDefinition Width="0.40*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border BorderBrush="Gray" BorderThickness="0,0,1,0">
+                        <StackPanel Grid.Column="0">
+                            <TextBlock TextWrapping="Wrap" Text="{Binding TenMon}" FontFamily="Comic Sans MS" FontSize="25" FontWeight="Bold"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding MaMon}" FontFamily="Tahoma" FontSize="22"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Nhom}" FontFamily="Tahoma" FontSize="22"/>
+                            </Grid>
+                            <TextBlock Text="{Binding SoTC, StringFormat=TC \{0\}}" FontFamily="Tahoma" FontSize="22"/>
+                        </StackPanel>
+                    </Border>
+                    <StackPanel Grid.Column="1">
+                        <Border BorderBrush="Gray" BorderThickness="0,0,0,1">
+                            <StackPanel Margin="10,0,0,0">
+                                <TextBlock Text="{Binding Thu1, StringFormat=Thứ \{0\}}" FontFamily="Tahoma" FontSize="22"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding Tiet1, StringFormat=Tiết \{0\}}" FontFamily="Tahoma" FontSize="22"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Phong1}" FontFamily="Tahoma" FontSize="22"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <StackPanel  Margin="10,0,0,0">
+                            <TextBlock Text="{Binding Thu2, StringFormat=Thứ \{0\}}" FontFamily="Tahoma" FontSize="22"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Tiet2, StringFormat=Tiết \{0\}}" FontFamily="Tahoma" FontSize="22"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Phong2}" FontFamily="Tahoma" FontSize="22"/>
+                            </Grid>
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -171,6 +223,7 @@
                         </TextBlock.Foreground>
                     </TextBlock>
                 </phone:PivotItem.Header>
+                <phone:LongListSelector Grid.Row="1" Margin="5,0,0,0" ItemsSource="{Binding ThoiKhoaBieuItems}" ItemTemplate="{StaticResource ThoiKhoaBieuTemplate}"/>
             </phone:PivotItem>
         </phone:Pivot>
 

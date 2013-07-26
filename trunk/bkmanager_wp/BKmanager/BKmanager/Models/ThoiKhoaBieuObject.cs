@@ -12,10 +12,10 @@
         public int SoTC { get; set; }
 
         public int Thu1 { get; set; }
-        public string Tiet1 { get; set; }
+        public int Tiet1 { get; set; }
         public string Phong1 { get; set; }
         public int Thu2 { get; set; }
-        public string Tiet2 { get; set; }
+        public int Tiet2 { get; set; }
         public string Phong2 { get; set; }
         
         public string Notice;
