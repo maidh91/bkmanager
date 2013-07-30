@@ -16,11 +16,13 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.SearchView;
+import com.cvteam.bkmanager.adapter.DiemAdapter;
 import com.cvteam.bkmanager.controller.DiemController;
+import com.cvteam.bkmanager.model.DI__Diem;
+import com.cvteam.bkmanager.model.DI__NienHoc;
 import com.cvteam.bkmanager.model.DiemModel;
 import com.cvteam.bkmanager.service.LogService;
 
@@ -225,13 +227,43 @@ org.holoeverywhere.widget.AdapterView.OnItemSelectedListener {
 	@Override
 	public void handleDiemModelChanged(DiemModel sender, List<Object> objs) {
 		// TODO Auto-generated method stub
+		List<DI__Diem> diems = new ArrayList<DI__Diem>();
+		diems = sender.getDiems();
 		
+		DiemAdapter dvAdapter = (DiemAdapter)lstDiem.getAdapter();
+
+		if (dvAdapter == null)
+        {
+            dvAdapter =  new DiemAdapter(this, diems);
+            lstDiem.setAdapter(dvAdapter);
+        }
+        else
+        {
+            dvAdapter.setLstDiem(diems);
+            dvAdapter.notifyDataSetChanged();
+        }
+        this.lstDiem.invalidateViews();
 	}
+	
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
 		// TODO Auto-generated method stub
-		
+		// On selecting a spinner item
+        String label = parent.getItemAtPosition(position).toString();
+        logService.functionTag("onItemSelected", label);
+        // Showing selected spinner item
+        // Toast.makeText(parent.getContext(), "You selected: " + label,
+        // Toast.LENGTH_LONG).show();
+
+        if (position == 0)
+            return;
+
+        if (MainActivity.nienHocModel.getHKs().size() != 0) {
+            DI__NienHoc nienhoc = MainActivity.nienHocModel.getHKs().get(position);
+            loadDiem(nienhoc.namhoc, nienhoc.hk);
+            //controller.getByHocKy(nienhoc.namhoc, nienhoc.hk);
+        }
 	}
 	@Override
 	public void onNothingSelected(AdapterView<?> parent) {

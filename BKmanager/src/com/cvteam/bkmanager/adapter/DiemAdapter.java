@@ -5,14 +5,14 @@ import java.util.List;
 import org.holoeverywhere.LayoutInflater;
 import org.holoeverywhere.widget.TextView;
 
-import com.cvteam.bkmanager.R;
-import com.cvteam.bkmanager.model.DI__Diem;
-import com.cvteam.bkmanager.service.LogService;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.cvteam.bkmanager.R;
+import com.cvteam.bkmanager.model.DI__Diem;
+import com.cvteam.bkmanager.service.LogService;
 
 public class DiemAdapter extends BaseAdapter {
 	private LogService logService = new LogService("DiemViewAdapter");
@@ -24,6 +24,10 @@ public class DiemAdapter extends BaseAdapter {
 		lstDiem = l;
 	}
 
+	public void setLstDiem(List<DI__Diem> lstDiem) {
+		this.lstDiem = lstDiem;
+	}
+	
 	@Override
 	public int getCount() {
 		return lstDiem.size();
