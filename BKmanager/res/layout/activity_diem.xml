@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<org.holoeverywhere.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:isScrollContainer="true"
@@ -39,4 +39,4 @@
         android:background="#FFFFFF"
         android:text="Xem thông tin học kỳ"/>
 
-</LinearLayout>
+</org.holoeverywhere.widget.LinearLayout>

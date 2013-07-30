@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.holoeverywhere.app.Activity;
 import org.holoeverywhere.widget.AdapterView;
 import org.holoeverywhere.widget.Button;
 import org.holoeverywhere.widget.Spinner;
@@ -23,7 +24,7 @@ import com.cvteam.bkmanager.controller.DiemController;
 import com.cvteam.bkmanager.model.DiemModel;
 import com.cvteam.bkmanager.service.LogService;
 
-public class DiemActivity extends SherlockFragmentActivity implements
+public class DiemActivity extends Activity implements
 SearchView.OnQueryTextListener, DiemModel.Listener, 
 org.holoeverywhere.widget.AdapterView.OnItemSelectedListener {
 
