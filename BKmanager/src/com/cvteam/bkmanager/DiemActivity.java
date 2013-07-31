@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.app.AlertDialog;
 import org.holoeverywhere.widget.AdapterView;
 import org.holoeverywhere.widget.Button;
 import org.holoeverywhere.widget.Spinner;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +26,8 @@ import com.cvteam.bkmanager.controller.DiemController;
 import com.cvteam.bkmanager.model.DI__Diem;
 import com.cvteam.bkmanager.model.DI__NienHoc;
 import com.cvteam.bkmanager.model.DiemModel;
+import com.cvteam.bkmanager.service.Constant;
+import com.cvteam.bkmanager.service.DialogService;
 import com.cvteam.bkmanager.service.LogService;
 
 public class DiemActivity extends Activity implements
@@ -185,6 +189,8 @@ org.holoeverywhere.widget.AdapterView.OnItemSelectedListener {
 	public boolean onQueryTextSubmit(String query) {
 		logService.functionTag("onQueryTextSubmit", "submit text: " + query);
 		currentSearch = query;
+		DI__NienHoc nienhoc = MainActivity.nienHocModel.getHKs().get(spinHocKy.getSelectedItemPosition());
+		loadDiem(nienhoc.namhoc, nienhoc.hk);
 		return true;
 	}
 
@@ -195,7 +201,7 @@ org.holoeverywhere.widget.AdapterView.OnItemSelectedListener {
 	}
 
 	public void loadDiem(int namhoc, int hocky) {
-		logService.functionTag("loadThoiKhoaBieu", "");
+		logService.functionTag("loadDiem", namhoc + " - " + hocky);
 		
 		if (!currentSearch.equals("")
                 && !model.mssv.equals(currentSearch)) {
@@ -203,10 +209,12 @@ org.holoeverywhere.widget.AdapterView.OnItemSelectedListener {
             Map<String, String> searchParams = new HashMap<String, String>();
             searchParams.put("mssv", currentSearch);
             model.mssv = currentSearch;
+        	DialogService.openProgressDialog(this, Constant.progress_diem);
             controller.getByHocKy(namhoc, hocky);
         } else if (currentSearch.equals("")
                 && !model.mssv.equals(Setting._mssv)) {
         	model.mssv = Setting._mssv;
+        	DialogService.openProgressDialog(this, Constant.progress_diem);
         	controller.getByHocKy(namhoc, hocky);
         }
 	}
@@ -230,19 +238,25 @@ org.holoeverywhere.widget.AdapterView.OnItemSelectedListener {
 		List<DI__Diem> diems = new ArrayList<DI__Diem>();
 		diems = sender.getDiems();
 		
-		DiemAdapter dvAdapter = (DiemAdapter)lstDiem.getAdapter();
+		DiemAdapter dvAdapter = new DiemAdapter(this, diems);
+        lstDiem.setAdapter(dvAdapter);
 
-		if (dvAdapter == null)
-        {
-            dvAdapter =  new DiemAdapter(this, diems);
-            lstDiem.setAdapter(dvAdapter);
-        }
-        else
-        {
-            dvAdapter.setLstDiem(diems);
-            dvAdapter.notifyDataSetChanged();
-        }
         this.lstDiem.invalidateViews();
+        
+        if (diems.size() == 0)
+        {
+            final AlertDialog dialogBuilder = new AlertDialog.Builder(this).create();
+            dialogBuilder.setMessage(model.getObjs().get(0).toString());
+            dialogBuilder.setTitle("BKmanager");
+            dialogBuilder.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+
+                  public void onClick(DialogInterface dialog, int id) {
+
+                      dialogBuilder.dismiss();
+
+                } });
+            dialogBuilder.show();
+        }
 	}
 	
 	@Override
@@ -252,9 +266,6 @@ org.holoeverywhere.widget.AdapterView.OnItemSelectedListener {
 		// On selecting a spinner item
         String label = parent.getItemAtPosition(position).toString();
         logService.functionTag("onItemSelected", label);
-        // Showing selected spinner item
-        // Toast.makeText(parent.getContext(), "You selected: " + label,
-        // Toast.LENGTH_LONG).show();
 
         if (position == 0)
             return;

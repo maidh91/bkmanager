@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.holoeverywhere.app.Activity;
 import org.holoeverywhere.app.AlertDialog;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.SearchView;
@@ -19,9 +19,11 @@ import com.cvteam.bkmanager.adapter.LichThiAdapter;
 import com.cvteam.bkmanager.controller.LichThiController;
 import com.cvteam.bkmanager.model.DI__LichThi;
 import com.cvteam.bkmanager.model.LichThiModel;
+import com.cvteam.bkmanager.service.Constant;
+import com.cvteam.bkmanager.service.DialogService;
 import com.cvteam.bkmanager.service.LogService;
 
-public class LichThiActivity extends SherlockFragmentActivity implements
+public class LichThiActivity extends Activity implements
 SearchView.OnQueryTextListener, LichThiModel.Listener {
 
 	ListView lstLichThi;
@@ -76,7 +78,7 @@ SearchView.OnQueryTextListener, LichThiModel.Listener {
 		// Create the search view
 		SearchView searchView = new SearchView(getSupportActionBar()
 				.getThemedContext());
-		searchView.setQueryHint("Tìm theo MSSV");
+		searchView.setQueryHint("TÃ¬m theo MSSV");
 		searchView.setOnQueryTextListener(this);
 
 		menu.add("Search")
@@ -116,6 +118,7 @@ SearchView.OnQueryTextListener, LichThiModel.Listener {
 	public boolean onQueryTextSubmit(String query) {
 		logService.functionTag("onQueryTextSubmit", "submit text: " + query);
 		currentSearch = query;
+		loadLichThi();
 		return true;
 	}
 
@@ -133,18 +136,8 @@ SearchView.OnQueryTextListener, LichThiModel.Listener {
 		List<DI__LichThi> lichthis = new ArrayList<DI__LichThi>();
 		lichthis = sender.getLichThis();
 		
-		LichThiAdapter dvAdapter = (LichThiAdapter)lstLichThi.getAdapter();
-
-		if (dvAdapter == null)
-        {
-            dvAdapter =  new LichThiAdapter(this, lichthis);
-            lstLichThi.setAdapter(dvAdapter);
-        }
-        else
-        {
-            dvAdapter.setLstLichThi(lichthis);
-            dvAdapter.notifyDataSetChanged();
-        }
+		LichThiAdapter dvAdapter = new LichThiAdapter(this, lichthis);
+		lstLichThi.setAdapter(dvAdapter);
         this.lstLichThi.invalidateViews();
         
         if (lichthis.size() == 0)
@@ -163,17 +156,19 @@ SearchView.OnQueryTextListener, LichThiModel.Listener {
         }
 	}
 	public void loadLichThi() {
-		logService.functionTag("loadThoiKhoaBieu", "");
+		logService.functionTag("loadLichThi", "");
 		
 		if (!currentSearch.equals("")
                 && !model.mssv.equals(currentSearch)) {
 			model.mssv = currentSearch;
             Map<String, String> searchParams = new HashMap<String, String>();
             searchParams.put("mssv", currentSearch);
+        	DialogService.openProgressDialog(this, Constant.progress_lichthi);
             controller.getLichThi(searchParams);
         } else if (currentSearch.equals("")
                 && !model.mssv.equals(Setting._mssv)) {
         	model.mssv = Setting._mssv;
+        	DialogService.openProgressDialog(this, Constant.progress_lichthi);
         	controller.getLichThi();
         }
 	}

@@ -16,6 +16,7 @@ import com.cvteam.bkmanager.model.DI__ThoiKhoaBieu;
 import com.cvteam.bkmanager.model.ThoiKhoaBieuModel;
 import com.cvteam.bkmanager.service.AAOService;
 import com.cvteam.bkmanager.service.DatabaseService;
+import com.cvteam.bkmanager.service.DialogService;
 import com.cvteam.bkmanager.service.LogService;
 
 public class ThoiKhoaBieuController implements IDataSource{
@@ -105,6 +106,7 @@ public class ThoiKhoaBieuController implements IDataSource{
         } else {
             this.thoikhoabieu.setThoiKhoaBieus(lstTKB);
         }
+		DialogService.closeProgressDialog();
     }
 
     /**
@@ -122,8 +124,11 @@ public class ThoiKhoaBieuController implements IDataSource{
         this.thoikhoabieu.setObjects(objs);
         this.thoikhoabieu.setThoiKhoaBieus(lstTKB);
 
-        if (lstTKB.size() == 0)
+        if (lstTKB.size() == 0) {
+
+			DialogService.closeProgressDialog();
             return;
+        }
 
         for (int i = 0; i < lstTKB.size(); i++) {
             DI__ThoiKhoaBieu temp = lstTKB.get(i);
@@ -177,6 +182,7 @@ public class ThoiKhoaBieuController implements IDataSource{
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+		DialogService.closeProgressDialog();
     }
 
     public void requestTKBFromAao(String mssv) {

@@ -19,6 +19,7 @@ import com.cvteam.bkmanager.model.DI__NienHoc;
 import com.cvteam.bkmanager.model.DiemModel;
 import com.cvteam.bkmanager.service.AAOService;
 import com.cvteam.bkmanager.service.DatabaseService;
+import com.cvteam.bkmanager.service.DialogService;
 import com.cvteam.bkmanager.service.LogService;
 
 public class DiemController implements IDataSource {
@@ -177,6 +178,7 @@ public class DiemController implements IDataSource {
 			// logService.functionTag("UpdateDataSource",
 			// "Update model Diem successfully");
 		}
+		DialogService.closeProgressDialog();
 	}
 
 	public void requestDiemFromAao(String mssv) {
@@ -190,8 +192,10 @@ public class DiemController implements IDataSource {
 		diem.setObjects(objs);
 		diem.setDiems(lstDiem);
 
-		if (lstDiem.size() == 0)
+		if (lstDiem.size() == 0) {
+			DialogService.closeProgressDialog();
 			return;
+		}
 
 		for (int i = 0; i < lstDiem.size(); i++) {
 			DI__Diem temp = lstDiem.get(i);
@@ -345,6 +349,7 @@ public class DiemController implements IDataSource {
 				ex.printStackTrace();
 			}
 		}
+		DialogService.closeProgressDialog();
 	}
 
 	class RequestDiemFromAaoAsynTask extends AsyncTask<Void, Void, Void> {

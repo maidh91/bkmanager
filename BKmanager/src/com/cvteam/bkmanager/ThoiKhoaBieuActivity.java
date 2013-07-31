@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.holoeverywhere.app.Activity;
 import org.holoeverywhere.app.AlertDialog;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.SearchView;
@@ -19,9 +19,11 @@ import com.cvteam.bkmanager.adapter.ThoiKhoaBieuAdapter;
 import com.cvteam.bkmanager.controller.ThoiKhoaBieuController;
 import com.cvteam.bkmanager.model.DI__ThoiKhoaBieu;
 import com.cvteam.bkmanager.model.ThoiKhoaBieuModel;
+import com.cvteam.bkmanager.service.Constant;
+import com.cvteam.bkmanager.service.DialogService;
 import com.cvteam.bkmanager.service.LogService;
 
-public class ThoiKhoaBieuActivity extends SherlockFragmentActivity implements
+public class ThoiKhoaBieuActivity extends Activity implements
 		SearchView.OnQueryTextListener, ThoiKhoaBieuModel.Listener {
 
 	ListView lstTKB;
@@ -118,6 +120,7 @@ public class ThoiKhoaBieuActivity extends SherlockFragmentActivity implements
 	public boolean onQueryTextSubmit(String query) {
 		logService.functionTag("onQueryTextSubmit", "submit text: " + query);
 		currentSearch = query;
+		loadThoiKhoaBieu();
 		return true;
 	}
 
@@ -135,24 +138,15 @@ public class ThoiKhoaBieuActivity extends SherlockFragmentActivity implements
 		List<DI__ThoiKhoaBieu> TKBs = new ArrayList<DI__ThoiKhoaBieu>();
 		TKBs = sender.getThoiKhoaBieus();
 		
-		ThoiKhoaBieuAdapter dvAdapter = (ThoiKhoaBieuAdapter)lstTKB.getAdapter();
-		if (dvAdapter == null)
-        {
-            dvAdapter =  new ThoiKhoaBieuAdapter(this, TKBs);
-            lstTKB.setAdapter(dvAdapter);
-        }
-        else
-        {
-            dvAdapter.setLstTKB(TKBs);
-            dvAdapter.notifyDataSetChanged();
-        }
+		ThoiKhoaBieuAdapter dvAdapter = new ThoiKhoaBieuAdapter(this, TKBs);
+		lstTKB.setAdapter(dvAdapter);
         this.lstTKB.invalidateViews();
         
         if (TKBs.size() == 0)
         {
             final AlertDialog dialogBuilder = new AlertDialog.Builder(this).create();
             dialogBuilder.setMessage(model.getObjs().get(0));
-            dialogBuilder.setTitle("BKnoti");
+            dialogBuilder.setTitle("BKmanager");
             dialogBuilder.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
 
                   public void onClick(DialogInterface dialog, int id) {
@@ -171,10 +165,12 @@ public class ThoiKhoaBieuActivity extends SherlockFragmentActivity implements
 			model.mssv = currentSearch;
             Map<String, String> searchParams = new HashMap<String, String>();
             searchParams.put("mssv", currentSearch);
+        	DialogService.openProgressDialog(this, Constant.progress_diem);
             controller.getThoiKhoaBieu(searchParams);
         } else if (currentSearch.equals("")
                 && !model.mssv.equals(Setting._mssv)) {
         	model.mssv = Setting._mssv;
+        	DialogService.openProgressDialog(this, Constant.progress_diem);
         	controller.getThoiKhoaBieu();
         }
 	}
