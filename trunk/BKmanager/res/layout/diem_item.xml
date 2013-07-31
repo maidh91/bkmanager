@@ -3,82 +3,105 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="3dp"
-    android:paddingLeft="5dp"
-    android:paddingRight="3dp" >
+    android:paddingTop="10dp" >
+
+    <org.holoeverywhere.widget.TextView
+        android:id="@+id/txt_tenmon"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="50"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:background="#02BD85"
+        android:textSize="16sp" />
 
     <org.holoeverywhere.widget.LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="50"
         android:orientation="horizontal" >
 
-        <org.holoeverywhere.widget.LinearLayout
-            android:layout_width="match_parent"
+        <org.holoeverywhere.widget.TextView
+            android:layout_width="0dip"
             android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:orientation="vertical"
-            android:layout_marginRight="5dp" >
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="GK"
+            android:textSize="13sp" />
 
-            <org.holoeverywhere.widget.TextView
-                android:id="@+id/txt_tenmon"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textColor="#006400"
-                android:textStyle="bold" />
-
-            <org.holoeverywhere.widget.TextView
-                android:id="@+id/txt_mamonhoc"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textColor="#32cd32"
-                android:textSize="15sp" />
-
-            <org.holoeverywhere.widget.TextView
-                android:id="@+id/txt_sotc"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textColor="#32cd32"
-                android:textSize="15sp" />
-        </org.holoeverywhere.widget.LinearLayout>
-
-        <org.holoeverywhere.widget.LinearLayout
-            android:layout_width="match_parent"
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/border"
+            android:layout_width="0.5dp"
             android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:orientation="vertical" >
+            android:background="#A4A4A4" />
 
-            <org.holoeverywhere.widget.TextView
-                android:id="@+id/txt_nhomto"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textStyle="bold"
-                android:textSize="15sp" />
+        <org.holoeverywhere.widget.TextView
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="CK"
+            android:textSize="13sp" />
 
-            <org.holoeverywhere.widget.TextView
-                android:id="@+id/txt_diemgk"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textSize="13sp" />
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/border"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="#A4A4A4" />
 
-            <org.holoeverywhere.widget.TextView
-                android:id="@+id/txt_diemck"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textSize="13sp" />
+        <org.holoeverywhere.widget.TextView
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="TK"
+            android:textSize="13sp" />
+    </org.holoeverywhere.widget.LinearLayout>
 
-            <org.holoeverywhere.widget.TextView
-                android:id="@+id/txt_diemtk"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textSize="13sp" />
-        </org.holoeverywhere.widget.LinearLayout>
+    <org.holoeverywhere.widget.LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="50"
+        android:orientation="horizontal" >
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/txt_diemgk"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/border"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="#A4A4A4" />
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/txt_diemck"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/border"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="#A4A4A4" />
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/txt_diemtk"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:textStyle="bold" />
     </org.holoeverywhere.widget.LinearLayout>
 
 </org.holoeverywhere.widget.LinearLayout>

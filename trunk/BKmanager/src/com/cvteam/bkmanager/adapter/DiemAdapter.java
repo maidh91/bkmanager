@@ -52,10 +52,6 @@ public class DiemAdapter extends BaseAdapter {
 		View inflate = inflater.inflate(R.layout.diem_item, parent, false);
 
 		TextView txtTenMon = (TextView) inflate.findViewById(R.id.txt_tenmon);
-		TextView txtMaMonHoc = (TextView) inflate
-				.findViewById(R.id.txt_mamonhoc);
-		TextView txtSoTC = (TextView) inflate.findViewById(R.id.txt_sotc);
-		TextView txtNhomTo = (TextView) inflate.findViewById(R.id.txt_nhomto);
 		TextView txtGiuaKy = (TextView) inflate.findViewById(R.id.txt_diemgk);
 		TextView txtCuoiKy = (TextView) inflate.findViewById(R.id.txt_diemck);
 		TextView txtTongKet = (TextView) inflate.findViewById(R.id.txt_diemtk);
@@ -63,28 +59,22 @@ public class DiemAdapter extends BaseAdapter {
 		DI__Diem diemItem = lstDiem.get(position);
 
 		if (diemItem != null) {
-			txtTenMon.setText(diemItem.tenmh);
-			txtMaMonHoc.setText("Mã MH: " + diemItem.mamh);
-			txtSoTC.setText("Số TC: " + diemItem.sotc);
-			txtNhomTo.setText("Nhóm tổ: " + diemItem.nhomto);
+			txtTenMon.setText(diemItem.mamh + " - " + diemItem.tenmh);
 
 			if (diemItem.diemkt < 0)
-				txtGiuaKy.setText("  - Kiểm tra: --");
+				txtGiuaKy.setText("--");
 			else
-				txtGiuaKy.setText("  - Kiểm tra: "
-						+ Float.toString(diemItem.diemkt));
+				txtGiuaKy.setText(Float.toString(diemItem.diemkt));
 
 			if (diemItem.diemthi < 0)
-				txtCuoiKy.setText("  - Cuối kỳ: --");
+				txtCuoiKy.setText("--");
 			else
-				txtCuoiKy.setText("  - Cuối kỳ: "
-						+ Float.toString(diemItem.diemthi));
+				txtCuoiKy.setText(Float.toString(diemItem.diemthi));
 
 			if (diemItem.diemtk < 0)
-				txtTongKet.setText("  - Tổng kết: --");
+				txtTongKet.setText("--");
 			else
-				txtTongKet.setText("  - Tổng kết: "
-						+ Float.toString(diemItem.diemtk));
+				txtTongKet.setText(Float.toString(diemItem.diemtk));
 		}
 		
 		return inflate;
