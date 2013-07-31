@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.SearchView;
@@ -18,7 +17,7 @@ import com.cvteam.bkmanager.model.NienHocModel;
 import com.cvteam.bkmanager.service.LogService;
 import com.cvteam.bkmanager.service.SharedPreferencesService;
 
-public class MainActivity extends SherlockFragmentActivity implements
+public class MainActivity extends Activity implements
 		SearchView.OnQueryTextListener {
 
 	private LogService logService = new LogService("MainActivity");
@@ -201,6 +200,4 @@ public class MainActivity extends SherlockFragmentActivity implements
 			break;
 		}
 	}
-	
-	
 }

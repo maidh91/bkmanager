@@ -2,12 +2,13 @@ package com.cvteam.bkmanager.adapter;
 
 import java.util.List;
 
+import org.holoeverywhere.widget.TextView;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import com.cvteam.bkmanager.R;
 import com.cvteam.bkmanager.model.DI__LichThi;

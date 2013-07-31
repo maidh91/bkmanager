@@ -19,7 +19,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1" >
 
-            <TextView
+            <org.holoeverywhere.widget.TextView
                 android:id="@+id/txtviewDiem"
                 android:layout_height="fill_parent"
                 android:layout_margin="2dp"
@@ -29,7 +29,7 @@
                 android:onClick="onClickFeature"
                 android:text="Điểm" />
 
-            <TextView
+            <org.holoeverywhere.widget.TextView
                 android:id="@+id/txtviewLichThi"
                 android:layout_height="fill_parent"
                 android:layout_margin="2dp"
@@ -46,7 +46,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1" >
 
-            <TextView
+            <org.holoeverywhere.widget.TextView
                 android:id="@+id/txtviewThoiKhoaBieu"
                 android:layout_height="fill_parent"
                 android:layout_margin="2dp"
@@ -63,7 +63,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1" >
 
-            <TextView
+            <org.holoeverywhere.widget.TextView
                 android:id="@+id/txtviewTienIch"
                 android:layout_height="fill_parent"
                 android:layout_margin="2dp"
@@ -83,7 +83,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1" >
 
-                    <TextView
+                    <org.holoeverywhere.widget.TextView
                         android:id="@+id/txtviewHocPhi"
                         android:layout_height="fill_parent"
                         android:layout_margin="2dp"
@@ -98,7 +98,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1" >
 
-                    <TextView
+                    <org.holoeverywhere.widget.TextView
                         android:id="@+id/txtviewCauHinh"
                         android:layout_height="fill_parent"
                         android:layout_margin="2dp"

@@ -16,6 +16,7 @@ import com.cvteam.bkmanager.model.DI__LichThi;
 import com.cvteam.bkmanager.model.LichThiModel;
 import com.cvteam.bkmanager.service.AAOService;
 import com.cvteam.bkmanager.service.DatabaseService;
+import com.cvteam.bkmanager.service.DialogService;
 import com.cvteam.bkmanager.service.LogService;
 
 public class LichThiController implements IDataSource {
@@ -99,6 +100,7 @@ public class LichThiController implements IDataSource {
 		} else {
 			this.lichThi.setLichThis(lstLichThi);
 		}
+		DialogService.closeProgressDialog();
 	}
 
 	/**
@@ -116,8 +118,10 @@ public class LichThiController implements IDataSource {
 		this.lichThi.setObject(objs);
 		this.lichThi.setLichThis(lstLichThi);
 
-		if (lstLichThi.size() == 0)
+		if (lstLichThi.size() == 0) {
+			DialogService.closeProgressDialog();
 			return;
+		}
 		
 		for (int i = 0; i < lstLichThi.size(); i++) {
 			DI__LichThi temp = lstLichThi.get(i);
@@ -174,6 +178,7 @@ public class LichThiController implements IDataSource {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		DialogService.closeProgressDialog();
 	}
 
 	public void requestLichThiFromAao(String mssv) {
