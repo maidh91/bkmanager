@@ -1,113 +1,168 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<org.holoeverywhere.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <TableLayout
-        android:id="@+id/table_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+    <org.holoeverywhere.widget.LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_header"
+        android:orientation="vertical"
+        android:paddingTop="10dp" >
 
-        <TableRow
-            android:id="@+id/rowDiemLichThi"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1" >
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/txt_tensv"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="50"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="19sp" />
 
-            <org.holoeverywhere.widget.TextView
-                android:id="@+id/txtviewDiem"
-                android:layout_height="fill_parent"
-                android:layout_margin="2dp"
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/txt_mssv"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="50"
+            android:gravity="center_horizontal"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp" />
+    </org.holoeverywhere.widget.LinearLayout>
+
+    <org.holoeverywhere.widget.LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <org.holoeverywhere.widget.LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <org.holoeverywhere.widget.LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#8D55F5"
-                android:clickable="true"
-                android:onClick="onClickFeature"
-                android:text="Điểm" />
+                android:orientation="vertical" >
 
-            <org.holoeverywhere.widget.TextView
-                android:id="@+id/txtviewLichThi"
-                android:layout_height="fill_parent"
-                android:layout_margin="2dp"
-                android:layout_weight="1"
-                android:background="#47E1D2"
-                android:clickable="true"
-                android:onClick="onClickFeature"
-                android:text="Lịch thi" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/rowThoiKhoaBieu"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1" >
-
-            <org.holoeverywhere.widget.TextView
-                android:id="@+id/txtviewThoiKhoaBieu"
-                android:layout_height="fill_parent"
-                android:layout_margin="2dp"
-                android:layout_weight="1"
-                android:background="#1E743A"
-                android:clickable="true"
-                android:onClick="onClickFeature"
-                android:text="Thời khóa biểu" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/rowTienIchHocPhiCauHinh"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1" >
-
-            <org.holoeverywhere.widget.TextView
-                android:id="@+id/txtviewTienIch"
-                android:layout_height="fill_parent"
-                android:layout_margin="2dp"
-                android:layout_weight="1"
-                android:background="#96EC4B"
-                android:text="Tiện ích" />
-
-            <TableLayout
-                android:id="@+id/table_layout2"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" >
-
-                <TableRow
-                    android:id="@+id/rowHocPhi"
+                <ImageView
+                    android:id="@+id/imgDiem"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1" >
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Điểm"
+                    android:onClick="onClickFeature"
+                    android:paddingTop="30dp"
+                    android:src="@drawable/diem" />
 
-                    <org.holoeverywhere.widget.TextView
-                        android:id="@+id/txtviewHocPhi"
-                        android:layout_height="fill_parent"
-                        android:layout_margin="2dp"
-                        android:layout_weight="1"
-                        android:background="#AD2C62"
-                        android:text="Học phí" />
-                </TableRow>
+                <org.holoeverywhere.widget.TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Điểm"
+                    android:textSize="17sp" />
+            </org.holoeverywhere.widget.LinearLayout>
 
-                <TableRow
-                    android:id="@+id/rowCauHinh"
+            <org.holoeverywhere.widget.TextView
+                android:id="@+id/border"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="#A4A4A4" />
+
+            <org.holoeverywhere.widget.LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/imgLichThi"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1" >
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Lịch thi"
+                    android:onClick="onClickFeature"
+                    android:paddingTop="30dp"
+                    android:src="@drawable/lichthi" />
 
-                    <org.holoeverywhere.widget.TextView
-                        android:id="@+id/txtviewCauHinh"
-                        android:layout_height="fill_parent"
-                        android:layout_margin="2dp"
-                        android:layout_weight="1"
-                        android:background="#D7EC4B"
-                        android:text="Cấu hình" />
-                </TableRow>
-            </TableLayout>
-        </TableRow>
-    </TableLayout>
+                <org.holoeverywhere.widget.TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Lịch thi"
+                    android:textSize="17sp" />
+            </org.holoeverywhere.widget.LinearLayout>
+        </org.holoeverywhere.widget.LinearLayout>
+    </org.holoeverywhere.widget.LinearLayout>
 
-</RelativeLayout>
+    <org.holoeverywhere.widget.TextView
+        android:id="@+id/border"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#A4A4A4" />
+
+    <org.holoeverywhere.widget.LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <org.holoeverywhere.widget.LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <org.holoeverywhere.widget.LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/imgTKB"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Thời khóa biểu"
+                    android:onClick="onClickFeature"
+                    android:paddingTop="30dp"
+                    android:src="@drawable/diem" />
+
+                <org.holoeverywhere.widget.TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Tnời khóa biểu"
+                    android:textSize="17sp" />
+            </org.holoeverywhere.widget.LinearLayout>
+
+            <org.holoeverywhere.widget.TextView
+                android:id="@+id/border"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="#A4A4A4" />
+
+            <org.holoeverywhere.widget.LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/imgTienIch"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Tiện ích"
+                    android:onClick="onClickFeature"
+                    android:paddingTop="30dp"
+                    android:src="@drawable/tienich" />
+
+                <org.holoeverywhere.widget.TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Tiện ích"
+                    android:textSize="17sp" />
+            </org.holoeverywhere.widget.LinearLayout>
+        </org.holoeverywhere.widget.LinearLayout>
+    </org.holoeverywhere.widget.LinearLayout>
+
+</org.holoeverywhere.widget.LinearLayout>

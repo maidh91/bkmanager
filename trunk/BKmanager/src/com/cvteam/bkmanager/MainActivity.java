@@ -3,6 +3,7 @@ package com.cvteam.bkmanager;
 import java.util.List;
 
 import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.widget.TextView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,10 +40,15 @@ public class MainActivity extends Activity implements
 			startActivityForResult(
 					new Intent(this, AccountSetupActivity.class), 57);
 		} else {
-			getSupportActionBar().setDisplayShowTitleEnabled(true);
-			getSupportActionBar().setTitle(Setting._name);
-			getSupportActionBar().setSubtitle(Setting._mssv);
-			getSupportActionBar().setHomeButtonEnabled(true);
+			//getSupportActionBar().setDisplayShowTitleEnabled(true);
+			//getSupportActionBar().setTitle(Setting._name);
+			//getSupportActionBar().setSubtitle(Setting._mssv);
+			getSupportActionBar().setHomeButtonEnabled(false);
+			
+			TextView txt_tensv = (TextView)findViewById(R.id.txt_tensv);
+			TextView txt_mssv = (TextView)findViewById(R.id.txt_mssv);
+			txt_tensv.setText(Setting._name);
+			txt_mssv.setText("MSSV: " + Setting._mssv);
 		}
 		
 		nienHocModel = new NienHocModel();
@@ -183,17 +189,17 @@ public class MainActivity extends Activity implements
 		logService.functionTag("onClickFeature", "id: " + view.getId());
 		Intent myIntent;
 		switch (view.getId()) {
-		case R.id.txtviewThoiKhoaBieu:
+		case R.id.imgTKB:
 			myIntent = new Intent(MainActivity.this,
 					ThoiKhoaBieuActivity.class);
 			MainActivity.this.startActivity(myIntent);
 			break;
-		case R.id.txtviewLichThi:
+		case R.id.imgLichThi:
 			myIntent = new Intent(MainActivity.this,
 					LichThiActivity.class);
 			MainActivity.this.startActivity(myIntent);
 			break;
-		case R.id.txtviewDiem:
+		case R.id.imgDiem:
 			myIntent = new Intent(MainActivity.this,
 					DiemActivity.class);
 			MainActivity.this.startActivity(myIntent);
