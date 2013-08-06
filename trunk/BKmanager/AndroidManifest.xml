@@ -17,7 +17,7 @@
         <activity
             android:name="com.cvteam.bkmanager.MainActivity"
             android:label="@string/app_name"
-        android:theme="@style/Holo.Theme.Light" >
+            android:theme="@style/Holo.Theme.Light" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,22 +27,37 @@
         <activity
             android:name="com.cvteam.bkmanager.AccountSetupActivity"
             android:label="@string/title_activity_account_setup"
-        android:theme="@style/Holo.Theme.Light" >
+            android:theme="@style/Holo.Theme.Light" >
         </activity>
         <activity
             android:name="com.cvteam.bkmanager.ThoiKhoaBieuActivity"
             android:label="@string/title_activity_thoi_khoa_bieu"
-        android:theme="@style/Holo.Theme.Light" >
+            android:theme="@style/Holo.Theme.Light" >
         </activity>
         <activity
             android:name="com.cvteam.bkmanager.LichThiActivity"
             android:label="@string/title_activity_lich_thi"
-        android:theme="@style/Holo.Theme.Light" >
+            android:theme="@style/Holo.Theme.Light" >
         </activity>
         <activity
             android:name="com.cvteam.bkmanager.DiemActivity"
             android:label="@string/title_activity_diem"
-        android:theme="@style/Holo.Theme.Light" >
+            android:theme="@style/Holo.Theme.Light" >
+        </activity>
+        <activity
+            android:name="com.cvteam.bkmanager.SettingActivity"
+            android:label="@string/title_activity_setting"
+            android:theme="@style/Holo.Theme.Light" >
+        </activity>
+        <activity
+            android:name="com.cvteam.bkmanager.SettingThongBaoActivity"
+            android:label="@string/title_activity_setting_thon_bao"
+            android:theme="@style/Holo.Theme.Light" >
+        </activity>
+        <activity
+            android:name="com.cvteam.bkmanager.SettingDongBoActivity"
+            android:label="@string/title_activity_setting_dong_bo"
+            android:theme="@style/Holo.Theme.Light" >
         </activity>
     </application>
 

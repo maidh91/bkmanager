@@ -1,0 +1,172 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingActivity" >
+	
+    <org.holoeverywhere.widget.LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/main_header"
+        android:orientation="vertical"
+        android:paddingTop="10dp" android:id="@+id/linearLayout1">
+
+        <org.holoeverywhere.widget.TextView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.15"
+            android:gravity="center"
+            android:text="Cấu Hình"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.72" />
+
+    </org.holoeverywhere.widget.LinearLayout>
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutTaiKhoan"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_below="@+id/linearLayout1" 
+        android:clickable="true"
+        android:background="@drawable/clickable_white"
+        android:layout_centerHorizontal="true">
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/TextViewTK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:text="Tài khoản" />
+        
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"
+            android:layout_below="@+id/TextViewTK"/>
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/arow" />
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutThongBao"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_below="@+id/RelativeLayoutTaiKhoan" 
+        android:clickable="true"
+        android:background="@drawable/clickable_white"
+        android:layout_centerHorizontal="true">
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/TextViewTB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:text="Thông báo" />
+        
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"
+            android:layout_below="@+id/TextViewTB"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/arow" />
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutDongBo"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_below="@+id/RelativeLayoutThongBao" 
+        android:clickable="true"
+        android:background="@drawable/clickable_white"
+        android:layout_centerHorizontal="true">
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/TextViewDB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:text="Đồng bộ" />
+        
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"
+            android:layout_below="@+id/TextViewDB"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/arow" />
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutKhac"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:clickable="true"
+        android:background="@drawable/clickable_white"
+        android:layout_below="@+id/RelativeLayoutDongBo" 
+        android:layout_centerHorizontal="true">
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/TextViewTK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:text="Khác" />
+        
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"
+            android:layout_below="@+id/TextViewTK"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/arow" />
+
+    </RelativeLayout>
+    
+</RelativeLayout>

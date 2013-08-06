@@ -16,6 +16,14 @@ public final class SharedPreferencesService {
 			editor.putBoolean("_blackTheme", Setting._blackTheme);
 			editor.putString("_mssv", Setting._mssv);
 			editor.putString("_name", Setting._name);
+			editor.putBoolean("_thongBaoLichThi", Setting._thongBaoLichThi);
+			editor.putBoolean("_thongBaoDiem", Setting._thongBaoDiem);
+			editor.putBoolean("_thongBaoHocPhi", Setting._thongBaoHocPhi);
+			editor.putBoolean("_thongBaoHocBong", Setting._thongBaoHocBong);
+			editor.putBoolean("_thongBaoSuKien", Setting._thongBaoSuKien);
+			editor.putBoolean("_dongBoLichThi", Setting._dongBoLichThi);
+			editor.putInt("_chuKiCapNhat", Setting._chuKiCapNhat);
+			editor.putInt("_nhacNhoLichThi", Setting._nhacNhoLichThi);
 			editor.commit();
 			return true;
 		} catch (Exception ex) {
@@ -28,6 +36,14 @@ public final class SharedPreferencesService {
 			Setting._blackTheme = preferences.getBoolean("_blackTheme", true);
 			Setting._mssv = preferences.getString("_mssv", "");
 			Setting._name = preferences.getString("_name", "");
+			Setting._thongBaoLichThi = preferences.getBoolean("_thongBaoLichThi", true);
+			Setting._thongBaoDiem = preferences.getBoolean("_thongBaoDiem", true);
+			Setting._thongBaoHocPhi = preferences.getBoolean("_thongBaoHocPhi", true);
+			Setting._thongBaoHocBong = preferences.getBoolean("_thongBaoHocBong", true);
+			Setting._thongBaoSuKien = preferences.getBoolean("_thongBaoSuKien", true);
+			Setting._dongBoLichThi = preferences.getBoolean("_dongBoLichThi", true);
+			Setting._chuKiCapNhat = preferences.getInt("_chuKiCapNhat", 3);
+			Setting._nhacNhoLichThi = preferences.getInt("_nhacNhoLichThi", 0);
 
 			return true;
 		} catch (Exception ex) {

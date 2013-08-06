@@ -1,0 +1,227 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingThongBaoActivity" >
+
+    <org.holoeverywhere.widget.LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/main_header"
+        android:orientation="vertical"
+        android:paddingTop="10dp" >
+
+        <org.holoeverywhere.widget.TextView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.15"
+            android:gravity="center"
+            android:text="Thông báo"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.72" />
+    </org.holoeverywhere.widget.LinearLayout>
+    
+    <org.holoeverywhere.widget.LinearLayout
+        android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:paddingBottom="@dimen/activity_vertical_margin"
+	    android:paddingLeft="@dimen/activity_horizontal_margin"
+	    android:paddingRight="@dimen/activity_horizontal_margin"
+	    android:paddingTop="@dimen/activity_vertical_margin"
+	    android:layout_below="@+id/linearLayout1"
+	    android:orientation="vertical" >
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/TextViewTB"
+            android:background="#DDDDDD" />
+        
+        <RelativeLayout
+        android:id="@+id/RelativeLayoutLichThi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/clickable_white"
+        android:clickable="true" >
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/TextViewTB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="7dp"
+            android:text="Lịch thi"
+            android:textSize="20dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/TextViewTB"
+            android:background="#DDDDDD" />
+
+        <org.holoeverywhere.widget.CheckBox
+            android:id="@+id/CheckBoxLichThi"
+            android:button="@drawable/selector_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/arow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutDiem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/clickable_white"
+        android:clickable="true" >
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/TextViewDB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="7dp"
+            android:text="Điểm"
+            android:textSize="20dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/TextViewDB"
+            android:background="#DDDDDD" />
+
+        <org.holoeverywhere.widget.CheckBox
+            android:id="@+id/CheckBoxDiem"
+            android:button="@drawable/selector_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/arow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutHocPhi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/clickable_white"
+        android:clickable="true" >
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/TextViewHP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="7dp"
+            android:text="Học phí"
+            android:textSize="20dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/TextViewHP"
+            android:background="#DDDDDD" />
+
+        <org.holoeverywhere.widget.CheckBox
+            android:id="@+id/CheckBoxHocPhi"
+            android:button="@drawable/selector_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/arow" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutHocBong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/clickable_white"
+        android:clickable="true" >
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/TextViewHB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="7dp"
+            android:text="Học bổng"
+            android:textSize="20dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/TextViewHB"
+            android:background="#DDDDDD" />
+
+        <org.holoeverywhere.widget.CheckBox
+            android:id="@+id/CheckBoxHocBong"
+            android:button="@drawable/selector_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/arow" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutSuKien"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/clickable_white"
+        android:clickable="true" >
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/TextViewSK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="7dp"
+            android:text="Sự kiện"
+            android:textSize="20dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/TextViewSK"
+            android:background="#DDDDDD" />
+
+        <org.holoeverywhere.widget.CheckBox
+            android:id="@+id/CheckBoxSuKien"
+            android:button="@drawable/selector_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/arow" />
+    </RelativeLayout>
+        
+    </org.holoeverywhere.widget.LinearLayout>
+
+    
+
+</RelativeLayout>

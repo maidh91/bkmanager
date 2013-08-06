@@ -1,0 +1,145 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingDongBoActivity" >
+	<org.holoeverywhere.widget.LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/main_header"
+        android:orientation="vertical"
+        android:paddingTop="10dp" >
+
+        <org.holoeverywhere.widget.TextView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.15"
+            android:gravity="center"
+            android:text="Đồng bộ"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.72" />
+    </org.holoeverywhere.widget.LinearLayout>
+	<org.holoeverywhere.widget.LinearLayout
+        android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_below="@+id/linearLayout1"
+	    android:orientation="vertical" >
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/TextViewTB"
+            android:background="#DDDDDD" />
+        <RelativeLayout
+        android:id="@+id/RelativeLayoutCKCN"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:clickable="true"
+        android:background="@drawable/clickable_white"
+        android:layout_centerHorizontal="true">
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/TextViewCKCN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:text="Chu kì cập nhật" />
+        
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"
+            android:layout_below="@+id/TextViewCKCN"/>
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/TextViewCKCNValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:textColor="#3BB9FF"
+            />
+
+    </RelativeLayout>
+	<RelativeLayout
+        android:id="@+id/RelativeLayoutDBLT"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_centerHorizontal="true">
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/TextViewDBLT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:text="Đồng bộ lịch thi" />
+        
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"
+            android:layout_below="@+id/TextViewDBLT"/>
+
+        <org.holoeverywhere.widget.Switch
+            android:id="@+id/SwitchDBLT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/arow" />
+
+    </RelativeLayout>
+	<RelativeLayout
+        android:id="@+id/RelativeLayoutNNLT"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:clickable="true"
+        android:background="@drawable/clickable_white"
+        android:layout_centerHorizontal="true">
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/TextViewNNLT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:text="Nhắc nhở lịch thi" />
+        
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"
+            android:layout_below="@+id/TextViewNNLT"/>
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/TextViewNNLTValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:textColor="#3BB9FF"
+            />
+
+    </RelativeLayout>
+        
+    </org.holoeverywhere.widget.LinearLayout>
+</RelativeLayout>

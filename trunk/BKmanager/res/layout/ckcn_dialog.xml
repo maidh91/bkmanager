@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <org.holoeverywhere.widget.TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Chu kì cập là khoảng thời gian giữa 2 lần cập nhật."
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <org.holoeverywhere.widget.NumberPicker
+        android:id="@+id/numberPicker1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true" >
+    </org.holoeverywhere.widget.NumberPicker>
+
+    <org.holoeverywhere.widget.TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/numberPicker1"
+        android:layout_alignBottom="@+id/numberPicker1"
+        android:layout_alignParentRight="true"
+        android:text="Ngày"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <View
+        android:id="@+id/View1"
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:layout_below="@+id/numberPicker1"
+        android:layout_alignParentLeft="true"
+        android:background="#3BB9FF" />
+
+    <org.holoeverywhere.widget.LinearLayout
+        android:id="@+id/LinearLayoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/View1" >
+
+        <org.holoeverywhere.widget.Button
+            android:id="@+id/buttonOK"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@drawable/clickable_white"
+            android:text="Hoàn tất" />
+
+        <View
+            android:layout_width="2dip"
+            android:layout_height="match_parent"
+            android:background="#3BB9FF" />
+
+        <org.holoeverywhere.widget.Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@drawable/clickable_white"
+            android:text="Hủy" />
+    </org.holoeverywhere.widget.LinearLayout>
+
+</RelativeLayout>
