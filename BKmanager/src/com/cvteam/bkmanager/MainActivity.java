@@ -121,6 +121,7 @@ public class MainActivity extends Activity implements
 				.setShowAsAction(
 						MenuItem.SHOW_AS_ACTION_IF_ROOM
 								| MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+		getSupportMenuInflater().inflate(R.menu.my_options_menu, menu);
 		return true;
 	}
 
@@ -129,7 +130,16 @@ public class MainActivity extends Activity implements
 		logService.functionTag("onOptionsItemSelected", item.getTitle() + " selected");
 		if (item.getTitle().toString().equals("Refresh")) {
 		}
-		return false;
+		switch (item.getItemId()) {
+		case R.id.about:
+			return true;
+		case R.id.setting:
+			startActivity(new Intent(this, SettingActivity.class));
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+		//return false;
 	}
 
 	@Override

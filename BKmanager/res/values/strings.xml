@@ -9,5 +9,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_lich_thi">LichThiActivity</string>
     <string name="title_activity_diem">DiemActivity</string>
+    <string name="title_activity_setting">SettingActivity</string>
+    <string name="title_activity_setting_thon_bao">SettingThonBaoActivity</string>
+    <string name="title_activity_setting_dong_bo">SettingDongBoActivity</string>
 
 </resources>
