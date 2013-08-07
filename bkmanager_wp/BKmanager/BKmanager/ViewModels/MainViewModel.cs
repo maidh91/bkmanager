@@ -271,6 +271,13 @@ namespace BKmanager.ViewModels
             {
                 LichThiItems.Clear();
 
+                // load from db
+
+
+                if (LichThiItems.Count > 0) return;
+
+                // load from web
+
                 var lichthi = new LichThiObject()
                 {
                     TenMon = "Chủ nghĩa Mác-Lênin",
@@ -315,6 +322,9 @@ namespace BKmanager.ViewModels
                     PhongCK = "309C1",
                 };
                 LichThiItems.Add(lichthi);
+
+                // save db
+
             }
             catch (Exception ex) { LogService.ErrorLog(ex.Message); }
         }

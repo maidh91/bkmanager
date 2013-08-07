@@ -14,5 +14,7 @@
         public double DiemGK { get; set; }
         public double DiemCK { get; set; }
         public double DiemTK { get; set; }
+
+        public string NgayCapNhat { get; set; }
     }
 }
