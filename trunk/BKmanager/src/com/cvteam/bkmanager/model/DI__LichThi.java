@@ -13,6 +13,8 @@ public class DI__LichThi {
 	public String ngayck;
 	public int tietck;
 	public String phongck;
+	public long eventgk;
+	public long eventck;
 
 	public DI__LichThi() {
 		mssv = "";
@@ -27,5 +29,7 @@ public class DI__LichThi {
 		ngayck = "";
 		tietck = 0;
 		phongck = "";
+		eventgk = 0;
+		eventck = 0;
 	}
 }

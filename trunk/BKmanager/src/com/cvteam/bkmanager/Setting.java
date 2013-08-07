@@ -5,6 +5,7 @@ public class Setting {
 	public static String _mssv;
 	public static String _name;
 	public static Boolean _thongBaoLichThi;
+	public static Boolean _thongBaoTKB;
 	public static Boolean _thongBaoDiem;
 	public static Boolean _thongBaoHocPhi;
 	public static Boolean _thongBaoHocBong;

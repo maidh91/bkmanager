@@ -17,5 +17,7 @@
         public string NgayCK { get; set; }
         public int TietCK { get; set; }
         public string PhongCK { get; set; }
+
+        public string NgayCapNhat { get; set; }
     }
 }
