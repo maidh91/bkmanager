@@ -1,5 +1,8 @@
 package com.cvteam.bkmanager;
 
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningServiceInfo;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,7 +14,7 @@ import org.holoeverywhere.widget.CheckBox;
 import com.actionbarsherlock.view.Menu;
 
 public class SettingThongBaoActivity extends Activity {
-	
+
 	private CheckBox cblichthi;
 	private CheckBox cbdiem;
 	private CheckBox cbhocphi;
@@ -25,7 +28,7 @@ public class SettingThongBaoActivity extends Activity {
 		View backMenu = getLayoutInflater().inflate(R.layout.back_menu);
 		RelativeLayout backlayout = (RelativeLayout) backMenu.findViewById(R.id.backmenu);
 		backlayout.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
@@ -36,28 +39,27 @@ public class SettingThongBaoActivity extends Activity {
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(backMenu);
-		
-		
+
 		RelativeLayout lichthi = (RelativeLayout) findViewById(R.id.RelativeLayoutLichThi);
 		RelativeLayout diem = (RelativeLayout) findViewById(R.id.RelativeLayoutDiem);
 		RelativeLayout hocphi = (RelativeLayout) findViewById(R.id.RelativeLayoutHocPhi);
 		RelativeLayout hocbong = (RelativeLayout) findViewById(R.id.RelativeLayoutHocBong);
 		RelativeLayout sukien = (RelativeLayout) findViewById(R.id.RelativeLayoutSuKien);
-		
+
 		cblichthi = (CheckBox) findViewById(R.id.CheckBoxLichThi);
 		cbdiem = (CheckBox) findViewById(R.id.CheckBoxDiem);
 		cbhocphi = (CheckBox) findViewById(R.id.CheckBoxHocPhi);
 		cbhocbong = (CheckBox) findViewById(R.id.CheckBoxHocBong);
 		cbsukien = (CheckBox) findViewById(R.id.CheckBoxSuKien);
-		
+
 		cblichthi.setChecked(Setting._thongBaoLichThi);
 		cbdiem.setChecked(Setting._thongBaoDiem);
 		cbhocphi.setChecked(Setting._thongBaoHocPhi);
 		cbhocbong.setChecked(Setting._thongBaoHocBong);
 		cbsukien.setChecked(Setting._thongBaoSuKien);
-		
+
 		lichthi.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
@@ -66,7 +68,7 @@ public class SettingThongBaoActivity extends Activity {
 			}
 		});
 		diem.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
@@ -75,7 +77,7 @@ public class SettingThongBaoActivity extends Activity {
 			}
 		});
 		hocphi.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
@@ -84,7 +86,7 @@ public class SettingThongBaoActivity extends Activity {
 			}
 		});
 		hocbong.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
@@ -93,7 +95,7 @@ public class SettingThongBaoActivity extends Activity {
 			}
 		});
 		sukien.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
@@ -101,7 +103,7 @@ public class SettingThongBaoActivity extends Activity {
 				Setting._thongBaoSuKien = !Setting._thongBaoSuKien;
 			}
 		});
-		
+
 	}
 
 	@Override
@@ -110,4 +112,42 @@ public class SettingThongBaoActivity extends Activity {
 		return true;
 	}
 
+	@Override
+	protected void onStop() {
+		InitializeService();
+		super.onStop();
+	}
+
+	// /////////////////////////////////////////
+	// Notification //
+	// /////////////////////////////////////////
+
+	private void InitializeService() {
+		Boolean isRunning = false;
+		ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+		for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+			if ("com.cvteam.bkmanager.service.NotiService".equals(service.service.getClassName())) {
+				// System.out.println("isRunning");
+				isRunning = true;
+				break;
+			}
+		}
+
+		if (!isRunning) {
+			Intent intent = new Intent(this, com.cvteam.bkmanager.service.NotiService.class);
+			intent.putExtra("mssv", Setting._mssv);
+			intent.putExtra("dongbo", Setting._dongBoLichThi);
+			intent.putExtra("noti_lichthi", Setting._thongBaoLichThi);
+			intent.putExtra("noti_tkb", Setting._thongBaoTKB);
+			intent.putExtra("noti_diem", Setting._thongBaoDiem);
+			intent.putExtra("intervalTime", Setting._chuKiCapNhat);
+
+			// System.out.println("start service " + mssv);
+			startService(intent);
+		}
+	}
+
+	// /////////////////////////////////////////
+	// End Notification //
+	// /////////////////////////////////////////
 }

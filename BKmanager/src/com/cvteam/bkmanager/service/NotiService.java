@@ -27,8 +27,8 @@ public class NotiService extends Service {
 			mssv = intent.getStringExtra("mssv");
 			dongbo = intent.getIntExtra("dongbo", 0);
 			notifications_lich_thi = intent.getBooleanExtra("noti_lichthi", true);
-			notifications_tkb = intent.getBooleanExtra("noti_diem", true);
 			notifications_diem = intent.getBooleanExtra("noti_tkb", true);
+			notifications_tkb = intent.getBooleanExtra("noti_diem", true);
 			notifications_hoc_phi = intent.getBooleanExtra("noti_hocphi", true);
 			intervalTime = intent.getIntExtra("intervalTime", 1);
 		}
@@ -39,6 +39,7 @@ public class NotiService extends Service {
 		intentUpdateService.putExtra("noti_lichthi", notifications_lich_thi);
 		intentUpdateService.putExtra("noti_diem", notifications_diem);
 		intentUpdateService.putExtra("noti_tkb", notifications_tkb);
+		intentUpdateService.putExtra("noti_hocphi", notifications_hoc_phi);
 
 		PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intentUpdateService, PendingIntent.FLAG_UPDATE_CURRENT);
 		AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
