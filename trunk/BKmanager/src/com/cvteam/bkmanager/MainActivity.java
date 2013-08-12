@@ -219,7 +219,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
 		ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 		for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
 			if ("com.cvteam.bkmanager.service.NotiService".equals(service.service.getClassName())) {
-				// System.out.println("isRunning");
+				System.out.println("isRunning");
 				isRunning = true;
 				break;
 			}
@@ -234,7 +234,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
 			intent.putExtra("noti_diem", Setting._thongBaoDiem);
 			intent.putExtra("intervalTime", Setting._chuKiCapNhat);
 
-			// System.out.println("start service " + mssv);
+			System.out.println("start service " + Setting._mssv);
 			startService(intent);
 		}
 	}
