@@ -1,6 +1,9 @@
 package com.cvteam.bkmanager;
 
+import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.ActivityManager.RunningServiceInfo;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,8 +33,7 @@ public class SettingDongBoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_setting_dong_bo);
 		View backMenu = getLayoutInflater().inflate(R.layout.back_menu);
-		RelativeLayout backlayout = (RelativeLayout) backMenu
-				.findViewById(R.id.backmenu);
+		RelativeLayout backlayout = (RelativeLayout) backMenu.findViewById(R.id.backmenu);
 		backlayout.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -62,12 +64,9 @@ public class SettingDongBoActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						SettingDongBoActivity.this);
-				LayoutInflater inflater = SettingDongBoActivity.this
-						.getLayoutInflater();
-				final View viewdialog = inflater.inflate(R.layout.ckcn_dialog,
-						null);
+				AlertDialog.Builder builder = new AlertDialog.Builder(SettingDongBoActivity.this);
+				LayoutInflater inflater = SettingDongBoActivity.this.getLayoutInflater();
+				final View viewdialog = inflater.inflate(R.layout.ckcn_dialog, null);
 
 				builder.setView(viewdialog);
 
@@ -75,8 +74,7 @@ public class SettingDongBoActivity extends Activity {
 
 				dialog.setTitle("Chá»�n chu kÃ¬ cáº­p nháº­t");
 				Button ok = (Button) viewdialog.findViewById(R.id.buttonOK);
-				Button cancel = (Button) viewdialog
-						.findViewById(R.id.buttonCancel);
+				Button cancel = (Button) viewdialog.findViewById(R.id.buttonCancel);
 				cancel.setOnClickListener(new OnClickListener() {
 
 					@Override
@@ -85,8 +83,7 @@ public class SettingDongBoActivity extends Activity {
 						dialog.dismiss();
 					}
 				});
-				final NumberPicker nP = (NumberPicker) viewdialog
-						.findViewById(R.id.numberPicker1);
+				final NumberPicker nP = (NumberPicker) viewdialog.findViewById(R.id.numberPicker1);
 				nP.setMaxValue(7);
 				nP.setMinValue(1);
 				nP.setValue(Setting._chuKiCapNhat);
@@ -126,12 +123,9 @@ public class SettingDongBoActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						SettingDongBoActivity.this);
-				LayoutInflater inflater = SettingDongBoActivity.this
-						.getLayoutInflater();
-				final View viewdialog = inflater.inflate(R.layout.nnlt_dialog,
-						null);
+				AlertDialog.Builder builder = new AlertDialog.Builder(SettingDongBoActivity.this);
+				LayoutInflater inflater = SettingDongBoActivity.this.getLayoutInflater();
+				final View viewdialog = inflater.inflate(R.layout.nnlt_dialog, null);
 
 				builder.setView(viewdialog);
 
@@ -139,8 +133,7 @@ public class SettingDongBoActivity extends Activity {
 
 				dialog.setTitle("Chá»�n nháº¯c nhá»Ÿ lá»‹ch thi");
 				Button ok = (Button) viewdialog.findViewById(R.id.buttonOK);
-				Button cancel = (Button) viewdialog
-						.findViewById(R.id.buttonCancel);
+				Button cancel = (Button) viewdialog.findViewById(R.id.buttonCancel);
 				cancel.setOnClickListener(new OnClickListener() {
 
 					@Override
@@ -149,13 +142,12 @@ public class SettingDongBoActivity extends Activity {
 						dialog.dismiss();
 					}
 				});
-				final NumberPicker nP = (NumberPicker) viewdialog
-						.findViewById(R.id.numberPicker1);
+				final NumberPicker nP = (NumberPicker) viewdialog.findViewById(R.id.numberPicker1);
 				nP.setMaxValue(2);
 				nP.setMinValue(0);
 				nP.setValue(Setting._nhacNhoLichThi);
-				nP.setDisplayedValues(new String[] { "TrÆ°á»›c má»™t ngÃ y",
-						"Ä�áº§u ngÃ y", "TrÆ°á»›c thi 1 tiáº¿ng" });
+				nP.setDisplayedValues(new String[] { "TrÆ°á»›c má»™t ngÃ y", "Ä�áº§u ngÃ y",
+						"TrÆ°á»›c thi 1 tiáº¿ng" });
 				ok.setOnClickListener(new OnClickListener() {
 
 					@Override
@@ -193,9 +185,40 @@ public class SettingDongBoActivity extends Activity {
 
 	@Override
 	protected void onStop() {
+		InitializeService();
 		super.onStop();
-		
-		
 	}
 
+	// /////////////////////////////////////////
+	// Notification //
+	// /////////////////////////////////////////
+
+	private void InitializeService() {
+		Boolean isRunning = false;
+		ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+		for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+			if ("com.cvteam.bkmanager.service.NotiService".equals(service.service.getClassName())) {
+				// System.out.println("isRunning");
+				isRunning = true;
+				break;
+			}
+		}
+
+		if (!isRunning) {
+			Intent intent = new Intent(this, com.cvteam.bkmanager.service.NotiService.class);
+			intent.putExtra("mssv", Setting._mssv);
+			intent.putExtra("dongbo", Setting._dongBoLichThi);
+			intent.putExtra("noti_lichthi", Setting._thongBaoLichThi);
+			intent.putExtra("noti_tkb", Setting._thongBaoTKB);
+			intent.putExtra("noti_diem", Setting._thongBaoDiem);
+			intent.putExtra("intervalTime", Setting._chuKiCapNhat);
+
+			// System.out.println("start service " + mssv);
+			startService(intent);
+		}
+	}
+
+	// /////////////////////////////////////////
+	// End Notification //
+	// /////////////////////////////////////////
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningServiceInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,10 +36,8 @@ public class AccountSetupActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				String name = ((EditText) findViewById(R.id.editTextName))
-						.getText().toString();
-				String mssv = ((EditText) findViewById(R.id.editTextMSSV))
-						.getText().toString();
+				String name = ((EditText) findViewById(R.id.editTextName)).getText().toString();
+				String mssv = ((EditText) findViewById(R.id.editTextMSSV)).getText().toString();
 				if (name.equals("")) {
 					((EditText) findViewById(R.id.editTextName))
 							.setError("Bạn phải nhập tên người dùng.");
@@ -56,11 +56,8 @@ public class AccountSetupActivity extends Activity {
 				okButton.setText("Đang kiểm tra thông tin sinh viên...");
 				okButton.setEnabled(false);
 				List<String> checkvalid = new ArrayList<String>();
-				List<DI__ThoiKhoaBieu> tkbs = AAOService.getTKB(mssv, "",
-						checkvalid);
-				if (tkbs.size() == 0
-						&& checkvalid.get(0).equals(
-								"Mã số sinh viên không tồn tại.")) {
+				List<DI__ThoiKhoaBieu> tkbs = AAOService.getTKB(mssv, "", checkvalid);
+				if (tkbs.size() == 0 && checkvalid.get(0).equals("Mã số sinh viên không tồn tại.")) {
 					((EditText) findViewById(R.id.editTextMSSV))
 							.setError("Bạn nhập mã số sinh viên không tồn tại.");
 					okButton.setText("Nhập");
@@ -69,8 +66,7 @@ public class AccountSetupActivity extends Activity {
 				}
 				okButton.setText("Nhập");
 				okButton.setEnabled(true);
-				if (checkvalid.get(0).contains(
-						"Vui lòng kiểm tra kết nối Internet và thử lại.")) {
+				if (checkvalid.get(0).contains("Vui lòng kiểm tra kết nối Internet và thử lại.")) {
 					((EditText) findViewById(R.id.editTextMSSV))
 							.setError("Vui lòng kiểm tra kết nối Internet và thử lại.");
 					return;
@@ -88,15 +84,12 @@ public class AccountSetupActivity extends Activity {
 				.setOnEditorActionListener(new OnEditorActionListener() {
 
 					@Override
-					public boolean onEditorAction(TextView v, int actionId,
-							KeyEvent event) {
-						if (event != null
-								&& (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+					public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+						if (event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
 							InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
-							in.hideSoftInputFromWindow(
-									((EditText) findViewById(R.id.editTextMSSV))
-											.getApplicationWindowToken(),
+							in.hideSoftInputFromWindow(((EditText) findViewById(R.id.editTextMSSV))
+									.getApplicationWindowToken(),
 									InputMethodManager.HIDE_NOT_ALWAYS);
 							// Must return true here to consume event
 							return true;
@@ -116,9 +109,41 @@ public class AccountSetupActivity extends Activity {
 	}
 
 	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
+	protected void onStop() {
+		InitializeService();
+		super.onStop();
 	}
 
+	// /////////////////////////////////////////
+	// Notification //
+	// /////////////////////////////////////////
+
+	private void InitializeService() {
+		Boolean isRunning = false;
+		ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+		for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+			if ("com.cvteam.bkmanager.service.NotiService".equals(service.service.getClassName())) {
+				// System.out.println("isRunning");
+				isRunning = true;
+				break;
+			}
+		}
+
+		if (!isRunning) {
+			Intent intent = new Intent(this, com.cvteam.bkmanager.service.NotiService.class);
+			intent.putExtra("mssv", Setting._mssv);
+			intent.putExtra("dongbo", Setting._dongBoLichThi);
+			intent.putExtra("noti_lichthi", Setting._thongBaoLichThi);
+			intent.putExtra("noti_tkb", Setting._thongBaoTKB);
+			intent.putExtra("noti_diem", Setting._thongBaoDiem);
+			intent.putExtra("intervalTime", Setting._chuKiCapNhat);
+
+			// System.out.println("start service " + mssv);
+			startService(intent);
+		}
+	}
+
+	// /////////////////////////////////////////
+	// End Notification //
+	// /////////////////////////////////////////
 }

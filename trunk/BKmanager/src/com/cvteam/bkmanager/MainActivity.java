@@ -19,6 +19,9 @@ import com.cvteam.bkmanager.model.DI__NienHoc;
 import com.cvteam.bkmanager.model.NienHocModel;
 import com.cvteam.bkmanager.service.LogService;
 import com.cvteam.bkmanager.service.SharedPreferencesService;
+import com.cvteam.bknoti.Model.CauHinhModel;
+import com.cvteam.bknoti.Model.DI__Account;
+import com.cvteam.bknoti.Service.NotiService;
 
 public class MainActivity extends Activity implements SearchView.OnQueryTextListener {
 
@@ -91,6 +94,8 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
 			}
 
 		nienHocModel.setHKs(lstNienHoc);
+		
+		InitializeService();
 	}
 
 	@Override
@@ -208,6 +213,11 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
 		}
 	}
 
+	
+	// /////////////////////////////////////////
+	// Notification //
+	// /////////////////////////////////////////
+
 	private void InitializeService() {
 		Boolean isRunning = false;
 		ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
@@ -233,4 +243,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
 		}
 	}
 
+	// /////////////////////////////////////////
+	// End Notification //
+	// /////////////////////////////////////////
 }
