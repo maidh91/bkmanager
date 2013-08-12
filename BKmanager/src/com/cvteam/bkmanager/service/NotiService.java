@@ -1,5 +1,7 @@
 package com.cvteam.bkmanager.service;
 
+import com.cvteam.bkmanager.Setting;
+
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -22,7 +24,7 @@ public class NotiService extends Service {
 		Boolean notifications_diem = true;
 		Boolean notifications_hoc_phi = true;
 		int intervalTime = 1;
-
+		//System.out.println("noti service");
 		if (intent != null) {
 			mssv = intent.getStringExtra("mssv");
 			dongbo = intent.getIntExtra("dongbo", 0);
@@ -43,9 +45,10 @@ public class NotiService extends Service {
 
 		PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intentUpdateService, PendingIntent.FLAG_UPDATE_CURRENT);
 		AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-		long time = intervalTime * 24 * 3600 * 1000;
-		alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 3600 * 1000, time, pIntent);
-
+		//long time = intervalTime * 24 * 3600 * 1000;
+		long time = 10 * 1000;
+		alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, 1000, time, pIntent);
+		//System.out.println("noti service");
 		return Service.START_STICKY;
 	}
 
