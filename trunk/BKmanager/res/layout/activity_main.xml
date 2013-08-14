@@ -54,7 +54,7 @@
                     android:contentDescription="Điểm"
                     android:onClick="onClickFeature"
                     android:paddingTop="30dp"
-                    android:src="@drawable/diem" />
+                    android:src="@drawable/diem_clickable" />
 
                 <org.holoeverywhere.widget.TextView
                     android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                     android:contentDescription="Lịch thi"
                     android:onClick="onClickFeature"
                     android:paddingTop="30dp"
-                    android:src="@drawable/lichthi" />
+                    android:src="@drawable/lichthi_clickable" />
 
                 <org.holoeverywhere.widget.TextView
                     android:layout_width="match_parent"
@@ -124,7 +124,7 @@
                     android:contentDescription="Thời khóa biểu"
                     android:onClick="onClickFeature"
                     android:paddingTop="30dp"
-                    android:src="@drawable/diem" />
+                    android:src="@drawable/thoikhoabieu_clickable" />
 
                 <org.holoeverywhere.widget.TextView
                     android:layout_width="match_parent"
@@ -153,7 +153,7 @@
                     android:contentDescription="Tiện ích"
                     android:onClick="onClickFeature"
                     android:paddingTop="30dp"
-                    android:src="@drawable/tienich" />
+                    android:src="@drawable/tienich_clickable" />
 
                 <org.holoeverywhere.widget.TextView
                     android:layout_width="match_parent"
