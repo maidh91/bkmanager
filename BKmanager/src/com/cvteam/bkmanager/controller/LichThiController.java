@@ -1,6 +1,7 @@
 package com.cvteam.bkmanager.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,16 +13,25 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
+import com.cvteam.bkmanager.Setting;
 import com.cvteam.bkmanager.model.DI__LichThi;
 import com.cvteam.bkmanager.model.LichThiModel;
 import com.cvteam.bkmanager.service.AAOService;
+import com.cvteam.bkmanager.service.CalendarService;
 import com.cvteam.bkmanager.service.DatabaseService;
 import com.cvteam.bkmanager.service.DialogService;
 import com.cvteam.bkmanager.service.LogService;
 
 public class LichThiController implements IDataSource {
+
+	private byte[][] gioThiBK = { { 6, 30 }, { 7, 15 }, { 8, 10 }, { 9, 5 },
+			{ 10, 0 }, { 10, 45 }, { 12, 30 }, { 13, 15 }, { 14, 10 },
+			{ 15, 5 }, { 16, 0 }, { 16, 45 }, { 17, 30 }, { 18, 15 },
+			{ 19, 0 }, { 19, 55 }, { 20, 40 } };
+
 	private SQLiteDatabase database;
 	private DatabaseService databaseService;
+	private Context context;
 	private LogService logService = new LogService("LichThiController");
 
 	private LichThiModel lichThi;
@@ -32,6 +42,7 @@ public class LichThiController implements IDataSource {
 
 	public LichThiController(Context context) {
 		databaseService = new DatabaseService(context);
+		this.context = context;
 	}
 
 	public void open() throws SQLException {
@@ -122,9 +133,91 @@ public class LichThiController implements IDataSource {
 			DialogService.closeProgressDialog();
 			return;
 		}
-		
+
+		String mssv = Setting._mssv;
+
 		for (int i = 0; i < lstLichThi.size(); i++) {
 			DI__LichThi temp = lstLichThi.get(i);
+
+			long evenGkId = -1;
+			long evenCkId = -1;
+
+			if (this.lichThi.mssv.equals(mssv)) {
+
+				// create a Calendar event for mid-term exam at 6am in exam day
+				// and
+				// logService.functionTag("updateLichThi",
+				// "Create event mamonhoc = " + temp.mamh + " for: "
+				// + temp.mssv);
+				Calendar eventTime;
+				int day, month;
+
+				boolean dongbo = Setting._dongBoLichThi;
+
+				if (dongbo) {
+					// amount of hours to notify before event(s)
+					double beforeAlarm = 0; // in hours
+
+					int nnlt = Setting._nhacNhoLichThi;
+
+					switch (nnlt) {
+					case 0:
+						beforeAlarm = 24; // before a day
+						break;
+					case 1:
+						beforeAlarm = (gioThiBK[temp.tietgk - 1][0] - 6) + gioThiBK[temp.tietgk - 1][1] / 60.0; // at 6AM
+						break;
+					case 2:
+						beforeAlarm = 1; // before an hour
+					}
+
+					if (temp.tietgk != 0) {
+						// set alarm 1 day before
+						eventTime = Calendar.getInstance();
+						day = Integer.parseInt(temp.ngaygk.substring(0, 2));
+						month = Integer.parseInt(temp.ngaygk.substring(3)) - 1;
+						eventTime.set(eventTime.get(Calendar.YEAR), month, day,
+								gioThiBK[temp.tietgk - 1][0],
+								gioThiBK[temp.tietgk - 1][1], 0);
+
+						if (Calendar.getInstance().getTimeInMillis() < eventTime
+								.getTimeInMillis()) {
+							evenGkId = CalendarService
+									.NewEvent(context, "Thi giua hoc ky"
+											+ temp.namhoc + temp.hocky
+											+ " mon " + temp.tenmh, "MSSV: "
+											+ temp.mssv + ". Tiet "
+											+ temp.tietgk, temp.phonggk,
+											eventTime, eventTime,
+											(int) (beforeAlarm * 60));
+						}
+					}
+					// create a Calendar event for final exam at 6am in exam day
+					// and
+					if (temp.tietck != 0) {
+						// set alarm 1 day before
+						eventTime = Calendar.getInstance();
+						day = Integer.parseInt(temp.ngayck.substring(0, 2));
+						month = Integer.parseInt(temp.ngayck.substring(3)) - 1;
+						eventTime.set(eventTime.get(Calendar.YEAR), month, day,
+								gioThiBK[temp.tietck - 1][0],
+								gioThiBK[temp.tietck - 1][1], 0);
+
+						if (Calendar.getInstance().getTimeInMillis() < eventTime
+								.getTimeInMillis()) {
+							evenCkId = CalendarService.NewEvent(context,
+									"Thi cuối kỳ " + temp.namhoc + temp.hocky
+											+ " môn " + temp.tenmh, "MSSV: "
+											+ temp.mssv + ". Tiết "
+											+ temp.tietck, temp.phongck,
+											eventTime, eventTime,
+											(int) (beforeAlarm * 60));
+						}
+					}
+				}
+
+				// logService.functionTag("updateDataSource", "Events created");
+			}
 
 			ContentValues values = new ContentValues();
 
@@ -142,6 +235,9 @@ public class LichThiController implements IDataSource {
 			values.put("ngayck", temp.ngayck);
 			values.put("tietck", temp.tietck);
 			values.put("phongck", temp.phongck);
+
+			values.put("evenGkId", evenGkId);
+			values.put("evenCkId", evenCkId);
 
 			try {
 				int affected = database.update("lichthi", values, "mssv = '"
