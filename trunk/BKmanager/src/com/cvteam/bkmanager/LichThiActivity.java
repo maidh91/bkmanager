@@ -139,6 +139,8 @@ SearchView.OnQueryTextListener, LichThiModel.Listener {
 		LichThiAdapter dvAdapter = new LichThiAdapter(this, lichthis);
 		lstLichThi.setAdapter(dvAdapter);
         this.lstLichThi.invalidateViews();
+
+		DialogService.closeProgressDialog();
         
         if (lichthis.size() == 0)
         {

@@ -111,7 +111,6 @@ public class LichThiController implements IDataSource {
 		} else {
 			this.lichThi.setLichThis(lstLichThi);
 		}
-		DialogService.closeProgressDialog();
 	}
 
 	/**
@@ -130,7 +129,6 @@ public class LichThiController implements IDataSource {
 		this.lichThi.setLichThis(lstLichThi);
 
 		if (lstLichThi.size() == 0) {
-			DialogService.closeProgressDialog();
 			return;
 		}
 
@@ -274,7 +272,6 @@ public class LichThiController implements IDataSource {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		DialogService.closeProgressDialog();
 	}
 
 	public void requestLichThiFromAao(String mssv) {
