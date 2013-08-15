@@ -80,7 +80,7 @@ public class ThoiKhoaBieuActivity extends Activity implements
 		// Create the search view
 		SearchView searchView = new SearchView(getSupportActionBar()
 				.getThemedContext());
-		searchView.setQueryHint("Tìm theo MSSV");
+		searchView.setQueryHint("Tï¿½m theo MSSV");
 		searchView.setOnQueryTextListener(this);
 
 		menu.add("Search")
@@ -141,6 +141,8 @@ public class ThoiKhoaBieuActivity extends Activity implements
 		ThoiKhoaBieuAdapter dvAdapter = new ThoiKhoaBieuAdapter(this, TKBs);
 		lstTKB.setAdapter(dvAdapter);
         this.lstTKB.invalidateViews();
+
+		DialogService.closeProgressDialog();
         
         if (TKBs.size() == 0)
         {

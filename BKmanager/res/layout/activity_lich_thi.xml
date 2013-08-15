@@ -4,12 +4,30 @@
     android:layout_height="match_parent"
    	android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/lichthi_title"
+    <org.holoeverywhere.widget.LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Lịch thi"
-        android:src="@drawable/thoikhoabieu_title" />
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/main_header"
+        android:orientation="vertical"
+        android:paddingTop="10dp" >
+
+        <org.holoeverywhere.widget.TextView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.15"
+            android:gravity="center"
+            android:text="Lịch Thi"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.72" />
+    </org.holoeverywhere.widget.LinearLayout>
 
     <ListView
         android:layout_marginTop="5dp"

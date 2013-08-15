@@ -106,7 +106,6 @@ public class ThoiKhoaBieuController implements IDataSource{
         } else {
             this.thoikhoabieu.setThoiKhoaBieus(lstTKB);
         }
-		DialogService.closeProgressDialog();
     }
 
     /**
@@ -125,8 +124,6 @@ public class ThoiKhoaBieuController implements IDataSource{
         this.thoikhoabieu.setThoiKhoaBieus(lstTKB);
 
         if (lstTKB.size() == 0) {
-
-			DialogService.closeProgressDialog();
             return;
         }
 
@@ -182,7 +179,6 @@ public class ThoiKhoaBieuController implements IDataSource{
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-		DialogService.closeProgressDialog();
     }
 
     public void requestTKBFromAao(String mssv) {
