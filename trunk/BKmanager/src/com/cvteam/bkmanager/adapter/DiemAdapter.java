@@ -45,7 +45,7 @@ public class DiemAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		logService.functionTag("getView", String.valueOf(position));
+		//logService.functionTag("getView", String.valueOf(position));
 
 		LayoutInflater inflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
