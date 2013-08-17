@@ -31,8 +31,8 @@ import com.cvteam.bkmanager.service.DialogService;
 import com.cvteam.bkmanager.service.LogService;
 
 public class DiemActivity extends Activity implements
-SearchView.OnQueryTextListener, DiemModel.Listener, 
-org.holoeverywhere.widget.AdapterView.OnItemSelectedListener {
+		SearchView.OnQueryTextListener, DiemModel.Listener,
+		org.holoeverywhere.widget.AdapterView.OnItemSelectedListener {
 
 	ListView lstDiem;
 	private String currentSearch;
@@ -42,105 +42,111 @@ org.holoeverywhere.widget.AdapterView.OnItemSelectedListener {
 	private Spinner spinHocKy;
 	private static ArrayAdapter<String> dataAdapter;
 	private List<Object> objs = new ArrayList<Object>();
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_diem);
-		
+
 		getSupportActionBar().setDisplayShowTitleEnabled(true);
 		getSupportActionBar().setTitle(Setting._name);
 		getSupportActionBar().setSubtitle(Setting._mssv);
 		getSupportActionBar().setHomeButtonEnabled(true);
-		
+
 		spinHocKy = (Spinner) findViewById(R.id.spin_hocky);
-        spinHocKy.setOnItemSelectedListener(this);
-        // Creating adapter for spinner
-        dataAdapter = new ArrayAdapter<String>(this, R.layout.simple_spinner_item);
+		spinHocKy.setOnItemSelectedListener(this);
+		// Creating adapter for spinner
+		dataAdapter = new ArrayAdapter<String>(this,
+				R.layout.simple_spinner_item);
 
-        // Drop down layout style - list view with radio button
-        dataAdapter
-                .setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+		// Drop down layout style - list view with radio button
+		dataAdapter
+				.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
 
-        for (int i = 0; i < MainActivity.nienHocModel.getHKs().size(); i++) {
-            // logService.functionTag("handleNienHocModelChanged", "add " + i);
-            String lbl = "";
-            if (MainActivity.nienHocModel.getHKs().get(i).hk == 0)
-                lbl = "Tất cả";
-            else if (MainActivity.nienHocModel.getHKs().get(i).hk == -1)
-                lbl = "Chọn học kỳ...";
-            else
-                lbl = "HK" + MainActivity.nienHocModel.getHKs().get(i).hk + "("
-                        + MainActivity.nienHocModel.getHKs().get(i).namhoc + "-"
-                        + (MainActivity.nienHocModel.getHKs().get(i).namhoc + 1) + ")";
-            dataAdapter.add(lbl);
-        }
-        spinHocKy.setAdapter(dataAdapter);
+		for (int i = 0; i < MainActivity.nienHocModel.getHKs().size(); i++) {
+			// logService.functionTag("handleNienHocModelChanged", "add " + i);
+			String lbl = "";
+			if (MainActivity.nienHocModel.getHKs().get(i).hk == 0)
+				lbl = "Tất cả";
+			else if (MainActivity.nienHocModel.getHKs().get(i).hk == -1)
+				lbl = "Chọn học kỳ...";
+			else
+				lbl = "HK"
+						+ MainActivity.nienHocModel.getHKs().get(i).hk
+						+ "("
+						+ MainActivity.nienHocModel.getHKs().get(i).namhoc
+						+ "-"
+						+ (MainActivity.nienHocModel.getHKs().get(i).namhoc + 1)
+						+ ")";
+			dataAdapter.add(lbl);
+		}
+		spinHocKy.setAdapter(dataAdapter);
 
-        Button btnMoreInfo = (Button) findViewById(R.id.btn_more_info);
-        btnMoreInfo.setOnClickListener(new OnClickListener() {
+		Button btnMoreInfo = (Button) findViewById(R.id.btn_more_info);
+		btnMoreInfo.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                // get correspondence item
+			@Override
+			public void onClick(View v) {
+				// get correspondence item
 
-                StringBuilder sb = new StringBuilder();
+				StringBuilder sb = new StringBuilder();
 
-                // check case all
-                if (model.hocky.namhoc != 0) {
-                    sb.append("\tTín chỉ đăng kí hk: "
-                            + (objs.size() > 1 ? objs.get(1) : "N/A"));
-                    sb.append("\n");
+				// check case all
+				if (model.hocky.namhoc != 0) {
+					sb.append("\tTín chỉ đăng kí hk: "
+							+ (objs.size() > 1 ? objs.get(1) : "N/A"));
+					sb.append("\n");
 
-                    sb.append("\tTín chỉ tích lũy hk: "
-                            + (objs.size() > 2 ? objs.get(2) : "N/A"));
-                    sb.append("\n");
-                }
-                sb.append("\tTổng số tín chỉ: "
-                        + (objs.size() > 3 ? objs.get(3) : "N/A"));
-                sb.append("\n");
+					sb.append("\tTín chỉ tích lũy hk: "
+							+ (objs.size() > 2 ? objs.get(2) : "N/A"));
+					sb.append("\n");
+				}
+				sb.append("\tTổng số tín chỉ: "
+						+ (objs.size() > 3 ? objs.get(3) : "N/A"));
+				sb.append("\n");
 
-                if (model.hocky.namhoc != 0) {
-                    sb.append("\tĐiểm TB hk: "
-                            + (objs.size() > 4 ? objs.get(4) : "N/A"));
-                    sb.append("\n");
-                }
+				if (model.hocky.namhoc != 0) {
+					sb.append("\tĐiểm TB hk: "
+							+ (objs.size() > 4 ? objs.get(4) : "N/A"));
+					sb.append("\n");
+				}
 
-                sb.append("\tĐiểm TB tích lũy: "
-                        + (objs.size() > 5 ? objs.get(5) : "N/A"));
-                sb.append("\n");
-            }
+				sb.append("\tĐiểm TB tích lũy: "
+						+ (objs.size() > 5 ? objs.get(5) : "N/A"));
+				sb.append("\n");
+			}
 
-        });
-        
+		});
+
 		onLoad();
 	}
+
 	private void onLoad() {
 		logService.functionTag("onLoad", "");
 		currentSearch = MainActivity.currentSearch;
-		lstDiem = (ListView)findViewById(R.id.list_diem);
+		lstDiem = (ListView) findViewById(R.id.list_diem);
 		model = new DiemModel();
 		controller = new DiemController(this);
 		controller.setModel(model);
 		controller.open();
 		setModel(model);
-		//loadDiem();
+		// loadDiem();
 	}
-	
+
 	public void setModel(DiemModel model) {
-        if (model == null) {
-            throw new NullPointerException("model");
-        }
+		if (model == null) {
+			throw new NullPointerException("model");
+		}
 
-        DiemModel oldModel = this.model;
-        if (oldModel != null) {
-            oldModel.removeListener(this);
-        }
-        this.model = model;
-        this.model.addListener(this);
+		DiemModel oldModel = this.model;
+		if (oldModel != null) {
+			oldModel.removeListener(this);
+		}
+		this.model = model;
+		this.model.addListener(this);
 
-    }
-	
+	}
+
 	public boolean onCreateOptionsMenu(Menu menu) {
 		logService.functionTag("onCreateOptionsMenu", "");
 		// Used to put dark icons on light action bar
@@ -172,15 +178,15 @@ org.holoeverywhere.widget.AdapterView.OnItemSelectedListener {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		logService.functionTag("onOptionsItemSelected", item.getTitle().toString() + " selected");
-		switch(item.getItemId())
-		{
+		logService.functionTag("onOptionsItemSelected", item.getTitle()
+				.toString() + " selected");
+		switch (item.getItemId()) {
 		case android.R.id.home:
 			this.finish();
 			break;
 		}
-		if(item.getTitle().toString().equals("Reload")) {
-			//loadDiem();
+		if (item.getTitle().toString().equals("Reload")) {
+			// loadDiem();
 		}
 		return true;
 	}
@@ -189,7 +195,8 @@ org.holoeverywhere.widget.AdapterView.OnItemSelectedListener {
 	public boolean onQueryTextSubmit(String query) {
 		logService.functionTag("onQueryTextSubmit", "submit text: " + query);
 		currentSearch = query;
-		DI__NienHoc nienhoc = MainActivity.nienHocModel.getHKs().get(spinHocKy.getSelectedItemPosition());
+		DI__NienHoc nienhoc = MainActivity.nienHocModel.getHKs().get(
+				spinHocKy.getSelectedItemPosition());
 		loadDiem(nienhoc.namhoc, nienhoc.hk);
 		return true;
 	}
@@ -203,83 +210,118 @@ org.holoeverywhere.widget.AdapterView.OnItemSelectedListener {
 	public void loadDiem(int namhoc, int hocky) {
 		logService.functionTag("loadDiem", namhoc + " - " + hocky);
 		
-		if (!currentSearch.equals("")
+		if (!currentSearch.equals("")) {
+            if( !model.mssv.equals(currentSearch)) {
+            	model.mssv = currentSearch;
+            }
+            Map<String, String> searchParams = new HashMap<String, String>();
+            searchParams.put("mssv", currentSearch);
+            model.mssv = currentSearch;
+        	logService.functionTag("loadDiem", namhoc + " - " + hocky + "a1");
+        	DialogService.openProgressDialog(this, Constant.progress_diem);
+        	logService.functionTag("loadDiem", namhoc + " - " + hocky + "a2");
+            controller.getByHocKy(namhoc, hocky);
+        } else if (currentSearch.equals("")) {
+            if( !model.mssv.equals(Setting._mssv)) {
+            	model.mssv = Setting._mssv;
+            }
+        	logService.functionTag("loadDiem", namhoc + " - " + hocky + "b1");
+        	DialogService.openProgressDialog(this, Constant.progress_diem);
+        	logService.functionTag("loadDiem", namhoc + " - " + hocky + "b2");
+        	controller.getByHocKy(namhoc, hocky);
+        }
+		/* backup here
+		 * if (!currentSearch.equals("")
                 && !model.mssv.equals(currentSearch)) {
 			model.mssv = currentSearch;
             Map<String, String> searchParams = new HashMap<String, String>();
             searchParams.put("mssv", currentSearch);
             model.mssv = currentSearch;
+        	logService.functionTag("loadDiem", namhoc + " - " + hocky + "a1");
         	DialogService.openProgressDialog(this, Constant.progress_diem);
+        	logService.functionTag("loadDiem", namhoc + " - " + hocky + "a2");
             controller.getByHocKy(namhoc, hocky);
         } else if (currentSearch.equals("")
                 && !model.mssv.equals(Setting._mssv)) {
         	model.mssv = Setting._mssv;
+        	logService.functionTag("loadDiem", namhoc + " - " + hocky + "b1");
         	DialogService.openProgressDialog(this, Constant.progress_diem);
+        	logService.functionTag("loadDiem", namhoc + " - " + hocky + "b2");
         	controller.getByHocKy(namhoc, hocky);
-        }
+        }*/
 	}
-	
+
 	@Override
 	protected void onResume() {
 		logService.functionTag("onResume", "");
 		controller.open();
 		super.onResume();
 	}
-	
+
 	@Override
 	protected void onPause() {
 		logService.functionTag("onPause", "");
 		controller.close();
 		super.onPause();
 	}
+
 	@Override
 	public void handleDiemModelChanged(DiemModel sender, List<Object> objs) {
-		// TODO Auto-generated method stub
+
+		logService.functionTag("handleDiemModelChanged", sender.mssv + " "
+				+ sender.hocky.namhoc + sender.hocky.hk);
+
 		List<DI__Diem> diems = new ArrayList<DI__Diem>();
 		diems = sender.getDiems();
-		
+
 		DiemAdapter dvAdapter = new DiemAdapter(this, diems);
-        lstDiem.setAdapter(dvAdapter);
+		lstDiem.setAdapter(dvAdapter);
 
-        this.lstDiem.invalidateViews();
-        
-        if (diems.size() == 0)
-        {
-            final AlertDialog dialogBuilder = new AlertDialog.Builder(this).create();
-            dialogBuilder.setMessage(model.getObjs().get(0).toString());
-            dialogBuilder.setTitle("BKmanager");
-            dialogBuilder.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+		this.lstDiem.invalidateViews();
 
-                  public void onClick(DialogInterface dialog, int id) {
+		DialogService.closeProgressDialog();
 
-                      dialogBuilder.dismiss();
+		if (diems.size() == 0) {
+			final AlertDialog dialogBuilder = new AlertDialog.Builder(this)
+					.create();
+			dialogBuilder.setMessage(model.getObjs().get(0).toString());
+			dialogBuilder.setTitle("BKmanager");
+			dialogBuilder.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+					new DialogInterface.OnClickListener() {
 
-                } });
-            dialogBuilder.show();
-        }
+						public void onClick(DialogInterface dialog, int id) {
+
+							dialogBuilder.dismiss();
+
+						}
+					});
+			dialogBuilder.show();
+		}
 	}
-	
+
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
 		// TODO Auto-generated method stub
 		// On selecting a spinner item
-        String label = parent.getItemAtPosition(position).toString();
-        logService.functionTag("onItemSelected", label);
+		String label = parent.getItemAtPosition(position).toString();
+		logService.functionTag("onItemSelected", label);
 
-        if (position == 0)
-            return;
+		if (position == 0)
+			return;
 
-        if (MainActivity.nienHocModel.getHKs().size() != 0) {
-            DI__NienHoc nienhoc = MainActivity.nienHocModel.getHKs().get(position);
-            loadDiem(nienhoc.namhoc, nienhoc.hk);
-            //controller.getByHocKy(nienhoc.namhoc, nienhoc.hk);
-        }
+		if (MainActivity.nienHocModel.getHKs().size() != 0) {
+			DI__NienHoc nienhoc = MainActivity.nienHocModel.getHKs().get(
+					position);
+			loadDiem(nienhoc.namhoc, nienhoc.hk);
+			// controller.getByHocKy(nienhoc.namhoc, nienhoc.hk);
+		}
 	}
+
 	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

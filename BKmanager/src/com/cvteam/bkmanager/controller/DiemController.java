@@ -55,8 +55,7 @@ public class DiemController implements IDataSource {
 
 	public void getByHocKy(int namhoc, int hocky) {
 
-		// logService.functionTag("getByHocKy", "Select all diem, mssv = " +
-		// diem.mssv);
+		//logService.functionTag("getByHocKy", diem.mssv + " " + namhoc + hocky);
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("mssv", diem.mssv);
 
@@ -178,7 +177,6 @@ public class DiemController implements IDataSource {
 			// logService.functionTag("UpdateDataSource",
 			// "Update model Diem successfully");
 		}
-		DialogService.closeProgressDialog();
 	}
 
 	public void requestDiemFromAao(String mssv) {
@@ -193,7 +191,6 @@ public class DiemController implements IDataSource {
 		diem.setDiems(lstDiem);
 
 		if (lstDiem.size() == 0) {
-			DialogService.closeProgressDialog();
 			return;
 		}
 
