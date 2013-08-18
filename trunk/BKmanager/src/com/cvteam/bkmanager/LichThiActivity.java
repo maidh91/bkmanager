@@ -14,6 +14,7 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuItem.OnActionExpandListener;
 import com.actionbarsherlock.widget.SearchView;
 import com.cvteam.bkmanager.adapter.LichThiAdapter;
 import com.cvteam.bkmanager.controller.LichThiController;
@@ -86,6 +87,22 @@ SearchView.OnQueryTextListener, LichThiModel.Listener {
 						isLight ? R.drawable.ic_search_inverse
 								: R.drawable.abs__ic_search)
 				.setActionView(searchView)
+				.setOnActionExpandListener(new OnActionExpandListener() {
+			        @Override
+			        public boolean onMenuItemActionCollapse(MenuItem item) {
+			            currentSearch = "";
+			            loadLichThi();
+			        	// Return true to collapse action view
+			            return true;  
+			        }
+
+			        @Override
+			        public boolean onMenuItemActionExpand(MenuItem item) {
+			            // Do something when expanded
+			        	// Return true to expand action view
+			            return true;
+			        }
+			    })
 				.setShowAsAction(
 						MenuItem.SHOW_AS_ACTION_IF_ROOM
 								| MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
@@ -160,16 +177,18 @@ SearchView.OnQueryTextListener, LichThiModel.Listener {
 	public void loadLichThi() {
 		logService.functionTag("loadLichThi", "");
 		
-		if (!currentSearch.equals("")
-                && !model.mssv.equals(currentSearch)) {
-			model.mssv = currentSearch;
+		if (!currentSearch.equals("")) {
+            if (!model.mssv.equals(currentSearch)) {
+            	model.mssv = currentSearch;
+            }
             Map<String, String> searchParams = new HashMap<String, String>();
             searchParams.put("mssv", currentSearch);
         	DialogService.openProgressDialog(this, Constant.progress_lichthi);
             controller.getLichThi(searchParams);
-        } else if (currentSearch.equals("")
-                && !model.mssv.equals(Setting._mssv)) {
-        	model.mssv = Setting._mssv;
+        } else {
+        	if (!model.mssv.equals(Setting._mssv)) {
+        		model.mssv = Setting._mssv;
+        	}
         	DialogService.openProgressDialog(this, Constant.progress_lichthi);
         	controller.getLichThi();
         }
