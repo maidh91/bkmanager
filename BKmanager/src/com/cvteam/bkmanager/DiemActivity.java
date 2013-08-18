@@ -20,6 +20,7 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuItem.OnActionExpandListener;
 import com.actionbarsherlock.widget.SearchView;
 import com.cvteam.bkmanager.adapter.DiemAdapter;
 import com.cvteam.bkmanager.controller.DiemController;
@@ -163,9 +164,26 @@ public class DiemActivity extends Activity implements
 						isLight ? R.drawable.ic_search_inverse
 								: R.drawable.abs__ic_search)
 				.setActionView(searchView)
+				.setOnActionExpandListener(new OnActionExpandListener() {
+			        @Override
+			        public boolean onMenuItemActionCollapse(MenuItem item) {
+			            currentSearch = "";
+			            loadDiem(model.hocky.namhoc, model.hocky.hk);
+			        	// Return true to collapse action view
+			            return true;  
+			        }
+
+			        @Override
+			        public boolean onMenuItemActionExpand(MenuItem item) {
+			            // Do something when expanded
+			        	// Return true to expand action view
+			            return true;
+			        }
+			    })
 				.setShowAsAction(
 						MenuItem.SHOW_AS_ACTION_IF_ROOM
-								| MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+								| MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW)
+				;
 		menu.add("Reload")
 				.setIcon(
 						isLight ? R.drawable.ic_refresh_inverse
