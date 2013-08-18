@@ -47,7 +47,7 @@ SearchView.OnQueryTextListener, LichThiModel.Listener {
 	}
 	private void onLoad() {
 		logService.functionTag("onLoad", "");
-		currentSearch = MainActivity.currentSearch;
+		currentSearch = "";//MainActivity.currentSearch;
 		lstLichThi = (ListView)findViewById(R.id.list_lich_thi);
 		model = new LichThiModel();
 		controller = new LichThiController(this);

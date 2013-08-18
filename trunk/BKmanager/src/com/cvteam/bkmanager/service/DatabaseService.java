@@ -17,7 +17,7 @@ public class DatabaseService extends SQLiteOpenHelper {
 
 	private static final String DATABASE_NAME = "bkmanager.db";
 
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 
 	private static final String CREATE_TABLE_LICHTHI = "create table lichthi ("
 			+ "_id integer primary key autoincrement, "
@@ -25,7 +25,8 @@ public class DatabaseService extends SQLiteOpenHelper {
 			+ "hocky integer not null, " + "mamh text not null, "
 			+ "tenmh text not null, " + "nhomto text not null, "
 			+ "ngaygk text, " + "tietgk integer, " + "phonggk text, "
-			+ "ngayck text, " + "tietck integer, " + "phongck text);";
+			+ "ngayck text, " + "tietck integer, " + "phongck text, "
+			+ "evenGkId integer, " + "evenCkId integer);";
 
 	private static final String CREATE_TABLE_THOIKHOABIEU = "create table thoikhoabieu ("
 			+ "_id integer primary key autoincrement, "
@@ -38,7 +39,10 @@ public class DatabaseService extends SQLiteOpenHelper {
 			+ "thu1 text, "
 			+ "tiet1 integer, "
 			+ "phong1 text, "
-			+ "thu2 text, " + "tiet2 integer, " + "phong2 text);";
+			+ "thu2 text, "
+			+ "tiet2 integer, "
+			+ "phong2 text, "
+			+ "notice text);";
 
 	private static final String CREATE_TABLE_DIEM = "create table diem ("
 			+ "_id integer primary key autoincrement, "

@@ -124,7 +124,7 @@ public class DiemActivity extends Activity implements
 
 	private void onLoad() {
 		logService.functionTag("onLoad", "");
-		currentSearch = MainActivity.currentSearch;
+		currentSearch = "";//MainActivity.currentSearch;
 		lstDiem = (ListView) findViewById(R.id.list_diem);
 		model = new DiemModel();
 		controller = new DiemController(this);
