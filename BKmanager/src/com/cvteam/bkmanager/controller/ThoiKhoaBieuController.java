@@ -76,6 +76,8 @@ public class ThoiKhoaBieuController implements IDataSource{
         tkb.thu2 = cursor.getInt(10);
         tkb.tiet2 = cursor.getString(11);
         tkb.phong2 = cursor.getString(12);
+        
+        tkb.notice = cursor.getString(13);
 
         return tkb;
     }
@@ -147,6 +149,8 @@ public class ThoiKhoaBieuController implements IDataSource{
             values.put("thu2", temp.thu2);
             values.put("tiet2", temp.tiet2);
             values.put("phong2", temp.phong2);
+            
+            values.put("notice", temp.notice);
 
             try {
                 int affected = database.update("thoikhoabieu", values,

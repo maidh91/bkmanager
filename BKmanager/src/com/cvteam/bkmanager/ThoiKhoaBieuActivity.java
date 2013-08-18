@@ -49,7 +49,7 @@ public class ThoiKhoaBieuActivity extends Activity implements
 
 	private void onLoad() {
 		logService.functionTag("onLoad", "");
-		currentSearch = MainActivity.currentSearch;
+		currentSearch = "";//MainActivity.currentSearch;
 		lstTKB = (ListView) findViewById(R.id.list_thoi_khoa_bieu);
 		model = new ThoiKhoaBieuModel();
 		controller = new ThoiKhoaBieuController(this);

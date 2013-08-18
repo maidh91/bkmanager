@@ -98,6 +98,8 @@ public class ThoiKhoaBieuAdapter extends BaseAdapter {
 		TextView txtTiet2 = (TextView) inflate.findViewById(R.id.txt_tiet2);
 		TextView txtPhong2 = (TextView) inflate.findViewById(R.id.txt_phong2);
 
+		TextView txtNote = (TextView) inflate.findViewById(R.id.txt_note);
+
 		DI__ThoiKhoaBieu tkbItem = lstTKB.get(position);
 		txtTenMon.setText(tkbItem.mamh + " - " + tkbItem.tenmh);
 
@@ -123,6 +125,11 @@ public class ThoiKhoaBieuAdapter extends BaseAdapter {
 			txtPhong2.setText("--");
 		}
 
+		// ghi chu
+		if (!tkbItem.notice.equals("")) {
+			txtNote.setText(tkbItem.notice);
+			txtNote.setVisibility(View.VISIBLE);
+		}
 		return inflate;
 	}
 
