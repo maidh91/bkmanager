@@ -115,6 +115,25 @@ public class DiemActivity extends Activity implements
 				sb.append("\tĐiểm TB tích lũy: "
 						+ (objs.size() > 5 ? objs.get(5) : "N/A"));
 				sb.append("\n");
+				
+
+				final AlertDialog dialogBuilder = new AlertDialog.Builder(DiemActivity.this).create();
+				dialogBuilder.setMessage(sb.toString());
+				if (model.hocky.namhoc != 0)
+					dialogBuilder.setTitle("Thông tin chi tiết hk: "
+							+ model.hocky.namhoc + model.hocky.hk);
+				else
+					dialogBuilder.setTitle("Thông tin chi tiết: ");
+				dialogBuilder.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+						new DialogInterface.OnClickListener() {
+
+							public void onClick(DialogInterface dialog, int id) {
+
+								dialogBuilder.dismiss();
+
+							}
+						});
+				dialogBuilder.show();
 			}
 
 		});
@@ -291,7 +310,8 @@ public class DiemActivity extends Activity implements
 
 		List<DI__Diem> diems = new ArrayList<DI__Diem>();
 		diems = sender.getDiems();
-
+		this.objs = objs;
+		
 		DiemAdapter dvAdapter = new DiemAdapter(this, diems);
 		lstDiem.setAdapter(dvAdapter);
 
