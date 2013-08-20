@@ -28,41 +28,7 @@
             android:layout_weight="0.72" />
 
     </org.holoeverywhere.widget.LinearLayout>
-    <RelativeLayout
-        android:id="@+id/RelativeLayoutTaiKhoan"
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content" 
-        android:layout_below="@+id/linearLayout1" 
-        android:clickable="true"
-        android:background="@drawable/clickable_white"
-        android:layout_centerHorizontal="true">
-
-        <org.holoeverywhere.widget.TextView
-            android:id="@+id/TextViewTK"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="20dp"
-            android:textSize="20dp"
-            android:text="Tài khoản" />
-        
-        <View 
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#DDDDDD"
-            android:layout_below="@+id/TextViewTK"/>
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:src="@drawable/arow" />
-
-    </RelativeLayout>
+    
     
     <RelativeLayout
         android:id="@+id/RelativeLayoutThongBao"
@@ -80,7 +46,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:layout_marginLeft="20dp"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:text="Thông báo" />
         
         <View 
@@ -115,7 +81,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:layout_marginLeft="20dp"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:text="Đồng bộ" />
         
         <View 
@@ -150,7 +116,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:layout_marginLeft="20dp"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:text="Khác" />
         
         <View 
