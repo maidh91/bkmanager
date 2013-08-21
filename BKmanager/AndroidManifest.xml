@@ -15,7 +15,7 @@
     <application
         android:name="org.holoeverywhere.app.Application"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/logo_bknoti"
         android:label="@string/app_name"
         android:theme="@style/Holo.Theme.Light" >
         <activity
@@ -31,7 +31,7 @@
 
         <service
             android:name="com.cvteam.bkmanager.service.NotiService"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@drawable/logo_bknoti"
             android:label="BKnoti Service" >
         </service>
 
