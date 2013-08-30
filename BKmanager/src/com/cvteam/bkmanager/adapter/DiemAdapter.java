@@ -6,6 +6,7 @@ import org.holoeverywhere.LayoutInflater;
 import org.holoeverywhere.widget.TextView;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -55,7 +56,12 @@ public class DiemAdapter extends BaseAdapter {
 		TextView txtGiuaKy = (TextView) inflate.findViewById(R.id.txt_diemgk);
 		TextView txtCuoiKy = (TextView) inflate.findViewById(R.id.txt_diemck);
 		TextView txtTongKet = (TextView) inflate.findViewById(R.id.txt_diemtk);
-
+		
+		if (position % 2 == 0)
+			txtTenMon.setBackgroundColor(Color.parseColor("#e0992d"));
+		else
+			txtTenMon.setBackgroundColor(Color.parseColor("#02bd86"));
+		
 		DI__Diem diemItem = lstDiem.get(position);
 
 		if (diemItem != null) {
