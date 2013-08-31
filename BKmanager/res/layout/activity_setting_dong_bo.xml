@@ -38,80 +38,95 @@
             android:layout_height="1dp"
             android:layout_below="@+id/TextViewTB"
             android:background="#DDDDDD" />
+
         <RelativeLayout
-        android:id="@+id/RelativeLayoutCKCN"
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content" 
-        android:clickable="true"
-        android:background="@drawable/clickable_white"
-        android:layout_centerHorizontal="true">
-
-        <org.holoeverywhere.widget.TextView
-            android:id="@+id/TextViewCKCN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="20dp"
-            android:textSize="20dp"
-            android:text="Chu kì cập nhật" />
-        
-        <View 
+            android:id="@+id/RelativeLayoutCKCN"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#DDDDDD"
-            android:layout_below="@+id/TextViewCKCN"/>
-
-        <org.holoeverywhere.widget.TextView
-            android:id="@+id/TextViewCKCNValue"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:textColor="#3BB9FF"
-            />
+            android:layout_centerHorizontal="true" >
 
-    </RelativeLayout>
-	<RelativeLayout
-        android:id="@+id/RelativeLayoutDBLT"
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content" 
-        android:layout_centerHorizontal="true">
+            <org.holoeverywhere.widget.TextView
+                android:id="@+id/TextViewCKCN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:text="Chu kì cập nhật"
+                android:textSize="16dp" />
 
-        <org.holoeverywhere.widget.TextView
-            android:id="@+id/TextViewDBLT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="20dp"
-            android:textSize="20dp"
-            android:text="Đồng bộ lịch thi" />
-        
-        <View 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/TextViewCKCN"
+                android:background="#DDDDDD" />
+            
+            <org.holoeverywhere.widget.ViewPager
+                android:id="@+id/viewpager_CKCN_l"
+                android:layout_width="30dp"
+                android:layout_height="fill_parent"
+                android:layout_alignBottom="@+id/TextViewCKCN"
+                android:layout_alignTop="@+id/TextViewCKCN"
+                android:layout_toLeftOf="@+id/viewpager_CKCN" />
+            
+            <org.holoeverywhere.widget.ViewPager
+                android:id="@+id/viewpager_CKCN"
+                android:layout_width="30dp"
+                android:layout_height="fill_parent"
+                android:layout_alignBottom="@+id/TextViewCKCN"
+                android:layout_alignTop="@+id/TextViewCKCN"
+                android:layout_toLeftOf="@+id/viewpager_CKCN_r" />
+
+            <org.holoeverywhere.widget.ViewPager
+                android:id="@+id/viewpager_CKCN_r"
+                android:layout_width="30dp"
+                android:layout_height="fill_parent"
+                android:layout_alignBottom="@+id/viewpager_CKCN"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/viewpager_CKCN"
+                android:layout_marginRight="30dp" >
+
+            </org.holoeverywhere.widget.ViewPager>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayoutDBLT"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#DDDDDD"
-            android:layout_below="@+id/TextViewDBLT"/>
-
-        <org.holoeverywhere.widget.Switch
-            android:id="@+id/SwitchDBLT"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/arow" />
+            android:layout_centerHorizontal="true" >
+
+            <org.holoeverywhere.widget.TextView
+                android:id="@+id/TextViewDBLT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:text="Đồng bộ lịch thi"
+                android:textSize="16dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/TextViewDBLT"
+                android:background="#DDDDDD" />
+
+            <org.holoeverywhere.widget.Switch
+                android:id="@+id/SwitchDBLT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/arow" />
 
     </RelativeLayout>
 	<RelativeLayout
         android:id="@+id/RelativeLayoutNNLT"
         android:layout_width="match_parent" 
         android:layout_height="wrap_content" 
-        android:clickable="true"
-        android:background="@drawable/clickable_white"
-        android:layout_centerHorizontal="true">
+        android:clickable="true">
 
         <org.holoeverywhere.widget.TextView
             android:id="@+id/TextViewNNLT"
@@ -119,8 +134,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:layout_marginLeft="20dp"
-            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="16dp"
             android:text="Nhắc nhở lịch thi" />
         
         <View 
@@ -129,15 +144,29 @@
             android:background="#DDDDDD"
             android:layout_below="@+id/TextViewNNLT"/>
 
-        <org.holoeverywhere.widget.TextView
-            android:id="@+id/TextViewNNLTValue"
+        <org.holoeverywhere.widget.ViewPager
+            android:id="@+id/viewpager_NNLT"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_alignBottom="@+id/TextViewNNLT"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/TextViewNNLT"
+            android:layout_toRightOf="@+id/TextViewNNLT" />
+
+        <ImageView
+            android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:textColor="#3BB9FF"
-            />
+            android:layout_alignRight="@+id/viewpager_NNLT"
+            android:layout_alignTop="@+id/viewpager_NNLT"
+            android:src="@drawable/arow" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/viewpager_NNLT"
+            android:layout_alignTop="@+id/viewpager_NNLT"
+            android:src="@drawable/arowback" />
 
     </RelativeLayout>
         
