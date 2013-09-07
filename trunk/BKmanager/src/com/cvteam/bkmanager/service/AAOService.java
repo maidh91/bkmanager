@@ -22,6 +22,7 @@ import java.util.zip.InflaterInputStream;
 
 import com.cvteam.bkmanager.MainActivity;
 import com.cvteam.bkmanager.model.DI__Diem;
+import com.cvteam.bkmanager.model.DI__HocPhi;
 import com.cvteam.bkmanager.model.DI__LichThi;
 import com.cvteam.bkmanager.model.DI__NienHoc;
 import com.cvteam.bkmanager.model.DI__ThoiKhoaBieu;
@@ -322,7 +323,7 @@ public class AAOService {
 
 			// get updated date
 			start = tmp.indexOf(keywordUpdateDate, end);
-			end = tmp.indexOf(keywordE, start + keywordS.length());
+			end = tmp.indexOf(keywordE, start + keywordUpdateDate.length());
 			ngayCapNhat = tmp
 					.substring(start + keywordUpdateDate.length(), end);
 			objs.add(ngayCapNhat);
@@ -473,6 +474,129 @@ public class AAOService {
 		if (result.size() == 0 && objs.size() == 0) {
 			objs.add("Chưa có thông tin mới!");
 		}
+		return result;
+	}
+
+	/**
+	 * 
+	 * @param mssv
+	 * @param hk
+	 *            i.e: 20122
+	 * @param objs
+	 *            objs[0] is updateDate or error message if result is empty
+	 * @return: an object containing tuition fee information 
+	 */
+	public static DI__HocPhi getHocPhi(String mssv, String hk,
+			List<String> objs) {
+		DI__HocPhi result = new DI__HocPhi();
+
+		LogService.freeTag("AAOService", "getHocPhi");
+		try {
+			// post request
+			Map<String, String> m = new HashMap<String, String>();
+			if (hk.equals("")) {
+				List<DI__NienHoc> lstNienHoc = refreshListNienHoc();
+				if (lstNienHoc.size() == 0) {
+					objs.clear();
+					objs.add("Không tìm thấy thông tin.\nVui lòng kiểm tra kết nối Internet và thử lại.");
+					return result;
+				}
+				DI__NienHoc nien = lstNienHoc.get(2);
+				hk = Integer.toString(nien.namhoc * 10 + nien.hk);
+			}
+
+			LogService.freeTag("AAOService", "getHocPhi hk " + hk);
+			m.put("HOC_KY", hk);
+			m.put("mssv", mssv);
+			m.put("image", "Xem-->");
+
+			String tmp = doSubmitPost(
+					"http://www.aao.hcmut.edu.vn/php/aao_hp.php?goto=", m);
+
+			if (tmp.equals("")) {
+				objs.clear();
+				objs.add("Không tìm thấy thông tin.\nVui lòng kiểm tra kết nối Internet và thử lại.");
+				return result;
+			}
+
+//			if (tmp.indexOf("Không tìm thấy thời khóa biểu sinh viên") != -1) {
+//				result.clear();
+//				objs.clear();
+//				objs.add("Không có thông tin cho học kỳ này.");
+//				return result;
+//			}
+
+			if (tmp.indexOf("Không tìm thấy mã") != -1) {
+				objs.clear();
+				objs.add("Mã số sinh viên không tồn tại.");
+				return result;
+			}
+
+			// searching keywords
+			String keywordTotalS = "Học phí học kỳ là : ";
+			String keywordOwedS = "Sinh viên còn nợ : ";
+			String keywordTotalE = " ";
+			String keywordOwedE = " ";
+			String keywordUpdateDate = "t: ";
+			String keywordUpdateEnd = "</font>";
+
+			int start, end;
+
+			start = 0;
+			end = 0;
+
+			// start = tmp.indexOf(keywordS);
+			// end = 0;
+
+			String ngayCapNhat;
+
+			// get updated date
+			start = tmp.indexOf(keywordUpdateDate, end);
+			end = tmp.indexOf(keywordUpdateEnd, start + keywordUpdateDate.length());
+			ngayCapNhat = tmp
+					.substring(start + keywordUpdateDate.length(), end);
+			objs.add(ngayCapNhat);
+			// System.out.print("Ngay cap nhap " + ngayCapNhat);
+
+			// find owed fee
+			start = tmp.indexOf(keywordOwedS, 0);
+			end = tmp.indexOf(keywordOwedE, start + keywordOwedS.length());
+			
+			if (start == -1 || end == -1) {
+				objs.clear();
+				objs.add("Không tìm thấy thông tin.");
+				return result;
+			}
+			
+			String owedFee = tmp.substring(start + keywordOwedS.length(), end);
+			
+			// find total fee
+			start = tmp.indexOf(keywordTotalS, 0);
+			end = tmp.indexOf(keywordTotalE, start + keywordTotalS.length());
+			
+			if (start == -1 || end == -1) {
+				objs.clear();
+				objs.add("Không tìm thấy thông tin.");
+				return result;
+			}
+			
+			String totalFee = tmp.substring(start + keywordOwedS.length(), end);
+			
+			result.owedFee = owedFee;
+			result.totalFee = totalFee;
+			
+		} catch (UnknownHostException uhe) {
+			objs.clear();
+			objs.add("Không tìm thấy thông tin.\nVui lòng kiểm tra kết nối Internet và thử lại.");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			objs.clear();
+			objs.add("Không tìm thấy thông tin.\nVui lòng kiểm tra kết nối Internet và thử lại.");
+		}
+
+//		if (result.size() == 0 && objs.size() == 0) {
+//			objs.add("Chưa có thông tin mới!");
+//		}
 		return result;
 	}
 
@@ -733,7 +857,7 @@ public class AAOService {
 
               // get updated date
               start = tmp.indexOf(keywordUpdateDate, end);
-              end = tmp.indexOf(keywordE, start + keywordS.length());
+              end = tmp.indexOf(keywordE, start + keywordUpdateDate.length());
               if (ngayCapNhat.equals("")) {
                   ngayCapNhat = tmp.substring(
                           start + keywordUpdateDate.length(), end);
