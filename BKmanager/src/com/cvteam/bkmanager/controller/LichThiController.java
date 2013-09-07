@@ -19,7 +19,6 @@ import com.cvteam.bkmanager.model.LichThiModel;
 import com.cvteam.bkmanager.service.AAOService;
 import com.cvteam.bkmanager.service.CalendarService;
 import com.cvteam.bkmanager.service.DatabaseService;
-import com.cvteam.bkmanager.service.DialogService;
 import com.cvteam.bkmanager.service.LogService;
 
 public class LichThiController implements IDataSource {
