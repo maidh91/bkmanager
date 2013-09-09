@@ -17,6 +17,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.SearchView;
 import com.cvteam.bkmanager.model.DI__NienHoc;
 import com.cvteam.bkmanager.model.NienHocModel;
+import com.cvteam.bkmanager.service.CalendarService;
 import com.cvteam.bkmanager.service.LogService;
 import com.cvteam.bkmanager.service.SharedPreferencesService;
 
@@ -92,7 +93,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
 
 		nienHocModel.setHKs(lstNienHoc);
 
-		InitializeService();
+		InitializeService(); //CalendarService.readCalendar(this);
 	}
 
 	@Override
@@ -215,28 +216,25 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
 	// /////////////////////////////////////////
 
 	private void InitializeService() {
-		Boolean isRunning = false;
 		ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 		for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
 			if ("com.cvteam.bkmanager.service.NotiService".equals(service.service.getClassName())) {
 				System.out.println("isRunning");
-				isRunning = true;
+				stopService(new Intent(this, com.cvteam.bkmanager.service.NotiService.class));
 				break;
 			}
 		}
 
-		if (!isRunning) {
-			Intent intent = new Intent(this, com.cvteam.bkmanager.service.NotiService.class);
-			intent.putExtra("mssv", Setting._mssv);
-			intent.putExtra("dongbo", Setting._dongBoLichThi);
-			intent.putExtra("noti_lichthi", Setting._thongBaoLichThi);
-			intent.putExtra("noti_tkb", Setting._thongBaoTKB);
-			intent.putExtra("noti_diem", Setting._thongBaoDiem);
-			intent.putExtra("intervalTime", Setting._chuKiCapNhat);
+		Intent intent = new Intent(this, com.cvteam.bkmanager.service.NotiService.class);
+		intent.putExtra("mssv", Setting._mssv);
+		intent.putExtra("dongbo", Setting._dongBoLichThi);
+		intent.putExtra("noti_lichthi", Setting._thongBaoLichThi);
+		intent.putExtra("noti_tkb", Setting._thongBaoTKB);
+		intent.putExtra("noti_diem", Setting._thongBaoDiem);
+		intent.putExtra("intervalTime", Setting._chuKiCapNhat);
 
-			System.out.println("start service " + Setting._mssv);
-			startService(intent);
-		}
+		System.out.println("start service " + Setting._mssv);
+		startService(intent);
 	}
 
 	// /////////////////////////////////////////
