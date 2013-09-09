@@ -34,10 +34,10 @@ public class UpdateService extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		System.out.println("onReceive()");
+		// System.out.println("onReceive()");
 		// System.out.println("thread " + Thread.currentThread().getId());
 		// Toast.makeText(context, "Checking BKnoti", Toast.LENGTH_LONG).show();
-
+		
 		// Init setting
 		if (intent == null)
 			return;
