@@ -3,35 +3,26 @@ package com.cvteam.bkmanager;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.holoeverywhere.widget.Switch;
+import org.holoeverywhere.widget.ViewPager;
+
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
-import android.widget.ListView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
 
-import org.holoeverywhere.app.Activity;
-import org.holoeverywhere.widget.Button;
-import org.holoeverywhere.widget.NumberPicker;
-import org.holoeverywhere.widget.Switch;
-import org.holoeverywhere.widget.TextView;
-import org.holoeverywhere.widget.ViewPager;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 
-import com.actionbarsherlock.view.Menu;
-
-public class SettingDongBoActivity extends FragmentActivity {
+public class SettingDongBoActivity extends SherlockFragmentActivity {
 
 	// private RelativeLayout ckcn;
 	// private RelativeLayout nnlt;
@@ -59,10 +50,10 @@ public class SettingDongBoActivity extends FragmentActivity {
 				SettingDongBoActivity.this.finish();
 			}
 		});
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setDisplayShowTitleEnabled(false);
-		getActionBar().setDisplayShowCustomEnabled(true);
-		getActionBar().setCustomView(backMenu);
+		getSupportActionBar().setDisplayShowHomeEnabled(false);
+		getSupportActionBar().setDisplayShowTitleEnabled(false);
+		getSupportActionBar().setDisplayShowCustomEnabled(true);
+		getSupportActionBar().setCustomView(backMenu);
 
 		dblt = (Switch) findViewById(R.id.SwitchDBLT);
 		dblt.setChecked(Setting._dongBoLichThi);
@@ -78,6 +69,7 @@ public class SettingDongBoActivity extends FragmentActivity {
 		FragmentAdapter FAdapter_ckcn = new FragmentAdapter(
 				getSupportFragmentManager(), 5, new String[] { "1", "2", "3",
 						"4", "5" },true);
+		
 		vpckcn.setAdapter(FAdapter_ckcn);
 		vpckcn.setOffscreenPageLimit(5);
 		vpckcn.setCurrentItem(Setting._chuKiCapNhat);
@@ -361,7 +353,6 @@ public class SettingDongBoActivity extends FragmentActivity {
 
 	private class FragmentAdapter extends FragmentPagerAdapter {
 		protected String[] CONTENT;
-		protected int[] ICONS = new int[] {};
 
 		private List<Fragment> fragments = new ArrayList<Fragment>();
 		private int mCount;
