@@ -240,4 +240,8 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
 	// /////////////////////////////////////////
 	// End Notification //
 	// /////////////////////////////////////////
+	
+	public void tienichclick(View v){
+		startActivity(new Intent(this, TienIchActivity.class));
+	}
 }
