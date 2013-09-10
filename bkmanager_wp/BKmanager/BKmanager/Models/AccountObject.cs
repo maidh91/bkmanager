@@ -4,6 +4,7 @@ namespace BKmanager.Models
 {
     public class AccountObject
     {
+        [SQLite.PrimaryKey]
         public string MSSV { get; set; }    // key
         public string Ten { get; set; }
 
