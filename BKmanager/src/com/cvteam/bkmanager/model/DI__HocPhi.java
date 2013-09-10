@@ -6,6 +6,8 @@ public class DI__HocPhi {
 	public int hocky;
 	public String totalFee;
 	public String owedFee;
+	public String updateDay;
+	
 	
 	public DI__HocPhi() {
 		mssv = "";
@@ -13,5 +15,6 @@ public class DI__HocPhi {
 		hocky = 0;
 		totalFee = "";
 		owedFee = "";
+		updateDay = "";
 	}
 }
