@@ -17,7 +17,7 @@ public class DatabaseService extends SQLiteOpenHelper {
 
 	private static final String DATABASE_NAME = "bkmanager.db";
 
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 3;
 
 	private static final String CREATE_TABLE_LICHTHI = "create table lichthi ("
 			+ "_id integer primary key autoincrement, "
@@ -58,7 +58,16 @@ public class DatabaseService extends SQLiteOpenHelper {
 			+ "hocky integer not null, " + "tcdkhk integer, "
 			+ "tctlhk integer, " + "tongsotc integer, " + "diemtbhk real, "
 			+ "diemtbtl real, " + "lichthistt text, " + "diemstt text, "
-			+ "tkbstt text);";
+			+ "tkbstt text, " + "hocphistt text);";
+
+	private static final String CREATE_TABLE_HOCPHI = "create table hocphi ("
+			+ "_id integer primary key autoincrement, "
+			+ "mssv text not null, " + "namhoc integer not null, "
+			+ "hocky integer not null, "
+			+ "hptong text, "
+			+ "hpno text, "
+			+ "ngaycapnhat text);";
+
 
 	public DatabaseService(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -70,6 +79,7 @@ public class DatabaseService extends SQLiteOpenHelper {
 		database.execSQL(CREATE_TABLE_DIEM);
 		database.execSQL(CREATE_TABLE_LICHTHI);
 		database.execSQL(CREATE_TABLE_THOIKHOABIEU);
+		database.execSQL(CREATE_TABLE_HOCPHI);
 	}
 
 	@Override
@@ -78,6 +88,7 @@ public class DatabaseService extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS diem");
 		db.execSQL("DROP TABLE IF EXISTS lichthi");
 		db.execSQL("DROP TABLE IF EXISTS thoikhoabieu");
+		db.execSQL("DROP TALBE IF EXISTS hocphi");
 		onCreate(db);
 	}
 

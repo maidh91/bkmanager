@@ -584,6 +584,7 @@ public class AAOService {
 			
 			result.owedFee = owedFee;
 			result.totalFee = totalFee;
+			result.updateDay = ngayCapNhat;
 			
 		} catch (UnknownHostException uhe) {
 			objs.clear();
