@@ -73,6 +73,10 @@
             android:label="@string/title_activity_setting_dong_bo"
             android:theme="@style/Holo.Theme.Light" >
         </activity>
+        <activity
+            android:name="com.cvteam.bkmanager.TienIchActivity"
+            android:label="@string/title_activity_tien_ich" >
+        </activity>
     </application>
 
 </manifest>
