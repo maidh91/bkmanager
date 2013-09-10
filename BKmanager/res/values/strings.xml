@@ -12,5 +12,6 @@
     <string name="title_activity_setting">SettingActivity</string>
     <string name="title_activity_setting_thon_bao">SettingThonBaoActivity</string>
     <string name="title_activity_setting_dong_bo">SettingDongBoActivity</string>
+    <string name="title_activity_tien_ich">TienIchActivity</string>
 
 </resources>
