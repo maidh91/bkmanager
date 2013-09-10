@@ -1,0 +1,69 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TienIchActivity" >
+
+    <org.holoeverywhere.widget.LinearLayout
+        android:id="@+id/LinearLayoutTitle"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/main_header"
+        android:orientation="vertical"
+        android:paddingTop="10dp">
+
+        <org.holoeverywhere.widget.TextView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.15"
+            android:gravity="center"
+            android:text="Tiện ích"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.72" />
+
+    </org.holoeverywhere.widget.LinearLayout>
+    
+    
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutHocPhi"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_below="@+id/LinearLayoutTitle" 
+        android:clickable="true"
+        android:background="@drawable/clickable_white"
+        android:layout_centerHorizontal="true">
+
+        <org.holoeverywhere.widget.TextView
+            android:id="@+id/TextViewHocPhi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="20sp"
+            android:text="Kiểm tra học phí" />
+        
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"
+            android:layout_below="@+id/TextViewHocPhi"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/arow" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

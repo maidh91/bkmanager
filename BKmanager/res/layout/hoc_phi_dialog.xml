@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <org.holoeverywhere.widget.LinearLayout
+        android:id="@+id/LinearLayoutContent"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:orientation="vertical"
+        android:paddingTop="15dp" >
+		
+        <org.holoeverywhere.widget.LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="50"
+            android:orientation="horizontal" >
+
+            <org.holoeverywhere.widget.TextView
+                android:id="@+id/txt_HK"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="#02BD86"
+                android:gravity="left"
+            	android:textColor="#FFFFFF"
+                android:textSize="12sp" />
+            <org.holoeverywhere.widget.TextView
+                android:id="@+id/txt_update"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#02BD86"
+                android:gravity="right"
+           		android:textColor="#FFFFFF"
+           		android:textSize="12sp" />
+        </org.holoeverywhere.widget.LinearLayout>
+
+        <org.holoeverywhere.widget.LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="50"
+            android:orientation="horizontal" >
+
+            <org.holoeverywhere.widget.TextView
+                android:id="@+id/headerOwed"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="#01A775"
+                android:text="Nợ" />
+
+            <org.holoeverywhere.widget.TextView
+                android:id="@+id/border"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="#A4A4A4" />
+
+            <org.holoeverywhere.widget.TextView
+                android:id="@+id/headerTotal"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="#01A775"
+                android:text="Tổng" />
+
+            <org.holoeverywhere.widget.TextView
+                android:id="@+id/border"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="#A4A4A4" />
+        </org.holoeverywhere.widget.LinearLayout>
+        <org.holoeverywhere.widget.TextView
+        android:id="@+id/border"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#A4A4A4" />
+
+        <org.holoeverywhere.widget.LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="50"
+            android:orientation="horizontal" >
+
+            <org.holoeverywhere.widget.TextView
+                android:id="@+id/txt_owed"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <org.holoeverywhere.widget.TextView
+                android:id="@+id/border"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="#A4A4A4" />
+
+            <org.holoeverywhere.widget.TextView
+                android:id="@+id/txt_total"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </org.holoeverywhere.widget.LinearLayout>
+        <org.holoeverywhere.widget.TextView
+        android:id="@+id/border"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#A4A4A4" />
+    </org.holoeverywhere.widget.LinearLayout>
+
+    <org.holoeverywhere.widget.LinearLayout
+        android:id="@+id/LinearLayoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/View1" >
+
+        <org.holoeverywhere.widget.Button
+            android:id="@+id/buttonOK"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@drawable/clickable_white"
+            android:text="Hoàn tất" />
+    </org.holoeverywhere.widget.LinearLayout>
+
+    <View
+        android:id="@+id/View1"
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/LinearLayoutContent"
+        android:background="#3BB9FF" />
+
+</RelativeLayout>
