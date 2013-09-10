@@ -215,7 +215,48 @@ public class AAOService {
 	public static List<DI__NienHoc> refreshListNienHoc() throws Exception {
 		List<DI__NienHoc> lstHK = new ArrayList<DI__NienHoc>();
 
-		String getResult = doSubmitGet("http://www.aao.hcmut.edu.vn/php/aao_lt.php");
+		String getResult = doSubmitGet("http://www.aao.hcmut.edu.vn/php/aao_tkb.php");
+
+		// check connection
+		if (getResult.length() >= 3)
+			if (getResult.substring(0, 3).equals("404"))
+				throw new UnknownHostException();
+
+		String optionTag = "<option value=";
+		int tagPos = getResult.indexOf(optionTag);
+
+		while (tagPos != -1) {
+			int _namhoc = 0;
+			int _hk = 0;
+
+			String hk = getResult.substring(tagPos + optionTag.length(), tagPos
+					+ optionTag.length() + 5);
+
+			_namhoc = Integer.parseInt(hk) / 10;
+			_hk = Integer.parseInt(hk) % 10;
+
+			DI__NienHoc newHK = new DI__NienHoc(_namhoc, _hk);
+			newHK.hk = _hk;
+			newHK.namhoc = _namhoc;
+
+			lstHK.add(newHK);
+
+			tagPos = getResult.indexOf(optionTag, tagPos + optionTag.length()
+					+ 5);
+		}
+		MainActivity.nienHocModel.setHKs(lstHK);
+		return lstHK;
+	}
+	
+	/**
+	 *  @param source
+	 *            : url of page
+	 * @return list of available DI__NienHoc from AAO
+	 */
+	public static List<DI__NienHoc> refreshListNienHoc(String source) throws Exception {
+		List<DI__NienHoc> lstHK = new ArrayList<DI__NienHoc>();
+
+		String getResult = doSubmitGet(source);
 
 		// check connection
 		if (getResult.length() >= 3)
@@ -489,6 +530,7 @@ public class AAOService {
 	public static DI__HocPhi getHocPhi(String mssv, String hk,
 			List<String> objs) {
 		DI__HocPhi result = new DI__HocPhi();
+		result.mssv = mssv;
 
 		LogService.freeTag("AAOService", "getHocPhi");
 		try {

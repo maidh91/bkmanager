@@ -3,6 +3,7 @@ package com.cvteam.bkmanager;
 import java.util.List;
 
 import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.widget.Button;
 import org.holoeverywhere.widget.TextView;
 
 import android.app.AlertDialog;
@@ -19,6 +20,9 @@ import com.cvteam.bkmanager.service.DialogService;
 
 public class TienIchActivity extends Activity implements Listener {
 
+	private HocPhiController hpC = null;
+	private HocPhiModel hpModel = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,13 +35,23 @@ public class TienIchActivity extends Activity implements Listener {
 				// TODO Auto-generated method stub
 				DialogService.openProgressDialog(TienIchActivity.this,
 						"Loading...");
-				HocPhiController hC = new HocPhiController(TienIchActivity.this);
-				HocPhiModel model = new HocPhiModel();
-				hC.setModel(model);
-				hC.getByHocKy(0, 0);
+				hpC = new HocPhiController(TienIchActivity.this);
+				hpModel = new HocPhiModel();
+				hpModel.mssv = Setting._mssv;
+				hpModel.addListener(TienIchActivity.this);
+				hpC.open();
+				hpC.setModel(hpModel);
+				hpC.getByHocKy(0, 0);
 
 			}
 		});
+	}
+
+	@Override
+	protected void onPause() {
+		if (hpC != null)
+			hpC.close();
+		super.onPause();
 	}
 
 	@Override
@@ -53,10 +67,17 @@ public class TienIchActivity extends Activity implements Listener {
 		
 		DialogService.closeProgressDialog();
 		
+		LayoutInflater inflater = TienIchActivity.this.getLayoutInflater();
+		final View viewdialog = inflater.inflate(R.layout.hoc_phi_dialog, null);		
+
+		TextView txtHK = (TextView) viewdialog.findViewById(R.id.txt_HK);
+		TextView txtUpdate = (TextView) viewdialog.findViewById(R.id.txt_update);
+		TextView txtOwed = (TextView) viewdialog.findViewById(R.id.txt_owed);
+		TextView txtTotal = (TextView) viewdialog.findViewById(R.id.txt_total);
+		Button btnOK = (Button) viewdialog.findViewById(R.id.buttonOK);
+		
 		AlertDialog.Builder builder = new AlertDialog.Builder(
 				TienIchActivity.this);
-		LayoutInflater inflater = TienIchActivity.this.getLayoutInflater();
-		final View viewdialog = inflater.inflate(R.layout.hoc_phi_dialog, null);
 
 		builder.setView(viewdialog);
 
@@ -64,16 +85,23 @@ public class TienIchActivity extends Activity implements Listener {
 
 		dialog.setTitle("Tuition fee");
 		
-
-		TextView txtHK = (TextView) findViewById(R.id.txt_HK);
-		TextView txtUpdate = (TextView) findViewById(R.id.txt_update);
-		TextView txtOwed = (TextView) findViewById(R.id.txt_owed);
-		TextView txtTotal = (TextView) findViewById(R.id.txt_total);
-		
 		txtHK.setText(hh.mssv + "_" + hh.namhoc + hh.hocky);
 		txtUpdate.setText(hh.updateDay);
 		txtOwed.setText(hh.owedFee);
 		txtTotal.setText(hh.totalFee);
+		
+		btnOK.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
+			}
+		});
+
+		System.out.println("owedFee = " + hh.owedFee);
+		System.out.println("totalFee = " + hh.totalFee);
+		
+		dialog.show();
 	}
 
 }
