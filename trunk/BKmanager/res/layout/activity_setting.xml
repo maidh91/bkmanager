@@ -5,13 +5,14 @@
     tools:context=".SettingActivity" >
 	
     <org.holoeverywhere.widget.LinearLayout
+        android:id="@+id/LinearLayoutTitle"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:background="@drawable/main_header"
         android:orientation="vertical"
-        android:paddingTop="10dp" android:id="@+id/linearLayout1">
+        android:paddingTop="10dp">
 
         <org.holoeverywhere.widget.TextView
             android:layout_width="match_parent"
@@ -34,7 +35,7 @@
         android:id="@+id/RelativeLayoutThongBao"
         android:layout_width="match_parent" 
         android:layout_height="wrap_content" 
-        android:layout_below="@+id/RelativeLayoutTaiKhoan" 
+        android:layout_below="@+id/LinearLayoutTitle" 
         android:clickable="true"
         android:background="@drawable/clickable_white"
         android:layout_centerHorizontal="true">
