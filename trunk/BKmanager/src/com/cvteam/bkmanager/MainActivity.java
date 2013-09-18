@@ -103,16 +103,18 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
 		boolean isLight = !Setting._blackTheme;
 
 		// Create the search view
-		SearchView searchView = new SearchView(getSupportActionBar().getThemedContext());
-		searchView.setQueryHint("Tìm theo MSSV");
-		searchView.setOnQueryTextListener(this);
+//		SearchView searchView = new SearchView(getSupportActionBar().getThemedContext());
+//		searchView.setQueryHint("Tìm theo MSSV");
+//		searchView.setOnQueryTextListener(this);
 
-		menu.add("Search")
-				.setIcon(isLight ? R.drawable.ic_search_inverse : R.drawable.abs__ic_search)
-				.setActionView(searchView)
-				.setShowAsAction(
-						MenuItem.SHOW_AS_ACTION_IF_ROOM
-								| MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+//		menu.add("Search")
+//				.setIcon(
+//						isLight ? R.drawable.ic_search_inverse
+//								: R.drawable.abs__ic_search)
+//				.setActionView(searchView)
+//				.setShowAsAction(
+//						MenuItem.SHOW_AS_ACTION_IF_ROOM
+//								| MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 		menu.add("Reload")
 				.setIcon(isLight ? R.drawable.ic_refresh_inverse : R.drawable.ic_refresh)
 				.setShowAsAction(
@@ -161,8 +163,12 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
 			// logService.functionTag("onActivityResult", "requestCode == 57");
 			if (resultCode == RESULT_OK) {
 				SharedPreferencesService.SaveCauHinh(sharedPrefs);
-				getSupportActionBar().setTitle(Setting._name);
-				getSupportActionBar().setSubtitle(Setting._mssv);
+//				getSupportActionBar().setTitle(Setting._name);
+//				getSupportActionBar().setSubtitle(Setting._mssv);
+				TextView txt_tensv = (TextView) findViewById(R.id.txt_tensv);
+				TextView txt_mssv = (TextView) findViewById(R.id.txt_mssv);
+				txt_tensv.setText(Setting._name);
+				txt_mssv.setText("MSSV: " + Setting._mssv);
 			}
 			if (resultCode == RESULT_CANCELED) {
 				// Write your code if there's no result
