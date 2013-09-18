@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="@allright reserved 2013"
+        android:text="\@allright reserved 2013"
         android:textColor="#aaaaaa" />
 
     <RelativeLayout
