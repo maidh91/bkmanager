@@ -78,29 +78,29 @@ public class HocPhiController implements IDataSource {
 			sql.append(model.mssv);
 			sql.append("' AND namhoc = 0");
 			sql.append(" AND hocky = 0");
-			logService.functionTag("updateDataSource", sql.toString());
+			logService.functionTag("getByHocKy", sql.toString());
 			Cursor csr = database.rawQuery(sql.toString(), null);
 			if (csr != null && csr.getCount() > 0) {
 				logService
-						.functionTag("updateDataSource", "cursor is not null");
+						.functionTag("getByHocKy", "cursor is not null");
 				csr.moveToFirst();
 				String lastNienHoc = csr.getString(0);
-				logService.functionTag("updateDataSource", "lastNienHoc = "
+				logService.functionTag("getByHocKy", "lastNienHoc = "
 						+ lastNienHoc);
 				csr.close();
 
 				DI__NienHoc nh = MainActivity.nienHocModel.getHKs().get(2);
-				logService.functionTag("updateDataSource",
+				logService.functionTag("getByHocKy",
 						"MainActivity.nienHocModel.getHKs().get(2) = "
 								+ nh.namhoc + "" + nh.hk);
 				
 				if (lastNienHoc!= null && lastNienHoc.equals(nh.namhoc + "" + nh.hk))
 					databaseService.selectTable("hocphi", params, this);
 				else {
-					requestDiemFromAao(model.mssv);
+				    requestHocPhiFromAao(model.mssv);
 				}
 			} else {
-				requestDiemFromAao(model.mssv);
+			    requestHocPhiFromAao(model.mssv);
 			}
 		}
 	}
@@ -121,8 +121,11 @@ public class HocPhiController implements IDataSource {
 	}
 
 	@Override
+	/**
+	 * Update from DB
+	 */
 	public void updateDataSource(Object obj) {
-		// logService.functionTag("UpdateDataSource", "Update model Diem");
+		// logService.functionTag("UpdateDataSource", "Update model hocphi");
 		DI__HocPhi hh = null;
 		if (obj != null) {
 			Cursor cursor = (Cursor) obj;
@@ -136,7 +139,7 @@ public class HocPhiController implements IDataSource {
 		// logService.functionTag("UpdateDataSource",
 		// "Update model Diem successfully");
 		if (hh == null) {
-			requestDiemFromAao(model.mssv);
+			requestHocPhiFromAao(model.mssv);
 		} else {
 			// StringBuilder sql = new StringBuilder(
 			// "SELECT hocphistt FROM hocky WHERE mssv ='");
@@ -177,12 +180,17 @@ public class HocPhiController implements IDataSource {
 		}
 	}
 
-	public void requestDiemFromAao(String mssv) {
-		RequestDiemFromAaoAsynTask asynTask = new RequestDiemFromAaoAsynTask(
+	public void requestHocPhiFromAao(String mssv) {
+	    RequestHocPhiFromAaoAsynTask asynTask = new RequestHocPhiFromAaoAsynTask(
 				mssv, this);
 		asynTask.execute();
 	}
 
+	/**
+	 * Update from AAO
+	 * @param hp
+	 * @param objs
+	 */
 	public void updateDataSource(DI__HocPhi hp, List<String> objs) {
 		// logService.functionTag("updateDiem", "Size is: " + lstmodel.size());
 		model.setObjects(objs);
@@ -218,7 +226,7 @@ public class HocPhiController implements IDataSource {
 			ex.printStackTrace();
 		}
 
-		// insert hocky entry into database
+		// insert hocky entry into database for hocky(0, 0)
 		if (model.hocky.namhoc == 0) {
 			temp = hp;
 
@@ -228,7 +236,7 @@ public class HocPhiController implements IDataSource {
 			values.put("namhoc", model.hocky.namhoc);
 			values.put("hocky", model.hocky.hk);
 
-			int lastestNienHoc = model.hocky.hk * 10 + model.hocky.hk;
+			int lastestNienHoc = temp.namhoc * 10 + temp.hocky;
 			
 			values.put("hocphistt", Integer.toString(lastestNienHoc));
 
@@ -255,13 +263,13 @@ public class HocPhiController implements IDataSource {
 		DialogService.closeProgressDialog();
 	}
 
-	class RequestDiemFromAaoAsynTask extends AsyncTask<Void, Void, Void> {
+	class RequestHocPhiFromAaoAsynTask extends AsyncTask<Void, Void, Void> {
 		private String mssv;
 		private HocPhiController controller;
 		private DI__HocPhi hp;
 		private List<String> objs;
 
-		public RequestDiemFromAaoAsynTask(String mssv,
+		public RequestHocPhiFromAaoAsynTask(String mssv,
 				HocPhiController controller) {
 			this.mssv = mssv;
 			this.controller = controller;
@@ -271,25 +279,30 @@ public class HocPhiController implements IDataSource {
 		@Override
 		protected Void doInBackground(Void... params) {
 			List<DI__NienHoc> nhs = null;
+			DI__NienHoc nh = new DI__NienHoc(0, 0);
 			
 			try {
-				nhs = AAOService.refreshListNienHoc("http://www.aao.hcmut.edu.vn/php/aao_hp.php");
+				nhs = AAOService.refreshListNienHocWithJSoup("http://www.aao.hcmut.edu.vn/php/aao_hp.php");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
 			if (nhs != null && nhs.size() > 2) {
-				controller.model.hocky = nhs.get(2);				
+				nh = nhs.get(2);				
 			}
 			
 			 logService.functionTag("doInBackground", "AAOService.getHocPhi:"
-			 + mssv + " " + controller.model.hocky.namhoc  + controller.model.hocky.hk);
+			 + mssv + " " + nh.namhoc  + nh.hk);
 			
 			 hp = AAOService.getHocPhi(
 					mssv,
-					Integer.toString(controller.model.hocky.namhoc * 10
-							+ controller.model.hocky.hk), objs);
-			return null;
+					Integer.toString(nh.namhoc * 10
+							+ nh.hk), objs);
+			 
+			 hp.namhoc = nh.namhoc;
+			 hp.hocky = nh.hk;
+			 
+			 return null;
 		}
 
 		@Override
