@@ -20,6 +20,11 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
+import org.jsoup.*;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import com.cvteam.bkmanager.MainActivity;
 import com.cvteam.bkmanager.model.DI__Diem;
 import com.cvteam.bkmanager.model.DI__HocPhi;
@@ -289,7 +294,54 @@ public class AAOService {
 		return lstHK;
 	}
 
-	/**
+    /**
+     *  @param source
+     *            : url of page
+     * @return list of available DI__NienHoc from AAO
+     */
+    public static List<DI__NienHoc> refreshListNienHocWithJSoup(String source) throws Exception {
+        List<DI__NienHoc> lstHK = new ArrayList<DI__NienHoc>();
+
+        String getResult = doSubmitGet(source);
+
+        // check connection
+        if (getResult.length() >= 3)
+            if (getResult.substring(0, 3).equals("404"))
+                throw new UnknownHostException();
+
+        Document doc = Jsoup.parse(getResult);
+        
+        Elements items = doc.getElementsByTag("option");
+        
+        for (int i = 0; i < items.size(); i++) {            
+            int _namhoc = 0;
+            int _hk = 0;
+            
+            Element localElement = items.get(i);
+            String value = localElement.attr("value").replace("'", "");
+            int len = value.length();
+            value = value.substring(len - 5);
+            
+            try {
+                _namhoc = Integer.parseInt(value) / 10;
+                _hk = Integer.parseInt(value) % 10;
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                continue;
+            }
+            
+            DI__NienHoc newHK = new DI__NienHoc(_namhoc, _hk);
+            newHK.hk = _hk;
+            newHK.namhoc = _namhoc;
+
+            lstHK.add(newHK);
+        }
+        
+        MainActivity.nienHocModel.setHKs(lstHK);
+        return lstHK;
+    }
+
+    /**
 	 * 
 	 * @param mssv
 	 * @param hk
