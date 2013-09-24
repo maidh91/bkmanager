@@ -83,10 +83,10 @@ public class TienIchActivity extends Activity implements Listener {
 
 		final android.app.AlertDialog dialog = builder.create();
 
-		dialog.setTitle("Tuition fee");
+		dialog.setTitle("Thông tin học phí");
 		
-		txtHK.setText(hh.mssv + "_" + hh.namhoc + hh.hocky);
-		txtUpdate.setText(hh.updateDay);
+		txtHK.setText("Học kỳ " + hh.hocky + " năm học " + hh.namhoc + " - " + (hh.namhoc + 1));
+		txtUpdate.setText("Cập nhật ngày: " + hh.updateDay);
 		txtOwed.setText(hh.owedFee);
 		txtTotal.setText(hh.totalFee);
 		

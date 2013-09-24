@@ -61,7 +61,6 @@ public class SettingDongBoActivity extends SherlockFragmentActivity {
 
 			@Override
 			public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
-				// TODO Auto-generated method stub
 				Setting._dongBoLichThi = isChecked;
 			}
 		});
@@ -102,13 +101,11 @@ public class SettingDongBoActivity extends SherlockFragmentActivity {
 		    private int mLastPagePosition;
 			@Override
 			public void onPageSelected(int position) {
-				// TODO Auto-generated method stub
 				mLastPagePosition = position;
 			}
 
 			@Override
 			public void onPageScrolled(int position, float arg1, int positionOffsetPixels) {
-				// TODO Auto-generated method stub
 				if(vpckcn_l.isFakeDragging()&&vpckcn_r.isFakeDragging()) {
 		            int absoluteOffsetPixels = positionOffsetPixels;
 		            if(mLastPagePosition!=position) {
@@ -125,8 +122,9 @@ public class SettingDongBoActivity extends SherlockFragmentActivity {
 
 			@Override
 			public void onPageScrollStateChanged(int state) {
-				// TODO Auto-generated method stub
+		        
 				Setting._chuKiCapNhat = state;
+                
 				if(!vpckcn.isFakeDragging()) {
 		            switch(state) {
 		            case ViewPager.SCROLL_STATE_DRAGGING:

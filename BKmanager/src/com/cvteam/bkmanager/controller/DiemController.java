@@ -93,8 +93,14 @@ public class DiemController implements IDataSource {
 						"MainActivity.nienHocModel.getHKs().get(2) = "
 								+ nh.namhoc + "" + nh.hk);
 
-				if (lastNienHoc.equals(nh.namhoc + "" + nh.hk))
-					databaseService.selectTable("diem", params, this);
+				if (lastNienHoc != null ) {
+				    if (lastNienHoc.equals(nh.namhoc + "" + nh.hk)) {
+	                    databaseService.selectTable("diem", params, this);
+				    }
+				    else {
+	                    requestDiemFromAao(diem.mssv);
+	                }
+				}
 				else {
 					requestDiemFromAao(diem.mssv);
 				}

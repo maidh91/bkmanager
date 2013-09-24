@@ -22,7 +22,7 @@ public class NotiService extends Service {
 		Boolean notifications_diem = true;
 		Boolean notifications_hoc_phi = true;
 		int intervalTime = 1;
-
+		//System.out.println("noti service");
 		if (intent != null) {
 			mssv = intent.getStringExtra("mssv");
 			dongbo = intent.getIntExtra("dongbo", 0);
@@ -41,13 +41,12 @@ public class NotiService extends Service {
 		intentUpdateService.putExtra("noti_tkb", notifications_tkb);
 		intentUpdateService.putExtra("noti_hocphi", notifications_hoc_phi);
 
-		PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intentUpdateService,
-				PendingIntent.FLAG_UPDATE_CURRENT);
+		PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intentUpdateService, PendingIntent.FLAG_UPDATE_CURRENT);
 		AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-		long time = intervalTime * 24 * 3600 * 1000;
-		//time = 10 * 1000;
-		alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, 1 * 1000, time, pIntent);
-		// System.out.println("noti service");
+		long intervalTimeInMilis = intervalTime * 24 * 3600 * 1000;
+		long triggerTimeInMilis = 300000L;
+		alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, triggerTimeInMilis, intervalTimeInMilis, pIntent);
+		//System.out.println("noti service");
 		return Service.START_STICKY;
 	}
 

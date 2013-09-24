@@ -16,7 +16,7 @@ public class DialogService {
                 return;
         }
         pd = new ProgressDialog(context);
-        pd.setTitle("BKnoti: ThÙng b·o");
+        pd.setTitle("BKnoti: Th√¥ng b√°o");
         pd.setMessage(message);
         pd.setCancelable(false);
         pd.setCanceledOnTouchOutside(false);
