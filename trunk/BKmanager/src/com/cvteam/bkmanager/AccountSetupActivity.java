@@ -21,6 +21,7 @@ import android.widget.TextView.OnEditorActionListener;
 
 import com.cvteam.bkmanager.model.DI__ThoiKhoaBieu;
 import com.cvteam.bkmanager.service.AAOService;
+import com.cvteam.bkmanager.service.DialogService;
 
 public class AccountSetupActivity extends Activity {
 
@@ -56,7 +57,9 @@ public class AccountSetupActivity extends Activity {
 				okButton.setText("Đang kiểm tra thông tin sinh viên...");
 				okButton.setEnabled(false);
 				List<String> checkvalid = new ArrayList<String>();
+	            DialogService.openProgressDialog(AccountSetupActivity.this, "Đang kiểm tra MSSV...");
 				List<DI__ThoiKhoaBieu> tkbs = AAOService.getTKB(mssv, "", checkvalid);
+                DialogService.closeProgressDialog();
 				if (tkbs.size() == 0 && checkvalid.get(0).equals("Mã số sinh viên không tồn tại.")) {
 					((EditText) findViewById(R.id.editTextMSSV))
 							.setError("Bạn nhập mã số sinh viên không tồn tại.");
