@@ -16,7 +16,6 @@ import com.cvteam.bkmanager.model.DI__ThoiKhoaBieu;
 import com.cvteam.bkmanager.model.ThoiKhoaBieuModel;
 import com.cvteam.bkmanager.service.AAOService;
 import com.cvteam.bkmanager.service.DatabaseService;
-import com.cvteam.bkmanager.service.DialogService;
 import com.cvteam.bkmanager.service.LogService;
 
 public class ThoiKhoaBieuController implements IDataSource{
