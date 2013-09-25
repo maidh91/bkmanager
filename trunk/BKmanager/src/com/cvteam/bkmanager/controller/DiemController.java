@@ -254,25 +254,32 @@ public class DiemController implements IDataSource {
 				values.put("mssv", lstDiem.get(i).mssv);
 				values.put("namhoc", currentNamhoc);
 				values.put("hocky", currentHocky);
-
+				
 				// logService.functionTag("updateDiem", "objs.size() = " +
 				// objs.size());
 
-				if (objs.size() > 1)
+				if (objs.size() > 1) {
 					values.put("tcdkhk",
 							Integer.parseInt(objs.get(1).toString().trim()));
-				if (objs.size() > 2)
+				}
+				if (objs.size() > 2) {
 					values.put("tctlhk",
 							Integer.parseInt(objs.get(2).toString().trim()));
-				if (objs.size() > 3)
+				}
+				if (objs.size() > 3) {
 					values.put("tongsotc",
 							Integer.parseInt(objs.get(3).toString().trim()));
-				if (objs.size() > 4)
+				}
+				if (objs.size() > 4) {
 					values.put("diemtbhk",
 							Double.parseDouble(objs.get(4).toString().trim()));
-				if (objs.size() > 5)
+				}
+				if (objs.size() > 5) {
 					values.put("diemtbtl",
 							Double.parseDouble(objs.get(5).toString().trim()));
+				}
+				
+                System.out.print(" diemstt" + objs.get(0));
 				values.put("diemstt", objs.get(0).toString());
 
 				try {

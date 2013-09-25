@@ -86,7 +86,7 @@ public class TienIchActivity extends Activity implements Listener {
 		dialog.setTitle("Thông tin học phí");
 		
 		txtHK.setText("Học kỳ " + hh.hocky + " năm học " + hh.namhoc + " - " + (hh.namhoc + 1));
-		txtUpdate.setText("Cập nhật ngày: " + hh.updateDay);
+		txtUpdate.setText("Cập nhật ngày: " + hh.updateDay.substring(0, hh.updateDay.indexOf(' ')));
 		txtOwed.setText(hh.owedFee);
 		txtTotal.setText(hh.totalFee);
 		
