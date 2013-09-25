@@ -29,6 +29,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     private SharedPreferences sharedPrefs;
     public static String currentSearch;
     public static NienHocModel nienHocModel;
+    public static NienHocModel nienHocHocPhiModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,55 +53,13 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
             txt_tensv.setText(Setting._name);
             txt_mssv.setText("MSSV: " + Setting._mssv);
         }
-
+        
         nienHocModel = new NienHocModel();
-        List<DI__NienHoc> lstNienHoc = SharedPreferencesService.LoadListNienHoc(sharedPrefs);
-        if (lstNienHoc.size() == 0)
-            try {
-                lstNienHoc = AAOService
-                        .refreshListNienHocWithJSoup("http://www.aao.hcmut.edu.vn/php/aao_tkb.php");
-            } catch (Exception e) {
-                e.printStackTrace();
-                if (lstNienHoc.size() == 0) {
-                    
-                    lstNienHoc.add(new DI__NienHoc(2013, 1));
-
-                    lstNienHoc.add(new DI__NienHoc(2012, 3));
-                    lstNienHoc.add(new DI__NienHoc(2012, 2));
-                    lstNienHoc.add(new DI__NienHoc(2012, 1));
-
-                    lstNienHoc.add(new DI__NienHoc(2011, 3));
-                    lstNienHoc.add(new DI__NienHoc(2011, 2));
-                    lstNienHoc.add(new DI__NienHoc(2011, 1));
-
-                    lstNienHoc.add(new DI__NienHoc(2010, 3));
-                    lstNienHoc.add(new DI__NienHoc(2010, 2));
-                    lstNienHoc.add(new DI__NienHoc(2010, 1));
-
-                    lstNienHoc.add(new DI__NienHoc(2009, 3));
-                    lstNienHoc.add(new DI__NienHoc(2009, 2));
-                    lstNienHoc.add(new DI__NienHoc(2009, 1));
-
-                    lstNienHoc.add(new DI__NienHoc(2008, 3));
-                    lstNienHoc.add(new DI__NienHoc(2008, 2));
-                    lstNienHoc.add(new DI__NienHoc(2008, 1));
-
-                    lstNienHoc.add(new DI__NienHoc(2007, 3));
-                    lstNienHoc.add(new DI__NienHoc(2007, 2));
-                    lstNienHoc.add(new DI__NienHoc(2007, 1));
-
-                    lstNienHoc.add(new DI__NienHoc(2006, 3));
-                    lstNienHoc.add(new DI__NienHoc(2006, 2));
-                    lstNienHoc.add(new DI__NienHoc(2006, 1));
-
-                    lstNienHoc.add(new DI__NienHoc(2005, 3));
-                    lstNienHoc.add(new DI__NienHoc(2005, 2));
-                    lstNienHoc.add(new DI__NienHoc(2005, 1));
-                }
-            }
-
-        nienHocModel.setHKs(lstNienHoc);
-
+        initNienHocModel(nienHocModel, "http://www.aao.hcmut.edu.vn/php/aao_tkb.php", "");
+        
+        nienHocHocPhiModel = new NienHocModel();
+        initNienHocModel(nienHocHocPhiModel, "http://www.aao.hcmut.edu.vn/php/aao_hp.php", "hocphi");
+        
         InitializeService(); // CalendarService.readCalendar(this);
     }
 
@@ -201,9 +160,10 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     @Override
     protected void onStop() {
         logService.functionTag("onStop", "");
-        // TODO Auto-generated method stub
         SharedPreferencesService.SaveCauHinh(sharedPrefs);
         SharedPreferencesService.SaveCurrentSearch(currentSearch, sharedPrefs);
+        SharedPreferencesService.SaveListNienHocByType(nienHocModel.getHKs(), sharedPrefs, "");
+        SharedPreferencesService.SaveListNienHocByType(nienHocHocPhiModel.getHKs(), sharedPrefs, "hocphi");
         super.onStop();
     }
 
@@ -258,5 +218,54 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
 
     public void tienichclick(View v) {
         startActivity(new Intent(this, TienIchActivity.class));
+    }
+
+    private void initNienHocModel(NienHocModel nienHocModel, String source, String type) {
+        List<DI__NienHoc> lstNienHoc = SharedPreferencesService.LoadListNienHocByType(sharedPrefs, type);
+        if (lstNienHoc.size() == 0)
+            try {
+                lstNienHoc = AAOService
+                        .refreshListNienHocWithJSoup(source);
+            } catch (Exception e) {
+                e.printStackTrace();
+                if (lstNienHoc.size() == 0) {
+
+                    lstNienHoc.add(new DI__NienHoc(2013, 1));
+
+                    lstNienHoc.add(new DI__NienHoc(2012, 3));
+                    lstNienHoc.add(new DI__NienHoc(2012, 2));
+                    lstNienHoc.add(new DI__NienHoc(2012, 1));
+
+                    lstNienHoc.add(new DI__NienHoc(2011, 3));
+                    lstNienHoc.add(new DI__NienHoc(2011, 2));
+                    lstNienHoc.add(new DI__NienHoc(2011, 1));
+
+                    lstNienHoc.add(new DI__NienHoc(2010, 3));
+                    lstNienHoc.add(new DI__NienHoc(2010, 2));
+                    lstNienHoc.add(new DI__NienHoc(2010, 1));
+
+                    lstNienHoc.add(new DI__NienHoc(2009, 3));
+                    lstNienHoc.add(new DI__NienHoc(2009, 2));
+                    lstNienHoc.add(new DI__NienHoc(2009, 1));
+
+                    lstNienHoc.add(new DI__NienHoc(2008, 3));
+                    lstNienHoc.add(new DI__NienHoc(2008, 2));
+                    lstNienHoc.add(new DI__NienHoc(2008, 1));
+
+                    lstNienHoc.add(new DI__NienHoc(2007, 3));
+                    lstNienHoc.add(new DI__NienHoc(2007, 2));
+                    lstNienHoc.add(new DI__NienHoc(2007, 1));
+
+                    lstNienHoc.add(new DI__NienHoc(2006, 3));
+                    lstNienHoc.add(new DI__NienHoc(2006, 2));
+                    lstNienHoc.add(new DI__NienHoc(2006, 1));
+
+                    lstNienHoc.add(new DI__NienHoc(2005, 3));
+                    lstNienHoc.add(new DI__NienHoc(2005, 2));
+                    lstNienHoc.add(new DI__NienHoc(2005, 1));
+                }
+            }
+
+        nienHocModel.setHKs(lstNienHoc);
     }
 }

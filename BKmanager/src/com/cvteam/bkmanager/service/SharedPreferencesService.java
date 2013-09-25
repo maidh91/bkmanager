@@ -84,6 +84,7 @@ public final class SharedPreferencesService {
             editor.commit();
             return true;
         } catch (Exception ex) {
+            ex.printStackTrace();
             return false;
         }
     }
@@ -92,6 +93,7 @@ public final class SharedPreferencesService {
         List<DI__NienHoc> nienhocs = new ArrayList<DI__NienHoc>();
         try {
             String lstNienHoc = preferences.getString("listnienhoc", "");
+            
             if(lstNienHoc == "")
                 return nienhocs;
             String[] lst = lstNienHoc.split(",");
@@ -102,6 +104,47 @@ public final class SharedPreferencesService {
             }
             return nienhocs;
         }catch (Exception ex) {
+            ex.printStackTrace();
+            return nienhocs;
+        }
+    }
+    
+    public static boolean SaveListNienHocByType(List<DI__NienHoc> nienhocs, SharedPreferences preferences, String type) {
+        try {
+            StringBuilder lstNienHoc = new StringBuilder();
+            if(nienhocs.size() > 0)
+                lstNienHoc.append(String.format("%s-%s", nienhocs.get(0).namhoc, nienhocs.get(0).hk));
+            for(int i = 1;i < nienhocs.size();i++)
+                lstNienHoc.append(String.format(",%s-%s", nienhocs.get(i).namhoc, nienhocs.get(i).hk));
+
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("listnienhoc" + type, lstNienHoc.toString());
+            editor.commit();
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public static List<DI__NienHoc> LoadListNienHocByType(SharedPreferences preferences, String type) {
+        List<DI__NienHoc> nienhocs = new ArrayList<DI__NienHoc>();
+        try {
+            String lstNienHoc = preferences.getString("listnienhoc" + type, "");
+            
+            System.out.println("LoadListNienHoc" + type + " = " + lstNienHoc);
+            
+            if(lstNienHoc == "")
+                return nienhocs;
+            String[] lst = lstNienHoc.split(",");
+            for(int i = 0;i < lst.length;i++)
+            {
+                DI__NienHoc nh = new DI__NienHoc(Integer.parseInt(lst[i].substring(0, 4)), Integer.parseInt(lst[i].substring(5)));
+                nienhocs.add(nh);
+            }
+            return nienhocs;
+        }catch (Exception ex) {
+            ex.printStackTrace();
             return nienhocs;
         }
     }

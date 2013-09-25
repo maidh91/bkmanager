@@ -43,8 +43,8 @@ public class NotiService extends Service {
 
 		PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intentUpdateService, PendingIntent.FLAG_UPDATE_CURRENT);
 		AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-		long intervalTimeInMilis = intervalTime * 24 * 3600 * 1000;
-		long triggerTimeInMilis = 300000L;
+		long intervalTimeInMilis = intervalTime * 24 * 3600 * 1000; // interval days
+		long triggerTimeInMilis = 5 * 60 * 1000; // 5 mins
 		alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, triggerTimeInMilis, intervalTimeInMilis, pIntent);
 		//System.out.println("noti service");
 		return Service.START_STICKY;

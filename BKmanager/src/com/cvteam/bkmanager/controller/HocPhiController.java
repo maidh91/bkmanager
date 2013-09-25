@@ -88,10 +88,10 @@ public class HocPhiController implements IDataSource {
 				logService.functionTag("getByHocKy", "lastNienHoc = "
 						+ lastNienHoc);
 				csr.close();
-
-				DI__NienHoc nh = MainActivity.nienHocModel.getHKs().get(2);
+				
+				DI__NienHoc nh = MainActivity.nienHocHocPhiModel.getHKs().get(2);
 				logService.functionTag("getByHocKy",
-						"MainActivity.nienHocModel.getHKs().get(2) = "
+						"MainActivity.nienHocHocPhiModel.getHKs().get(2) = "
 								+ nh.namhoc + "" + nh.hk);
 				
 				if (lastNienHoc!= null && lastNienHoc.equals(nh.namhoc + "" + nh.hk))
@@ -278,18 +278,20 @@ public class HocPhiController implements IDataSource {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			List<DI__NienHoc> nhs = null;
+			List<DI__NienHoc> nhs = MainActivity.nienHocHocPhiModel.getHKs();
 			DI__NienHoc nh = new DI__NienHoc(0, 0);
 			
-			try {
-				nhs = AAOService.refreshListNienHocWithJSoup("http://www.aao.hcmut.edu.vn/php/aao_hp.php");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			nh = nhs.get(2);
 			
-			if (nhs != null && nhs.size() > 2) {
-				nh = nhs.get(2);				
-			}
+//			try {
+//				nhs = AAOService.refreshListNienHocWithJSoup("http://www.aao.hcmut.edu.vn/php/aao_hp.php");
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			
+//			if (nhs != null && nhs.size() > 2) {
+//				nh = nhs.get(2);				
+//			}
 			
 			 logService.functionTag("doInBackground", "AAOService.getHocPhi:"
 			 + mssv + " " + nh.namhoc  + nh.hk);
